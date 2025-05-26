@@ -1,5 +1,5 @@
 
-import styles from "./admin.module.css";
+
 
 const AdminPage = () => {
   return (
