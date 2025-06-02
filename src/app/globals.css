@@ -15,6 +15,7 @@
   --font-inter: Inter, PT Serif, sans-serif;
   --color-light-grey: #eff2f8;
   --color-dark-green: rgb(29, 81, 5);
+  /* --color-dark-green: #1d5105; */
   /* --color-light-green: rgb(44, 120, 8); */
   --color-light-green: rgb(80, 161, 42);
   --color-main-text: #141517;
@@ -22,7 +23,7 @@
 
 
   --color-logo: #B50828;
-  --color-nav: #fcd21a;  
+  --color-nav-yellow: #fcd21a;  
   --color-text-shadow:  2px 2px 1px rgb(132, 5, 27);
   --color-inputs: #eff2f8;
 
