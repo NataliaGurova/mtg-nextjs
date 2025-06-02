@@ -41,4 +41,3 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 npx shadcn@latest add
 ---------------------------
 gap-[100px]
-"border-[#1d5105] hover:border-[#f7fafd]"
