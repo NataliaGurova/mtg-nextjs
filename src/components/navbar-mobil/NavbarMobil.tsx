@@ -9,6 +9,11 @@ const NavbarMobil = () => {
 
   return (
     <>
+      <SideMenu
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
+
       <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
         {/* <AlignJustify/> */}
         <AlignLeft className="text-main-text md:hidden hover:cursor-pointer" />
@@ -16,14 +21,46 @@ const NavbarMobil = () => {
       {/* <button onClick={onClose} className="p-2">
         X
       </button> */}
-      <div className="md:hidden">
-        <SideMenu
-          isOpen={isSidebarOpen}
-          onClose={() => setIsSidebarOpen(false)}
-        />
-      </div>
+      
+    
     </>
   )
 }
 
-export default NavbarMobil
+export default NavbarMobil;
+
+
+// "use client";
+
+// import React, { useState } from 'react';
+// import { AlignRight, X } from 'lucide-react';
+// import SideMenu from '../side-menu/SideMenu';
+
+// const NavbarMobil = () => {
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+//   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+
+//   return (
+//     <>
+//       <SideMenu
+//         isOpen={isSidebarOpen}
+//         onClose={() => setIsSidebarOpen(false)}
+//       />
+
+//       <button
+//         onClick={toggleSidebar}
+//         title="Menu"
+//         className="fixed top-4 right-5 z-50 md:hidden"
+//       >
+//         {isSidebarOpen ? (
+//           <X className="text-main-text w-6 h-6" />
+//         ) : (
+//           <AlignRight className="text-main-text w-6 h-6" />
+//         )}
+//       </button>
+//     </>
+//   );
+// };
+
+// export default NavbarMobil;
