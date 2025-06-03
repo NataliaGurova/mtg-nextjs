@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from 'react'
-import { AlignLeft } from 'lucide-react';
 import SideMenu from '../side-menu/SideMenu';
+import { AlignRight } from 'lucide-react';
 
 const NavbarMobil = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -16,7 +16,7 @@ const NavbarMobil = () => {
 
       <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
         {/* <AlignJustify/> */}
-        <AlignLeft className="text-main-text md:hidden hover:cursor-pointer" />
+        <AlignRight className="text-main-text w-6 h-6" />
       </button>
       {/* <button onClick={onClose} className="p-2">
         X
