@@ -1,6 +1,6 @@
 
 import Navbar from "../navbar/Navbar";
-import SearchBar from "../search/SearchBar";
+import SearchBar from "../search-bar/SearchBar";
 import Container from "../container/Container";
 import Logo from "../logo/Logo";
 import CartIcon from "../cart-icon/CartIcon";
