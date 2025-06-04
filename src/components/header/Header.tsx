@@ -15,7 +15,7 @@ const Header = () => {
     <header className="sticky top-0 z-50">
       <Container className="flex items-center justify-between bg-light-grey max-w-full text-main-text">
         <div className="w-auto md:w-1/3 flex items-center gap-10 justify-start md:gap-0">
-          {/* <NavbarMobil/> */}
+          <NavbarMobil/>
           <Logo/>
           <SearchBar />
           </div>
@@ -27,12 +27,8 @@ const Header = () => {
           <CartIcon />
           <FavoriteBtn/>
           </div>
-          </div>
       </Container>
-      <div className="bg-dark-green text-light-grey px-10 py-5">
-      <SearchBar />
-      </div>
-      {/* <Navbar/> */}
+      <Navbar/>
     </header>
   )
 }
