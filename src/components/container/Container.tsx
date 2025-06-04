@@ -10,7 +10,7 @@ const Container = ({
 }) => {
   return (
     // <div className={cn("max-w-screen-xl mx-auto px-10 py-5 outline outline-1 outline-red-500", className)}>
-    <div className={cn("mx-auto px-10 py-5 outline outline-1 outline-red-500", className)}>
+    <div className={cn("mx-auto px-5 py-5 outline outline-1 outline-red-500 md:px-10", className)}>
       {children}
     </div>
   );

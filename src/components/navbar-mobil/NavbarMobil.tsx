@@ -15,14 +15,8 @@ const NavbarMobil = () => {
       />
 
       <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-        {/* <AlignJustify/> */}
         <AlignRight className="text-main-text w-6 h-6" />
       </button>
-      {/* <button onClick={onClose} className="p-2">
-        X
-      </button> */}
-      
-    
     </>
   )
 }

@@ -24,9 +24,10 @@ const Header = () => {
           <Logo/>
           <SearchBar className="hidden md:inline md:ml-10" />
           </div>
-        <div className="flex w-auto gap-5 md:gap-[50px]">
-          <div className="flex">
+        <div className="flex w-auto gap-6 md:gap-[50px]">
+          <div className="hidden md:flex">
             <SignIn />
+            <span className="text-sm">/</span>
             <SignUp/>
           </div>
           <CartIcon />
@@ -41,14 +42,14 @@ const Header = () => {
       </Container>
 
       {/* Bottom nav section */}
-      <div className="bg-dark-green text-light-grey px-10 py-5">
+      <Container className="bg-dark-green text-light-grey">
         <nav className="hidden md:flex gap-[72px]">
           {navLinks.map(({ href, label }) => (
             <Link
               href={href}
               key={label}
               className={clsx(
-                'relative pb-1 transition-all duration-300 hoverEffect',
+                'relative pb-1 hoverEffect',
                 pathname === href
                   ? 'text-nav-yellow border-b-2 border-nav-yellow'
                   : 'border-b-2 border-transparent hover:border-light-grey'
@@ -62,7 +63,7 @@ const Header = () => {
         {/* 🔍 тільки на мобілці */}
         <SearchBar className="md:hidden mr-2" />
         
-      </div>
+      </Container>
     </header>
   )
 }
