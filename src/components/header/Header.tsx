@@ -1,6 +1,5 @@
 'use client';
 
-import Navbar from "../navbar/Navbar";
 import SearchBar from "../search-bar/SearchBar";
 import Container from "../container/Container";
 import Logo from "../logo/Logo";
@@ -37,32 +36,32 @@ const Header = () => {
           <div className="md:hidden">
             <NavbarMobil /> 
           </div>
-          
+
           </div>
       </Container>
 
       {/* Bottom nav section */}
       <div className="bg-dark-green text-light-grey px-10 py-5">
         <nav className="hidden md:flex gap-[72px]">
-          {navLinks.map((item) => (
+          {navLinks.map(({ href, label }) => (
             <Link
-              href={item.href}
-              key={item.label}
+              href={href}
+              key={label}
               className={clsx(
                 'relative pb-1 transition-all duration-300 hoverEffect',
-                pathname === item.href
+                pathname === href
                   ? 'text-nav-yellow border-b-2 border-nav-yellow'
                   : 'border-b-2 border-transparent hover:border-light-grey'
               )}
             >
-              {item.label}
+              {label}
             </Link>
           ))}
         </nav>
 
         {/* 🔍 тільки на мобілці */}
         <SearchBar className="md:hidden mr-2" />
-        {/* <Navbar/> */}
+        
       </div>
     </header>
   )
