@@ -15,9 +15,8 @@ const Header = () => {
     <header className="sticky top-0 z-50">
       <Container className="flex items-center justify-between bg-light-grey max-w-full text-main-text">
         <div className="w-auto md:w-1/3 flex items-center gap-10 justify-start md:gap-0">
-          <NavbarMobil/>
           <Logo/>
-          <SearchBar />
+          <SearchBar className="hidden md:inline md:ml-10" />
           </div>
         <div className="flex w-auto gap-5 md:gap-[50px]">
           <div className="flex">
@@ -25,9 +24,17 @@ const Header = () => {
             <SignUp/>
           </div>
           <CartIcon />
-          <FavoriteBtn/>
+          <FavoriteBtn />
+                    
+          {/* 🔍 тільки на мобілці */}
+          <div className="md:hidden">
+            <NavbarMobil /> 
+          </div>
           </div>
       </Container>
+
+        {/* 🔍 тільки на мобілці */}
+        <SearchBar className="md:hidden mr-2" />
       <Navbar/>
     </header>
   )
