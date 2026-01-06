@@ -30,11 +30,10 @@
 import CardsList from "@/components/cards/CardList/CardList";
 import Container from "@/components/Container/Container";
 import FiltersSidebar from "@/components/filters/FiltersSidebar";
-// import { getCardsPage } from "@/db/cards";
-// import { getAllCards } from "@/lib/db/cards";
+
 
 const SinglesPage = async () => {
-  // const cards = await getCardsPage(); // ← данные напрямую из MongoDB
+
 
   return (
     <Container>

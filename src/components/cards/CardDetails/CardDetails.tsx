@@ -36,14 +36,13 @@
 // "use client";
 
 import { DbCard, Face } from "@/types/types";
-// import Image from "next/image";
+
 
 import css from "./CardDetails.module.css";
 import { AddToCartSection } from "../AddToCartSection/AddToCartSection";
 import SetIcon from "@/components/SetIcon/SetIcon";
 import Container from "@/components/Container/Container";
-// import { useState } from "react";
-// import { RotateCw } from "lucide-react";
+
 import ImageCard from "@/components/ImageCard/ImageCard";
 
 
@@ -88,19 +87,6 @@ const CardDetails = ({ card }: CardDetailsProps) => {
 
   return (
     <Container className={css.cardDetailsContainer}>
-      {/* IMAGE */}
-      {/* <div className={css.imgContainer}>
-        {frontFace && (
-          <Image
-            src={frontFace.imageUrl}
-            alt={card.name}
-            width={325}
-            height={453}
-            className={css.imgCard}
-            priority
-          />
-        )}
-      </div> */}
 
       
       {/* IMAGE */}

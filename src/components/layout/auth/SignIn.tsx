@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link';
-import React from 'react'
 import { User } from "lucide-react";
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
