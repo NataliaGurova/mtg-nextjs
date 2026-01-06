@@ -12,7 +12,7 @@ import { navLinks } from "@/constants/data";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from 'next/navigation';
-import Container from "@/components/Wontainer/Container";
+import Container from "@/components/Container/Container";
 import NavbarMobil from "../navbar-mobil/NavbarMobil";
 import SearchBar from "@/components/SearchBar/SearchBar";
 

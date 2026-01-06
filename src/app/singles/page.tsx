@@ -28,7 +28,7 @@
 // export default SinglesPage;
 
 import CardsList from "@/components/cards/CardList/CardList";
-import Container from "@/components/Wontainer/Container";
+import Container from "@/components/Container/Container";
 import FiltersSidebar from "@/components/filters/FiltersSidebar";
 
 

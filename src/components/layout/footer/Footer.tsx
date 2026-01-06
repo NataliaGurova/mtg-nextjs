@@ -1,6 +1,6 @@
 
 
-import Container from "@/components/Wontainer/Container"
+import Container from "@/components/Container/Container"
 
 
 const Footer = () => {
