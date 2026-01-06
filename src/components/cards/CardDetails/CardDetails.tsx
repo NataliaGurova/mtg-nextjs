@@ -41,9 +41,9 @@ import { DbCard, Face } from "@/types/types";
 import css from "./CardDetails.module.css";
 import { AddToCartSection } from "../AddToCartSection/AddToCartSection";
 import SetIcon from "@/components/SetIcon/SetIcon";
-import Container from "@/components/Container/Container";
 
 import ImageCard from "@/components/ImageCard/ImageCard";
+import Container from "@/components/Container/Container";
 
 
 
