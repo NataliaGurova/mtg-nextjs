@@ -25,7 +25,7 @@ import { notFound } from "next/navigation";
 import { getCardById } from "@/db/cards";
 // import { AddToCartSection } from "@/components/cards/AddToCartSection/AddToCartSection";
 import CardDetails from "@/components/cards/CardDetails/CardDetails";
-import Container from "@/components/Container/Container";
+import Container from "@/components/Wontainer/Container";
 import { DbCard } from "@/types/types";
 // import { AddToCartSection } from "./AddToCartSection";
 
