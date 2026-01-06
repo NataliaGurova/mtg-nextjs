@@ -1,16 +1,52 @@
-import Container from "@/components/container/Container";
-import { Button } from "@/components/ui/button";
+// import Container from "@/components/container/Container";
+// import { Button } from "@/components/ui/button";
+// import { Metadata } from "next";
+// import Link from "next/link";
+
+// export const metadata: Metadata = {
+//   title: "Singles",
+// };
 
 
-const SinglesPage = () => {
+// const SinglesPage = () => {
+//   const singleId = 23;
+
+//   return (
+    
+//       <Container>
+//       <h1>Singles</h1>
+//       <Link href="/singles/1">Single 1</Link>
+//       <Link href="/singles/2">Single 2</Link>
+//       <Link href="/singles/3" replace>Single 3</Link>
+//       <Link href={`/singles/${singleId}`}>Single {singleId}</Link>
+//         <Button variant="more" size="sm" >View More</Button>
+//         </Container>
+    
+//   )
+// }
+
+// export default SinglesPage;
+
+import CardsList from "@/components/cards/CardList/CardList";
+import Container from "@/components/Container/Container";
+import FiltersSidebar from "@/components/filters/FiltersSidebar";
+// import { getCardsPage } from "@/db/cards";
+// import { getAllCards } from "@/lib/db/cards";
+
+const SinglesPage = async () => {
+  // const cards = await getCardsPage(); // ← данные напрямую из MongoDB
+
   return (
-    
-      <Container>
-      <h1>Singles</h1>
-        <Button variant="more" size="sm" >View More</Button>
-        </Container>
-    
-  )
-}
+    <Container>
+    <div className="flex">
+      <FiltersSidebar />
+      <section className="flex-1">
+        <CardsList />
+      </section>
+      </div>
+      </Container>
+  );
+};
 
 export default SinglesPage;
+

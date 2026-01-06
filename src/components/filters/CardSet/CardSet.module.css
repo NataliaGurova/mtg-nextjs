@@ -1,0 +1,114 @@
+.title {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  cursor: pointer;
+
+  /* font-size: 18px; */
+  line-height: 1.2;      /* сжатый текст */
+  letter-spacing: -0.01em;
+}
+
+/* скрываем настоящий input */
+.input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* квадрат чекбокса */
+.box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid #1d5105; /* dark green */
+  border: 2px solid #ccc; 
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 16px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+}
+
+/* галочка (SVG), по умолчанию скрыта */
+.check {
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* checked: зелёный фон + белая галочка */
+.input:checked + .box {
+  background: var(--color-dark-green);
+  border-color: var(--color-dark-green);
+}
+
+.input:checked + .box .check {
+  opacity: 1;
+}
+
+/* hover/focus как в UI */
+.label:hover .box {
+  border: 2px solid #1d5105;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.input:focus-visible + .box {
+  outline: 2px solid rgba(29, 81, 5, 0.35);
+  outline-offset: 2px;
+}
+
+
+
+.setName {
+  flex: 1;
+  /* white-space: nowrap;    */
+  /* не переносить */
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
+}
+
+
+
+/* scroll */
+
+.listWrap {
+  max-height: 300px;
+  overflow: auto;
+  padding-right: 6px;
+}
+
+/* тонкий скролл */
+.listWrap::-webkit-scrollbar {
+  width: 6px;
+}
+
+.listWrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.listWrap::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+}
+
+.listWrap:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Firefox */
+.listWrap {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.35) transparent;
+}

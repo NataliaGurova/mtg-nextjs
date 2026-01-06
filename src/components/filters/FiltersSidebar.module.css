@@ -1,0 +1,150 @@
+
+.container {
+  width: 300px;
+  padding-right: 10px;
+  margin-right: 10px;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.filterTitle {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.formContainer {
+  margin-top: 20px;
+}
+
+/* ============== 1 варіант*/
+.toggleFoil {
+  display: flex;
+  gap: 40px;
+}
+
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.label {
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
+}
+
+.label:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Сірий фон для Not Foils */
+.notFoils {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  width: 115px;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+/* Фон-картинка для Foils */
+.foils {
+  background-color: #fff;
+  border: 1px solid transparent;
+  background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
+  width: 115px;
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: #333;
+}
+
+/* Приховує стандартний input (синій кружечок) */
+.input {
+  display: none;
+}
+
+/* Активний стан для Not Foils */
+.input:checked + .text.notFoils {
+  background-color: #1d5105; /* Зелений фон */
+  color: white; /* Білий текст */
+  width: 115px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Активний стан для Foils із динамічним градієнтом */
+.input:checked + .text.foils {
+  background: linear-gradient(90deg, green, yellow, red);
+  background-size: 300% 300%;
+  animation: gradientShift 3s ease infinite; /* Використовуємо анімацію */
+  color: white;
+  width: 115px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+
+/* ---------------------------- */
+
+
+.title {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.label {
+  position: relative;
+  /* margin-right: 40px; */
+}
+
+.printCard {
+    /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 16px;
+  height: 20px;
+  /* width: 22px;
+  height: 25px; */
+  border-radius: 4px;
+  border: 2px solid #ccc;
+  background: #f0f0f0;
+
+  /* cursor: pointer; */
+  transition: all 0.2s ease;
+
+
+  position: absolute;
+  left: 0;
+
+  /* display: none; */
+}
+
+.input:checked + .printCard{
+    border-color: rgb(29, 81, 5);
+  background-color: rgb(29, 81, 5);
+  color: rgb(247, 250, 253);
+}
+
+.input {
+  /* opacity: 0; */
+}
+
+.inputName {
+  width: 300px;
+}

@@ -1,0 +1,31 @@
+
+.listCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* align-items: center; */
+  gap: 30px;
+}
+
+.btn {
+  display: flex;
+  padding: 5px 10px;
+  margin: 0 auto;
+  margin-top: 40px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  
+}
+/* width: 115px; */
+/* outline: 1px solid red; */
+
+.btn:hover, .btn:focus {
+  background-color: #ccc;
+  color: #333;
+
+  border-color: rgb(29, 81, 5);
+  background-color: rgb(29, 81, 5);
+  color: rgb(247, 250, 253);
+}

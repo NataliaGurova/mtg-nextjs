@@ -1,0 +1,103 @@
+
+.itemCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 260px;
+  /* height: 405px; */
+  height: 475px;
+  padding: 20px;
+  border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Анімація для об'ємного ефекту */
+
+}
+
+.itemCard:hover {
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.imgCard {
+  /* margin-top: 20px; */
+  border-radius: 10px;
+}
+
+
+
+
+
+
+.text {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  width: 210px; /* Встановлюємо максимальну ширину */
+  overflow: hidden; /* Приховуємо текст, який виходить за межі */
+  text-overflow: ellipsis; /* Додаємо три крапки (...) */
+  /* text-align: center; */
+  /* white-space: nowrap; Забороняємо перенос рядка */
+}
+.text {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+
+  width: 210px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;      /* 🔥 максимум 2 строки */
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  line-height: 1.2;           /* аккуратная высота */
+  max-height: calc(1.2em * 2); /* защита от скачков */
+}
+
+
+
+
+/* ============ */
+/* Ефект при наведенні */
+.itemProjects:hover {
+  transform: scale(1.05); /* Збільшення розміру */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Об'ємний тіньовий ефект */
+  background-color: rgba(43, 65, 112, 0.8); /* Трохи менш прозорий фон при наведенні */
+}
+
+/* ========= */
+.bottomSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+}
+.info {
+  display: flex;
+  width: 210px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.cart {
+  display: flex;
+  width: 210px;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 10px; */
+}
+
+.btnCart {
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  /* background-color: #535bf2; */
+  padding: 10px;
+  padding-right: 0;
+  /* border: 1px solid ; */
+}

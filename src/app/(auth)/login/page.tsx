@@ -1,5 +1,5 @@
 
-import Container from "@/components/container/Container";
+import Container from "@/components/Container/Container";
 
 
 const LoginPage = () => {
