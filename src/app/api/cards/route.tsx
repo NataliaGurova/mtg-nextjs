@@ -78,7 +78,7 @@
 
 
 import { NextResponse } from "next/server";
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import Card from "@/db/models/Card";
 import { connectDB } from "@/db/db";
 
@@ -88,9 +88,15 @@ const MAX_LIMIT = 50;
 const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export async function GET(req: Request) {
-  console.log("API /cards called");
+  // console.log("API /cards called");
   try {
     await connectDB();
+
+    console.log("DB state:", mongoose.connection.readyState);
+
+
+
+
     const { searchParams } = new URL(req.url);
 
     const qRaw = searchParams.get("q");
