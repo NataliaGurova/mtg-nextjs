@@ -23,11 +23,10 @@
 import { notFound } from "next/navigation";
 
 import { getCardById } from "@/db/cards";
-// import { AddToCartSection } from "@/components/cards/AddToCartSection/AddToCartSection";
 import CardDetails from "@/components/cards/CardDetails/CardDetails";
-import Container from "@/components/Container/Container";
 import { DbCard } from "@/types/types";
-// import { AddToCartSection } from "./AddToCartSection";
+// import Container from "@/components/Container/Container";
+
 
 type PageProps = {
   params: { singleId: string };
@@ -52,7 +51,7 @@ const SingleDetailsPage = async ( props: PageProps) => {
   // const backFace  = card.faces?.find((f) => f.side === "back");
 
   return (
-    <Container>
+    // <Container>
     <section className="">
       {/* IMAGE */}
       {/* <div className="flex justify-center">
@@ -94,7 +93,7 @@ const SingleDetailsPage = async ( props: PageProps) => {
         
       
       </section>
-      </Container>
+      // </Container>
   );
 };
 

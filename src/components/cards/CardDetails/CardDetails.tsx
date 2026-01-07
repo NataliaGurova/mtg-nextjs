@@ -43,7 +43,7 @@ import { AddToCartSection } from "../AddToCartSection/AddToCartSection";
 import SetIcon from "@/components/SetIcon/SetIcon";
 
 import ImageCard from "@/components/ImageCard/ImageCard";
-import Container from "@/components/Container/Container";
+// import Container from "@/components/Container/Container";
 
 
 
@@ -86,8 +86,8 @@ const CardDetails = ({ card }: CardDetailsProps) => {
   // };
 
   return (
-    <Container className={css.cardDetailsContainer}>
-
+    // <Container className={css.cardDetailsContainer}>
+<>
       
       {/* IMAGE */}
       <ImageCard
@@ -167,7 +167,8 @@ const CardDetails = ({ card }: CardDetailsProps) => {
           />
         </div>
       </div>
-    </Container>
+    {/* </Container > */}
+      </>
   );
 };
 

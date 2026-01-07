@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation';
 
 import NavbarMobil from "../navbar-mobil/NavbarMobil";
 import SearchBar from "@/components/SearchBar/SearchBar";
-import Container from "@/components/Container/Container";
+// import Container from "@/components/Container/Container";
 
 
 const Header = () => {
@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50">
-      <Container className="flex items-center justify-between bg-light-grey max-w-full text-main-text">
+      {/* <Container className="flex items-center justify-between bg-light-grey max-w-full text-main-text"> */}
         {/* <div className="w-auto md:w-1/3 flex items-center gap-25 justify-start md:gap-0">
           <Logo/>
           <SearchBar className="hidden md:inline md:ml-10" />
@@ -49,10 +49,10 @@ const Header = () => {
             </div>
 
           </div>
-      </Container>
+      {/* </Container> */}
 
       {/* Bottom nav section */}
-      <Container className="bg-dark-green text-light-grey">
+      {/* <Container className="bg-dark-green text-light-grey"> */}
         <nav className="hidden md:flex gap-[72px]">
           {navLinks.map(({ href, label }) => (
             <Link
@@ -78,7 +78,7 @@ const Header = () => {
           className="w-full"   // инпут на мобилке растягивается
         />
         
-      </Container>
+      {/* </Container> */}
     </header>
   )
 }
