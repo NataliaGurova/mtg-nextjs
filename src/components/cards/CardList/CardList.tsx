@@ -57,11 +57,11 @@ const CardsList = () => {
     p.set("page", String(pageNum));
 
     const res = await fetch(`/api/cards?${p.toString()}`);
-
+// ----------
     console.log("STATUS", res.status);
     const text = await res.text();
     console.log(text);
-
+// ----------
     if (!res.ok) {
       throw new Error("Failed to load cards");
     }
