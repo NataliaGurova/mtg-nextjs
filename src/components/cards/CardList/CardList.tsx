@@ -52,22 +52,24 @@ const CardsList = () => {
     return p;
   }, [q, sets]);
 
-  const fetchPage = async (pageNum: number): Promise<ApiResponse> => {
-    const p = new URLSearchParams(baseParams);
-    p.set("page", String(pageNum));
 
-    const res = await fetch(`/api/cards?${p.toString()}`);
-// ----------
-    console.log("STATUS", res.status);
-    const text = await res.text();
-    console.log(text);
-// ----------
-    if (!res.ok) {
-      throw new Error("Failed to load cards");
-    }
 
-    return (await res.json()) as ApiResponse;
-  };
+  
+const fetchPage = async (pageNum: number): Promise<ApiResponse> => {
+  const p = new URLSearchParams(baseParams);
+  p.set("page", String(pageNum));
+
+  const res = await fetch(`/api/cards?${p.toString()}`);
+
+  if (!res.ok) {
+    const text = await res.text(); // читаем body один раз только при ошибке
+    console.error("Failed to load cards:", text);
+    throw new Error("Failed to load cards");
+  }
+
+  const data: ApiResponse = await res.json(); // читаем body один раз
+  return data;
+};
 
 
   const loadInitial = async () => {
@@ -128,14 +130,6 @@ const CardsList = () => {
           {isLoading ? "Loading..." : "Load more"}
             </Button>
           </div>
-          // <button
-          //   type="button"
-          //   className={css.btn}
-          //   onClick={handleLoadMore}
-          //   disabled={isLoading}
-          // >
-          //   {isLoading ? "Loading..." : "Load more"}
-          // </button>
         )}
       </div>
     </div>
