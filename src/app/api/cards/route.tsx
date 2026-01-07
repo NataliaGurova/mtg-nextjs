@@ -88,6 +88,7 @@ const MAX_LIMIT = 50;
 const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export async function GET(req: Request) {
+  console.log("API /cards called");
   try {
     await connectDB();
     const { searchParams } = new URL(req.url);
