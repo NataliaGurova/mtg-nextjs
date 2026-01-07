@@ -25,7 +25,7 @@ import { notFound } from "next/navigation";
 import { getCardById } from "@/db/cards";
 import CardDetails from "@/components/cards/CardDetails/CardDetails";
 import { DbCard } from "@/types/types";
-// import Container from "@/components/Container/Container";
+import Container from "@/components/Container/Container";
 
 
 type PageProps = {
@@ -51,7 +51,7 @@ const SingleDetailsPage = async ( props: PageProps) => {
   // const backFace  = card.faces?.find((f) => f.side === "back");
 
   return (
-    // <Container>
+    <Container>
     <section className="">
       {/* IMAGE */}
       {/* <div className="flex justify-center">
@@ -93,7 +93,7 @@ const SingleDetailsPage = async ( props: PageProps) => {
         
       
       </section>
-      // </Container>
+      </Container>
   );
 };
 

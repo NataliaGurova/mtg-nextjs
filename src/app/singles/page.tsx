@@ -29,21 +29,21 @@
 
 import CardsList from "@/components/cards/CardList/CardList";
 import FiltersSidebar from "@/components/filters/FiltersSidebar";
-// import Container from "@/components/Container/Container";
+import Container from "@/components/Container/Container";
 
 
 const SinglesPage = async () => {
 
 
   return (
-    // <Container>
+    <Container>
     <div className="flex">
       <FiltersSidebar />
       <section className="flex-1">
         <CardsList />
       </section>
       </div>
-      // </Container>
+      </Container>
   );
 };
 
