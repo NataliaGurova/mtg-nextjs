@@ -32,8 +32,8 @@ const Logo = () => {
       <Image
         src="/citadel.jpg"
         alt="Citadel"
-        width={40}
-        height={40}
+        width={60}
+        height={60}
         className="rounded-md"
         priority
       />

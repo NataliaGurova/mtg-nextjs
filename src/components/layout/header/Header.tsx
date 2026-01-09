@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50">
-      <Container className="flex items-center justify-between bg-light-grey max-w-full text-main-text">
+      <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text">
         {/* <div className="w-auto md:w-1/3 flex items-center gap-25 justify-start md:gap-0">
           <Logo/>
           <SearchBar className="hidden md:inline md:ml-10" />
