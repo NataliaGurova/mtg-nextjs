@@ -17,10 +17,19 @@ const FiltersChips = ({ onRemoveSet, onClearAll }: FiltersChipsProps) => {
   const sp = useSearchParams();
 
   const q = (sp.get("q") ?? "").trim();
+
+  // const sets = useMemo(() => {
+  //   const raw = sp.get("sets") ?? "";
+  //   return raw.split(",").map(s => s.trim()).filter(Boolean);
+  // }, [sp]);
+
   const sets = useMemo(() => {
-    const raw = sp.get("sets") ?? "";
-    return raw.split(",").map(s => s.trim()).filter(Boolean);
+    return sp
+      .getAll("sets")
+      .map(s => s.trim().toLowerCase())
+      .filter(Boolean);
   }, [sp]);
+  
 
   const hasAny = Boolean(q) || sets.length > 0;
 

@@ -66,10 +66,18 @@ const FiltersSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  // const selectedSets = useMemo(() => {
+  //   const raw = sp.get("sets") ?? "";
+  //   return raw.split(",").map(s => s.trim()).filter(Boolean);
+  // }, [sp]);
+
   const selectedSets = useMemo(() => {
-    const raw = sp.get("sets") ?? "";
-    return raw.split(",").map(s => s.trim()).filter(Boolean);
+    return sp
+      .getAll("sets")
+      .map(s => s.trim().toLowerCase())
+      .filter(Boolean);
   }, [sp]);
+  
 
   const updateParams = (updater: (p: URLSearchParams) => void) => {
     const p = new URLSearchParams(sp.toString());
@@ -82,30 +90,54 @@ const FiltersSidebar = () => {
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   };
 
+  // const toggleSet = (code: string) => {
+  //   updateParams((p) => {
+  //     const raw = p.get("sets") ?? "";
+  //     const arr = raw.split(",").map(s => s.trim()).filter(Boolean);
+
+  //     const next = arr.includes(code)
+  //       ? arr.filter(x => x !== code)
+  //       : [...arr, code];
+
+  //     if (next.length) p.set("sets", next.join(","));
+  //     else p.delete("sets");
+  //   });
+  // };
+
   const toggleSet = (code: string) => {
     updateParams((p) => {
-      const raw = p.get("sets") ?? "";
-      const arr = raw.split(",").map(s => s.trim()).filter(Boolean);
-
-      const next = arr.includes(code)
-        ? arr.filter(x => x !== code)
-        : [...arr, code];
-
-      if (next.length) p.set("sets", next.join(","));
-      else p.delete("sets");
+      const current = p.getAll("sets");
+  
+      const next = current.includes(code)
+        ? current.filter(x => x !== code)
+        : [...current, code];
+  
+      p.delete("sets");
+      next.forEach(s => p.append("sets", s));
     });
   };
+  
+
+  // const removeSet = (code: string) => {
+  //   updateParams((p) => {
+  //     const raw = p.get("sets") ?? "";
+  //     const arr = raw.split(",").map(s => s.trim()).filter(Boolean);
+  //     const next = arr.filter(x => x !== code);
+
+  //     if (next.length) p.set("sets", next.join(","));
+  //     else p.delete("sets");
+  //   });
+  // };
 
   const removeSet = (code: string) => {
     updateParams((p) => {
-      const raw = p.get("sets") ?? "";
-      const arr = raw.split(",").map(s => s.trim()).filter(Boolean);
-      const next = arr.filter(x => x !== code);
-
-      if (next.length) p.set("sets", next.join(","));
-      else p.delete("sets");
+      const next = p.getAll("sets").filter(x => x !== code);
+  
+      p.delete("sets");
+      next.forEach(s => p.append("sets", s));
     });
   };
+          
 
   const clearAll = () => {
     updateParams((p) => {
