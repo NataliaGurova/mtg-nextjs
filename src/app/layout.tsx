@@ -4,10 +4,17 @@ import "./globals.css";
 import Footer from "@/components/layout/footer/Footer";
 import Header from "@/components/layout/header/Header";
 import { Suspense } from "react";
+// import { Cinzel } from "next/font/google";
+
+// export const cinzel = Cinzel({
+//   subsets: ["latin"],
+//   weight: ["500", "600", "700"],
+// });
 
 
 
-const inter = Inter({ subsets: ['latin'], weight: ["400", "700"] })
+
+export const inter = Inter({ subsets: ['latin'], weight: ["400", "700"] })
 
 export const metadata: Metadata = {
   title: {
@@ -29,13 +36,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <Suspense fallback={null}>
-    <Header />
-  </Suspense>
+        <Suspense fallback={null}>
+          <Header />
+        </Suspense>
           {children}
-          <Suspense fallback={null}>
-    <Footer />
-  </Suspense>
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
       </body>
     </html>
   );

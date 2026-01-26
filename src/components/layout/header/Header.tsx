@@ -24,10 +24,6 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50">
       <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text">
-        {/* <div className="w-auto md:w-1/3 flex items-center gap-25 justify-start md:gap-0">
-          <Logo/>
-          <SearchBar className="hidden md:inline md:ml-10" />
-          </div> */}
         <div className="w-auto md:w-1/3 flex items-center justify-start gap-25">
   <Logo />
   <SearchBar containerClassName="hidden md:flex md:ml-10" />
@@ -36,7 +32,7 @@ const Header = () => {
           <div className="hidden md:flex">
             <SignIn />
             <span className="text-sm">/</span>
-            <SignUp/>
+            <SignUp />
           </div>
           <div className="flex items-center gap-6">
           <CartIcon />

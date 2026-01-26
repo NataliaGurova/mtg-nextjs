@@ -40,15 +40,15 @@
 // }
 
 // export default FiltersSidebar;
+
 "use client";
 
-// import { useState } from "react";
 import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import CardSet from "./CardSet/CardSet";
 import css from "./FiltersSidebar.module.css"
 import FiltersChips from "./FiltersChips/FiltersChips";
-// import { useState } from "react";
+
 
 // const Filters = ({ onChange, textValue, isFoil, onChangeFoil }) => {
 // const FiltersSidebar = () => {
@@ -123,7 +123,7 @@ const FiltersSidebar = () => {
 // --------------------------
   
   return (
-    // <Container>
+
       // <aside className="w-75 bg-white rounded-xl shadow-sm p-5 sticky top-20 h-fit">
       <aside className={css.container}>
       <h1 className={css.filterTitle}>Filters</h1>
@@ -131,31 +131,43 @@ const FiltersSidebar = () => {
       <FiltersChips onRemoveSet={removeSet} onClearAll={clearAll} />
       <div className={css.formContainer}>
 
-        {/* <FoilNotFoil isFoil={isFoil} onChangeFoil={onChangeFoil} /> */}
-
-      {/* <h3 className={css.title}>Card Name</h3> */}
-        {/* <input
-          type="text"
-          // value={textValue}
-          // onChange={handleNameChange}
-          placeholder="name"
-          className={css.inputName}
-      /> */}
-        {/* <SearchBar showIcon={false} /> */}
-
-
-        {/* {["Sets", "Type", "Card Color", "Rarity", "Artists"].map(item => (
-            <section key={item} className="mb-6">
-              <details className="cursor-pointer">
-                <summary className="flex justify-between font-semibold">
-                  {item}
-                  <span>{isVisible ? <FaChevronUp /> : <FaChevronDown />}</span>
-            </summary>
-            <div className="mt-2 text-sm text-gray-600">…filters…</div>
-          </details>
-        </section>
-      ))} */}
         <CardSet selectedSets={selectedSets} onToggleSet={toggleSet} />
+
+
+      </div>
+      </aside>
+
+  );
+};
+
+export default FiltersSidebar;
+
+
+{/* <FoilNotFoil isFoil={isFoil} onChangeFoil={onChangeFoil} /> */}
+
+{/* <h3 className={css.title}>Card Name</h3> */}
+{/* <input
+  type="text"
+  // value={textValue}
+  // onChange={handleNameChange}
+  placeholder="name"
+  className={css.inputName}
+/> */}
+{/* <SearchBar showIcon={false} /> */}
+
+
+{/* {["Sets", "Type", "Card Color", "Rarity", "Artists"].map(item => (
+    <section key={item} className="mb-6">
+      <details className="cursor-pointer">
+        <summary className="flex justify-between font-semibold">
+          {item}
+          <span>{isVisible ? <FaChevronUp /> : <FaChevronDown />}</span>
+    </summary>
+    <div className="mt-2 text-sm text-gray-600">…filters…</div>
+  </details>
+</section>
+))} */}
+
 {/* <CardSet
   selectedSets={filters.sets}
   onToggleSet={(code) => dispatch(toggleSet(code))}
@@ -169,12 +181,3 @@ const FiltersSidebar = () => {
         <CardColor />
         <CardRarity  />
         <CardArtist  /> */}
-
-        {/* <button type="submit">Search</button> */}
-      </div>
-      </aside>
-    // </Container>  
-  );
-};
-
-export default FiltersSidebar;

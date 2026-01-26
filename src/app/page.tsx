@@ -1,24 +1,36 @@
 
-
-import HeroSearch from "@/components/home/HeroSearch";
-// import WhatYouCanDo from "@/components/home/WhatYouCanDo";
-// import ForWhom from "@/components/home/ForWhom";
-// import SinglesPreview from "@/components/home/SinglesPreview";
-// import DataScale from "@/components/home/DataScale";
+import FixedBackgroundHome from "@/components/home/FixedBackgroundHome";
+import HomeSlider from "@/components/home/HomeSlider/HomeSlider";
 import Roadmap from "@/components/home/Roadmap";
 import FinalCTA from "@/components/home/FinalCTA";
 
 const HomePage = () => {
   return (
-    <main className="flex flex-col gap-25">
+    <main className="flex flex-col ">
+      {/* fixed background ONLY for home */}
+      <FixedBackgroundHome />
 
-      <HeroSearch />
+      {/* hero */}
+      <section className="relative z-10">
+        <HomeSlider />
+      </section>
+
+      {/* content below */}
+      <section className="relative z-10 bg-[#eff2f8]/70">
+        {/* cards / banners / text */}
+      <FinalCTA />
+      <Roadmap />
+      <Roadmap />
+      <Roadmap />
+      <Roadmap />
+      </section>
+
+
+      {/* <HeroSearch /> */}
       {/* <WhatYouCanDo />
       <ForWhom />
       <SinglesPreview />
       <DataScale /> */}
-      <FinalCTA />
-      <Roadmap />
     </main>
   );
 };

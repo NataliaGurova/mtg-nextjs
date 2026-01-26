@@ -37,22 +37,41 @@ type PageChunk = {
 const CardsList = () => {
   const sp = useSearchParams();
 
-  const q = (sp.get("q") ?? "").trim();
-  const sets = (sp.get("sets") ?? "").trim();
+  // const q = (sp.get("q") ?? "").trim();
+  const q = useMemo(() => (sp.get("q") ?? "").trim(), [sp]);
+
+  const sets = useMemo(() => sp.getAll("sets"), [sp]);
+  // const sets = sp.getAll("sets"); // ["TLA", "TLE"]
+  // const sets = (sp.get("sets") ?? "").trim();
 
   const [chunks, setChunks] = useState<PageChunk[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // const baseParams = useMemo(() => {
+  //   const p = new URLSearchParams();
+  //   if (q) p.set("q", q);
+  //   if (sets) p.set("sets", sets);
+  //   p.set("limit", String(LIMIT));
+  //   return p;
+  // }, [q, sets]);
+
+
   const baseParams = useMemo(() => {
     const p = new URLSearchParams();
+  
     if (q) p.set("q", q);
-    if (sets) p.set("sets", sets);
+    if (sets.length > 0) p.set("sets", sets.join(",")); // 👈 ВАЖНО
+  
     p.set("limit", String(LIMIT));
     return p;
   }, [q, sets]);
 
 
+
+  console.log("CLIENT sets:", sets);
+  console.log("CLIENT query:", baseParams.toString());
+  
 
   
 const fetchPage = async (pageNum: number): Promise<ApiResponse> => {
@@ -85,7 +104,7 @@ const fetchPage = async (pageNum: number): Promise<ApiResponse> => {
   useEffect(() => {
     loadInitial();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [q, sets]);
+  }, [q, sets.join(",")]);
 
   const handleLoadMore = async () => {
     const nextPage = chunks.length + 1;

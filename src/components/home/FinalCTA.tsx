@@ -1,41 +1,28 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
-// import Image from "next/image";
+
 
 const FinalCTA = () => {
   return (
-    <section className="px-6 py-6 text-center">
+    <section className=" py-25 text-center">
       <h2 className="text-2xl font-semibold mb-6">
-      Знайдіти свою карту Magic: The Gathering
+      Знайдіть свою карту Magic: The Gathering
       </h2>
-      {/* <p className="text-lg text-gray-500">
-        Знайдіть свою улюблену карту Magic: The Gathering серед тисячі варіантів.
-      </p> */}
-              {/* <Image
-                src="/images/tower2.jpg"
-                alt="Avatar banner text"
-                width={800}
-                height={600}
-                className="mb-10 ml-25"
-                priority
-              /> */}
-      
 
       <Link
-  href={{
-    pathname: "/singles",
+        href={{
+          pathname: "/singles",
     // query: {
     //   sets: [
     //     "TLA",
     //     "TLE",
     //   ],
     // },
-  }}
->
-      <Button variant="banner">
-      Відкрити MTG Singles
+        }}>
+        <Button variant="banner">
+          Відкрити MTG Singles
         </Button>
-        </Link>
+      </Link>
 
     </section>
   );

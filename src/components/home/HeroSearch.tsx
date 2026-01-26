@@ -1,6 +1,7 @@
 // import Image from "next/image";
 
 
+
 // const HeroSearch = () => {
 //   return (
 //     <section className="px-6 pt-24 pb-32 max-w-5xl mx-auto text-center">
@@ -29,21 +30,35 @@
 
 // export default HeroSearch;
 
-import BannerAvatar from "../Banner/BannerAvatar";
 
+// import BannerAvatar from "./HomeSlider/BannerAvatar";
+// import BannerWelcome from "./HomeSlider/BannerWelcome";
+// // import HeroSlider from "./HeroSlider";
+
+// const HeroSearch = () => {
+  //   return (
+    
+  //     <section className="relative max-w-full mx-auto text-center overflow-hidden ">
+  //       {/* <BannerWelcome/> */}
+  //       <BannerAvatar />
+  //     </section>
+  //   );
+  // };
+
+  // export default HeroSearch;
+  
+// import HomeSlider from "@/components/HomeSlider/HomeSlider";
+
+import HomeSlider from "./HomeSlider/HomeSlider";
 
 const HeroSearch = () => {
   return (
-    // <section className="relative px-6 pt-24 pb-32 max-w-6xl mx-auto text-center overflow-hidden rounded-2xl">
-    <section className="relative max-w-full mx-auto text-center overflow-hidden ">
-      
-
-
-      <BannerAvatar/>
-
+    <section className="relative w-full overflow-hidden">
+      <HomeSlider />
     </section>
   );
 };
 
 export default HeroSearch;
+
 

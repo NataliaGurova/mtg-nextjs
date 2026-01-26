@@ -102,7 +102,11 @@ export async function GET(req: Request) {
     const qRaw = searchParams.get("q");
 
     // const set = searchParams.get("set");
-    const setsRaw = searchParams.get("sets"); // "mh3,war"
+    // const setsRaw = searchParams.get("sets"); // "mh3,war"
+    const setsRawAll = searchParams.getAll("sets"); // ["TLA", "TLE"] или []
+    const setsRaw = setsRawAll.length
+  ? setsRawAll.join(",")
+  : searchParams.get("sets");
 
     const rarity = searchParams.get("rarity");
 
@@ -129,7 +133,8 @@ export async function GET(req: Request) {
     if (setsRaw) {
       const sets = setsRaw
         .split(",")
-        .map((s) => s.trim())
+        // .map((s) => s.trim())
+        .map(s => s.trim().toLowerCase())
         .filter(Boolean);
     
       if (sets.length) {
