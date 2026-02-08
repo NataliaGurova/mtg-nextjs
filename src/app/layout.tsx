@@ -4,13 +4,16 @@ import "./globals.css";
 import Footer from "@/components/layout/footer/Footer";
 import Header from "@/components/layout/header/Header";
 import { Suspense } from "react";
+
+import { Providers } from "@/components/auth/Providers";
+
+
 // import { Cinzel } from "next/font/google";
 
 // export const cinzel = Cinzel({
 //   subsets: ["latin"],
 //   weight: ["500", "600", "700"],
 // });
-
 
 
 
@@ -34,19 +37,42 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
+    // <html lang="en">
+    //   <body className={inter.className}>
+    //     <Providers>
+    //     <Suspense fallback={null}>
+    //       <Header />
+    //     </Suspense>
+    //         {children}
+    //       <Suspense fallback={null}>
+    //         <Footer />
+    //       </Suspense>
+    //     </Providers>
+    //   </body>
+    // </html>
     <html lang="en">
-      <body className={inter.className}>
+    <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <Providers>
         <Suspense fallback={null}>
           <Header />
         </Suspense>
+
+        {/* Main растягивается */}
+        <main className="flex-1 bg-light-grey">
           {children}
+        </main>
+
         <Suspense fallback={null}>
           <Footer />
         </Suspense>
-      </body>
-    </html>
+      </Providers>
+    </body>
+  </html>
+    
   );
 }
+
 
 
 

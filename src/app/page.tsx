@@ -16,7 +16,7 @@ const HomePage = () => {
       </section>
 
       {/* content below */}
-      <section className="relative z-10 bg-[#eff2f8]/70">
+      <section className="relative z-10 bg-light-grey/60">
         {/* cards / banners / text */}
       <FinalCTA />
       <Roadmap />

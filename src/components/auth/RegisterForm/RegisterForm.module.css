@@ -1,0 +1,131 @@
+
+.container {
+  /* margin-left: 100px;
+  margin-right: 80px; */
+  color: rgba(40, 39, 39, 0.7);
+}
+
+.title {
+  letter-spacing: -0.6px;
+  font-size: 32px;
+  font-weight: 600;
+  color: rgba(40, 39, 39, 0.7);
+  margin-bottom: 20px;
+  /* line-height: 1.2;  */
+}
+
+.form {
+  width: 350px;
+  
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  /* margin-bottom: 4px;
+  margin-top: 10px; */
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.passwordContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input {
+  width: 350px;
+  height: 40px;
+  border: 1px solid rgba(26, 26, 26, 0.7);
+  border-radius: 4px;
+  background-color: transparent;
+  
+  padding: 10px 10px;
+  font-size: 14px;
+  /* margin-top: 4px; */
+  
+  padding-right: 40px; /* Відступ для кнопки */
+}
+
+.input::placeholder {
+  font-style: normal;
+  color: rgba(40, 39, 39, 0.7);
+  font-weight: 400;
+  transition: color 0.3s ease;  
+}
+
+.input:hover, .input:focus {
+  background-color: rgba(218, 223, 220, 0.7);
+  outline: none;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  outline: none;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+  color: #555;
+  font-size: 1.3rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  width: 350px;
+  height: 38px;
+  border: 1px solid rgba(53, 53, 53, 0.7); 
+  border-radius: 4px;
+  color: rgb(247, 250, 253);
+  /* margin-top: 10px;  */
+  background-color: rgb(114, 116, 114);
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
+
+/* Кнопка у стані disabled */
+.btn:disabled {
+  background-color: rgba(114, 116, 114, 0.5); /* Світліший сірий */
+  border: 1px solid rgba(53, 53, 53, 0.4);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Якщо форма валідна, робимо кнопку зеленою */
+.btn:not(:disabled) {
+  background-color: rgb(29, 81, 5);
+}
+
+.btn:not(:disabled):hover {
+  background-color: rgb(25, 70, 4);
+}
+
+
+/* ------------------------------ */
+
+.error{
+  color: #bf1650;
+  height: 21px;
+  font-size: 12px;
+}
+
+
+.linkSign {
+  display: flex;
+  width: 350px;
+  margin-top: 15px;
+  justify-content: space-between;
+}
+
+.link {
+  color: #fcd21a;
+}
+
+.link:hover, .link.active {
+  color: #fcd21a;
+  border-bottom: 1px solid #fcd21a;
+}
+

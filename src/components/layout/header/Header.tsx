@@ -5,8 +5,8 @@
 import Logo from "../../logo/Logo";
 import CartIcon from "../../cart-icon/CartIcon";
 import FavoriteBtn from "../../favorite-btn/FavoriteBtn";
-import SignIn from "../auth/SignIn";
-import SignUp from "../auth/SignUp";
+// import SignIn from "../auth/SignIn";
+// import SignUp from "../auth/SignUp";
 // import NavbarMobil from "../../navbar-mobil/NavbarMobil";
 import { navLinks } from "@/constants/data";
 import Link from "next/link";
@@ -16,6 +16,7 @@ import { usePathname } from 'next/navigation';
 import NavbarMobil from "../navbar-mobil/NavbarMobil";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Container from "@/components/Container/Container";
+import UserMenu from "./UserMenu";
 
 
 const Header = () => {
@@ -25,15 +26,19 @@ const Header = () => {
     <header className="sticky top-0 z-50">
       <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text">
         <div className="w-auto md:w-1/3 flex items-center justify-start gap-25">
-  <Logo />
-  <SearchBar containerClassName="hidden md:flex md:ml-10" />
-</div>
+          <Logo />
+          <SearchBar containerClassName="hidden md:flex md:ml-10" />          
+        </div>
+        
         <div className="flex w-auto gap-6 md:gap-[50px]">
+
           <div className="hidden md:flex">
-            <SignIn />
+            <UserMenu />
+            {/* <SignIn />
             <span className="text-sm">/</span>
-            <SignUp />
+            <SignUp /> */}
           </div>
+
           <div className="flex items-center gap-6">
           <CartIcon />
           <FavoriteBtn />
@@ -41,7 +46,7 @@ const Header = () => {
           {/* 🔍 тільки на мобілці */}
           <div className="md:hidden">
             <NavbarMobil /> 
-            </div>
+            </div>           
             </div>
 
           </div>

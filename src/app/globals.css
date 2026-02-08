@@ -176,7 +176,8 @@ body {
   padding: 0;
   min-height: 100dvh;
   font-family: 'Inter', 'PT Serif', sans-serif;
-  line-height: 1.5;
+  /* line-height: 1.5; */
+  line-height: 1.15;
   font-weight: 400;
   font-style: normal;
   font-size: 16px;
@@ -186,6 +187,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-background);
   color: var(--color-main-text);
+  /* Фон */
+  /* background-image: url('/images/towerDark2.png');  */
+
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
