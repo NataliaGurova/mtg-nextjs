@@ -1,6 +1,6 @@
 // import React from 'react'
 
-const FavoriteaaPage = () => {
+const FavoritePage = () => {
   return (
     <div>
       Favorite
@@ -8,4 +8,4 @@ const FavoriteaaPage = () => {
   )
 }
 
-export default FavoriteaaPage;
+export default FavoritePage;
