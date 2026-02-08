@@ -1,14 +1,15 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sets",
+  title: "Tokens",
 };
-const SetsPage = () => {
+
+const TokensaaPage = () => {
   return (
     <div>
-      Sets
+      Tokens
     </div>
   )
 }
 
-export default SetsPage;
+export default TokensaaPage;

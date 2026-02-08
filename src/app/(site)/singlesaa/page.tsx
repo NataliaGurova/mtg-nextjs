@@ -32,7 +32,7 @@ import FiltersSidebar from "@/components/filters/FiltersSidebar";
 import Container from "@/components/Container/Container";
 
 
-const SinglesPage = async () => {
+const SinglesaaPage = async () => {
 
 
   return (
@@ -47,5 +47,5 @@ const SinglesPage = async () => {
   );
 };
 
-export default SinglesPage;
+export default SinglesaaPage;
 
