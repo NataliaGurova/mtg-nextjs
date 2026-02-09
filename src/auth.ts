@@ -145,3 +145,110 @@ export const authConfig: AuthOptions = {
 //   ],
 // });
 
+
+
+
+// неизвестній код
+
+// import { loginUser } from "@/lib/auth";
+// import NextAuth, { CredentialsSignin, User } from "next-auth"
+// import { type JWT } from "next-auth/jwt";
+// import Credentials from "next-auth/providers/credentials"
+ 
+// // Access time is shorter than backend to prompt a refresh
+// export const BACKEND_ACCESS_TOKEN_LIFETIME = 45 * 60;              // 45 minutes
+// export const BACKEND_REFRESH_TOKEN_LIFETIME = 6 * 24 * 60 * 60;    // 6 days
+ 
+// export const getCurrentEpochTime = () => {
+//     return Math.floor(Date.now() / 1000);
+// };
+ 
+// export function shouldUpdateToken(token: JWT): boolean {
+//     return token.accessExp <= getCurrentEpochTime()
+// }
+ 
+// export class InvalidLoginError extends CredentialsSignin {
+//     constructor(message: string) {
+//         super(message);
+//         this.code = message;
+//     }
+// }
+ 
+// export const { handlers, signIn, signOut, auth } = NextAuth({
+//     session: {
+//         strategy: "jwt",
+//         maxAge: BACKEND_REFRESH_TOKEN_LIFETIME,
+//     },
+//     providers: [
+//         Credentials({
+//             name: "credentials",
+//             credentials: {
+//                 username: { label: "Username", type: "text" },
+//                 password: { label: "Password", type: "password" }
+//             },
+//             authorize: async (credentials) => {
+//                 if (!credentials || !credentials.password || !credentials.username) {
+//                     throw new Error("Missing credentials: " + credentials);
+//                 }
+ 
+//                 try {
+//                     const loginResponse = await loginUser({
+//                         username: credentials.username as string,
+//                         password: credentials.password as string,
+//                     });
+ 
+//                     return {
+//                         id: loginResponse.user.pk.toString(),
+//                         username: loginResponse.user.username,
+//                         email: loginResponse.user.email,
+//                         firstName: loginResponse.user.first_name,
+//                         lastName: loginResponse.user.last_name,
+//                         accessToken: loginResponse.access,
+//                         accessExp: getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME,
+//                         refreshToken: loginResponse.refresh,
+//                         emailVerified: loginResponse.user.is_verified,
+//                     } as User;
+//                 } catch (error) {
+//                     if (typeof (error) === "object") {
+//                         throw new InvalidLoginError(JSON.stringify(error));
+//                     }
+//                     throw new InvalidLoginError("InvalidCredentials");
+//                 }
+//             },
+//         }),
+//     ],
+//     callbacks: {
+//         async jwt({ token, user, account }) {
+//             // If `user` and `account` are set, that means it's a login event 
+//             if (user && account) {
+//                 // we only support credentials login
+//                 if (account?.type !== "credentials") {
+//                     throw new Error("Invalid Login Type: " + account?.type);
+//                 }
+//                 return {
+//                     ...token,
+//                     user: user,
+//                     accessToken: user.accessToken,
+//                     refreshToken: user.refreshToken,
+//                     accessExp: user.accessExp,
+//                 }
+//             }
+//             return token;
+//         },
+//         async session({ token, session }) {
+//             return {
+//                 ...session,
+//                 user: token.user,
+//                 accessToken: token.accessToken,
+//             }
+//         },
+//         authorized: async ({ auth }) => {
+//             // Logged in users are authenticated, otherwise redirect to login page
+//             return !!auth
+//         },
+//     },
+//     pages: {
+//         signIn: "/login",
+//         // TODO: signOut: "/logout",
+//     },
+// })
