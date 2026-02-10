@@ -1,12 +1,5 @@
-/* @import "tailwindcss";
-@import "tw-animate-css"; */
-/* @import "tailwindcss/preflight"; */
-/* @tailwind utilities; */
-
-
 @import "tailwindcss";
-/* @import "tw-animate-css"; */
-
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
   /* --main-text: #141517;
@@ -21,7 +14,6 @@
 @theme {
   --font-inter: Inter, PT Serif, sans-serif;
   --color-light-grey: #eff2f8;
-  --color-dark-grey: #141517; 
   --color-dark-green: rgb(29, 81, 5);
   /* --color-dark-green: #1d5105; */
   /* --color-light-green: rgb(44, 120, 8); */
@@ -160,10 +152,6 @@
 
   }
 
-  /* * {
-    @apply border border-gray-200 outline outline-gray-300;
-  } */
-
   body {
     @apply bg-background text-main-text;
 /* background: var(--background); */
@@ -188,8 +176,7 @@ body {
   padding: 0;
   min-height: 100dvh;
   font-family: 'Inter', 'PT Serif', sans-serif;
-  /* line-height: 1.5; */
-  line-height: 1.15;
+  line-height: 1.5;
   font-weight: 400;
   font-style: normal;
   font-size: 16px;
@@ -199,9 +186,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-background);
   color: var(--color-main-text);
-  /* Фон */
-  /* background-image: url('/images/towerDark2.png');  */
-
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
