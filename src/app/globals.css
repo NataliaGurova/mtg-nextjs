@@ -1,5 +1,10 @@
+/* @import "tailwindcss";
+@import "tw-animate-css"; */
 @import "tailwindcss";
+/* @import "tailwindcss/preflight"; */
+/* @tailwind utilities; */
 @import "tw-animate-css";
+
 
 @custom-variant dark (&:is(.dark *));
   /* --main-text: #141517;
@@ -152,6 +157,10 @@
     @apply border-border outline-ring/50;
 
   }
+
+  /* * {
+    @apply border border-gray-200 outline outline-gray-300;
+  } */
 
   body {
     @apply bg-background text-main-text;
