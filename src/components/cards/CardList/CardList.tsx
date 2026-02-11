@@ -18,6 +18,7 @@ import CardItem from "../CardItem/CardItem";
 import css from "./CardList.module.css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Loader from "@/components/Loader/Loader";
 
 const LIMIT = 20;
 
@@ -137,22 +138,26 @@ const fetchPage = async (pageNum: number): Promise<ApiResponse> => {
         )}
       </ul>
 
+
       <div className="mt-10 flex flex-col items-center gap-4">
-        {canLoadMore && (
-          <div className="mt-10 flex justify-center">
-          <Button
-          variant="loadMore"
-          // size="wide"
-          onClick={handleLoadMore}
-          disabled={isLoading}
-        >
-          {isLoading ? "Loading..." : "Load more"}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          canLoadMore && (
+            <Button
+              variant="loadMore"
+              onClick={handleLoadMore}
+            >
+              Load more
             </Button>
-          </div>
+          )
         )}
       </div>
-    </div>
-  );
+
+</div>
+);
 };
 
 export default CardsList;
+
+{/* {isLoading ? <Loader /> : "Load more"} */}

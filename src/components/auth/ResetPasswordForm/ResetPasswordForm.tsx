@@ -1,98 +1,148 @@
-"use client";
+// "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+// import { useSearchParams, useRouter } from "next/navigation";
+// import { useForm } from "react-hook-form";
+// import { z } from "zod";
+// import { zodResolver } from "@hookform/resolvers/zod";
 
-import css from "./ResetPasswordForm.module.css";
+// import css from "./ResetPasswordForm.module.css";
 
-const schema = z
-  .object({
-    password: z.string().min(8, "Min 8 characters"),
-    repeatPassword: z.string(),
-  })
-  .refine(data => data.password === data.repeatPassword, {
-    path: ["repeatPassword"],
-    message: "Passwords do not match",
-  });
+// const schema = z
+//   .object({
+//     password: z.string().min(8, "Min 8 characters"),
+//     repeatPassword: z.string(),
+//   })
+//   .refine(data => data.password === data.repeatPassword, {
+//     path: ["repeatPassword"],
+//     message: "Passwords do not match",
+//   });
 
-type FormData = z.infer<typeof schema>;
+// type FormData = z.infer<typeof schema>;
 
-const ResetPasswordForm = () => {
-  const params = useSearchParams();
-  const router = useRouter();
-  const token = params.get("token");
+// const ResetPasswordForm = () => {
+//   const params = useSearchParams();
+//   const router = useRouter();
+//   const token = params.get("token");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid, isSubmitting },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-    mode: "onChange",
-  });
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors, isValid, isSubmitting },
+//   } = useForm<FormData>({
+//     resolver: zodResolver(schema),
+//     mode: "onChange",
+//   });
 
-  const onSubmit = async (data: FormData) => {
+//   const onSubmit = async (data: FormData) => {
+//     const res = await fetch("/api/auth/reset-password", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         token,
+//         password: data.password,
+//       }),
+//     });
+
+//     if (!res.ok) {
+//       alert("Token invalid or expired");
+//       return;
+//     }
+
+//     router.push("/login");
+//   };
+
+//   if (!token) {
+//     return <p className={css.error}>Invalid reset link</p>;
+//   }
+
+//   return (
+//     <div className={css.container}>
+//       <h1 className={css.title}>Reset password</h1>
+
+//       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+//         <label className={css.label}>
+//           <input
+//             {...register("password")}
+//             type="password"
+//             placeholder="New password"
+//             className={css.input}
+//           />
+//         </label>
+//         <div className={css.error}>
+//           {errors.password && <p>{errors.password.message}</p>}
+//         </div>
+
+//         <label className={css.label}>
+//           <input
+//             {...register("repeatPassword")}
+//             type="password"
+//             placeholder="Repeat password"
+//             className={css.input}
+//           />
+//         </label>
+//         <div className={css.error}>
+//           {errors.repeatPassword && <p>{errors.repeatPassword.message}</p>}
+//         </div>
+
+//         <input
+//           type="submit"
+//           value={isSubmitting ? "Saving..." : "Reset password"}
+//           className={css.btn}
+//           disabled={!isValid || isSubmitting}
+//         />
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default ResetPasswordForm;
+
+
+
+"use client"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+
+export default function ResetPasswordForm({ token }: { token: string }) {
+  const [password, setPassword] = useState("")
+  const [message, setMessage] = useState("")
+  const router = useRouter()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
     const res = await fetch("/api/auth/reset-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token,
-        password: data.password,
-      }),
-    });
+      body: JSON.stringify({ token, password }),
+    })
 
-    if (!res.ok) {
-      alert("Token invalid or expired");
-      return;
+    if (res.ok) {
+      setMessage("Пароль изменён")
+      setTimeout(() => router.push("/login"), 1500)
+    } else {
+      setMessage("Токен недействителен или истёк")
     }
-
-    router.push("/login");
-  };
-
-  if (!token) {
-    return <p className={css.error}>Invalid reset link</p>;
   }
 
   return (
-    <div className={css.container}>
-      <h1 className={css.title}>Reset password</h1>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
+      <input
+        type="password"
+        required
+        placeholder="Новый пароль"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="border p-3 rounded"
+      />
 
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <label className={css.label}>
-          <input
-            {...register("password")}
-            type="password"
-            placeholder="New password"
-            className={css.input}
-          />
-        </label>
-        <div className={css.error}>
-          {errors.password && <p>{errors.password.message}</p>}
-        </div>
+      <button type="submit" className="bg-black text-white p-3 rounded">
+        Сменить пароль
+      </button>
 
-        <label className={css.label}>
-          <input
-            {...register("repeatPassword")}
-            type="password"
-            placeholder="Repeat password"
-            className={css.input}
-          />
-        </label>
-        <div className={css.error}>
-          {errors.repeatPassword && <p>{errors.repeatPassword.message}</p>}
-        </div>
+      {message && <p>{message}</p>}
+    </form>
+  )
+}
 
-        <input
-          type="submit"
-          value={isSubmitting ? "Saving..." : "Reset password"}
-          className={css.btn}
-          disabled={!isValid || isSubmitting}
-        />
-      </form>
-    </div>
-  );
-};
-
-export default ResetPasswordForm;

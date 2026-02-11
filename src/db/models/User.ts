@@ -84,8 +84,14 @@ const UserSchema = new Schema(
       select: false, // 🔐 не отдаём пароль
     },
 
-    resetPasswordToken: String,
-    resetPasswordExpires: Date,
+    resetPasswordToken: {
+      type: String,
+    },
+    
+    resetPasswordExpire: {
+      type: Date,
+    },
+    
   },
   {
     timestamps: true,

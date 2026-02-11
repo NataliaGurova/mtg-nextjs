@@ -1,4 +1,3 @@
-// import Container from "@/components/Container/Container";
 
 import RegisterForm from "@/components/auth/RegisterForm/RegisterForm";
 import Container from "@/components/Container/Container";
@@ -25,8 +24,9 @@ const RegisterPage = () => {
 
   return (
     // <main className="min-h-screen flex items-center justify-center">
-    <Container>
-  <div className="flex flex-col md:flex-row items-stretch justify-between gap-10 mx-25">
+    // <Container>
+    <Container className=" flex-1 flex items-center justify-center">
+  <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 mx-25">
 
     {/* Форма */}
     <div className="flex-1">
@@ -45,27 +45,7 @@ const RegisterPage = () => {
     </div>
 
   </div>
-</Container>
-    // <Container>
-    //   <div className="flex flex-col md:flex-row items-start justify-between gap-10 mx-25">  
-
-        
-    //       <RegisterForm />
-
-    //       <div className="height-[600px] md:block overflow-hidden rounded-[4px]">
-    //         <Image
-    //           src="/images/register.jpg"
-    //         alt="Magic"
-            
-    //         width={800}
-    //         height={500}
-    //         style={{ objectFit: "cover" }}
-    //           // className={css.img}
-    //         />
-    //       </div>
-    //     </div>
-    // </Container>
-    
+</Container>    
     // </main>
   );
 };

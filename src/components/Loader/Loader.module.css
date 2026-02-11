@@ -1,0 +1,72 @@
+.loaderContainer {
+  position: relative;
+  z-index: 100;
+  /* background-image: url(/public/Magic_the_gathering_small_pentagon.svg.png); */
+  /* background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
+    /* border: 1px solid red; */
+    
+  top: 40px;
+  width: 80px; 
+  height: 80px; 
+  border-radius: 50%;
+  margin: auto;
+  animation: rotate 2s linear infinite; /* Анімація обертання */
+}
+
+.circle {
+  position: absolute;
+  width: 30px; 
+  height: 30px;
+  border-radius: 50%;
+}
+
+.white {
+  background-color: #ecebe7;
+  border: 1px solid rgb(61, 59, 59);
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.green {
+  background-color: rgb(105, 122, 96);
+  border: 1px solid rgb(61, 59, 59);
+  top: 33.3%;
+  left: 4%;
+  transform: translate(-50%, -50%);
+}
+
+.blue {
+  background-color: #4771b8;
+  border: 1px solid rgb(61, 59, 59);
+  top: 33.3%;
+  left: 94%;
+  transform: translate(-50%, -50%);
+}
+
+.red {
+  background-color: #f66565;
+  border: 1px solid rgb(61, 59, 59);
+  top: 90%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.black {
+  background-color: #333;
+  border: 1px solid rgb(61, 59, 59);
+  top: 90%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

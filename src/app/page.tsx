@@ -3,6 +3,7 @@ import FixedBackgroundHome from "@/components/home/FixedBackgroundHome";
 import HomeSlider from "@/components/home/HomeSlider/HomeSlider";
 import Roadmap from "@/components/home/Roadmap";
 import FinalCTA from "@/components/home/FinalCTA";
+import Loader from "@/components/Loader/Loader";
 
 const HomePage = () => {
   return (
@@ -19,7 +20,7 @@ const HomePage = () => {
       <section className="relative z-10 bg-light-grey/60">
         {/* cards / banners / text */}
       <FinalCTA />
-      <Roadmap />
+      <Loader />
       <Roadmap />
       <Roadmap />
       <Roadmap />
