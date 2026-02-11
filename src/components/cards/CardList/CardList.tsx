@@ -38,24 +38,16 @@ type PageChunk = {
 const CardsList = () => {
   const sp = useSearchParams();
 
-  // const q = (sp.get("q") ?? "").trim();
   const q = useMemo(() => (sp.get("q") ?? "").trim(), [sp]);
 
   const sets = useMemo(() => sp.getAll("sets"), [sp]);
-  // const sets = sp.getAll("sets"); // ["TLA", "TLE"]
-  // const sets = (sp.get("sets") ?? "").trim();
 
   const [chunks, setChunks] = useState<PageChunk[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // const baseParams = useMemo(() => {
-  //   const p = new URLSearchParams();
-  //   if (q) p.set("q", q);
-  //   if (sets) p.set("sets", sets);
-  //   p.set("limit", String(LIMIT));
-  //   return p;
-  // }, [q, sets]);
+  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+  
 
 
   const baseParams = useMemo(() => {
@@ -92,33 +84,54 @@ const fetchPage = async (pageNum: number): Promise<ApiResponse> => {
 };
 
 
-  const loadInitial = async () => {
-    setIsLoading(true);
+  // const loadInitial = async () => {
+  //   setIsLoading(true);
 
+  //   const data = await fetchPage(1);
+  //   setTotalPages(data.totalPages);
+  //   setChunks([{ page: 1, items: data.items }]);
+
+  //   setIsLoading(false);
+  // };
+
+
+  const loadInitial = async () => {
     const data = await fetchPage(1);
     setTotalPages(data.totalPages);
     setChunks([{ page: 1, items: data.items }]);
-
-    setIsLoading(false);
   };
+  
 
   useEffect(() => {
     loadInitial();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q, sets.join(",")]);
+
+  // const handleLoadMore = async () => {
+  //   const nextPage = chunks.length + 1;
+  //   if (nextPage > totalPages) return;
+
+  //   setIsLoading(true);
+
+  //   const data = await fetchPage(nextPage);
+  //   setTotalPages(data.totalPages);
+  //   setChunks((prev) => [...prev, { page: nextPage, items: data.items }]);
+
+  //   setIsLoading(false);
+  // };
 
   const handleLoadMore = async () => {
     const nextPage = chunks.length + 1;
     if (nextPage > totalPages) return;
-
-    setIsLoading(true);
-
+  
+    setIsLoadingMore(true);
+  
     const data = await fetchPage(nextPage);
     setTotalPages(data.totalPages);
     setChunks((prev) => [...prev, { page: nextPage, items: data.items }]);
-
-    setIsLoading(false);
+  
+    setIsLoadingMore(false);
   };
+  
 
   const canLoadMore = chunks.length < totalPages;
 
@@ -139,7 +152,7 @@ const fetchPage = async (pageNum: number): Promise<ApiResponse> => {
       </ul>
 
 
-      <div className="mt-10 flex flex-col items-center gap-4">
+      {/* <div className="mt-10 flex flex-col items-center gap-4">
         {isLoading ? (
           <Loader />
         ) : (
@@ -152,7 +165,19 @@ const fetchPage = async (pageNum: number): Promise<ApiResponse> => {
             </Button>
           )
         )}
-      </div>
+      </div> */}
+      <div className="mt-10 flex flex-col items-center gap-4">
+  {chunks.length > 0 && canLoadMore && (
+    <Button
+      variant="loadMore"
+      onClick={handleLoadMore}
+      disabled={isLoadingMore}
+    >
+      {isLoadingMore ? "Loading..." : "Load more"}
+    </Button>
+  )}
+</div>
+
 
 </div>
 );

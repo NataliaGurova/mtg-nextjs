@@ -30,6 +30,11 @@
 import CardsList from "@/components/cards/CardList/CardList";
 import FiltersSidebar from "@/components/filters/FiltersSidebar";
 import Container from "@/components/Container/Container";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Singles",
+  };
 
 
 const SinglesPage = async () => {

@@ -11,6 +11,7 @@
   "use client";
   
   import FixedBackgroundHome from "@/components/home/FixedBackgroundHome";
+import Loader from "@/components/Loader/Loader";
   import { signOut, useSession } from "next-auth/react";
 
 
@@ -20,8 +21,16 @@ const AccountPage = () => {
   // const firstName = session?.user?.name?.split(" ")[0];
   const firstName = session?.user?.firstName || session?.user?.name?.split(" ")[0] || session?.user?.email;
 
+  // if (status === "loading") {
+  //   return <p className="p-6">Loading...</p>;
+  // }
+
   if (status === "loading") {
-    return <p className="p-6">Loading...</p>;
+    return (
+      <div className="p-6 flex justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   if (!session?.user) {
