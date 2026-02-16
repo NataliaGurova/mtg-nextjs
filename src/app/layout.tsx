@@ -6,6 +6,7 @@ import Header from "@/components/layout/header/Header";
 import { Suspense } from "react";
 
 import { Providers } from "@/components/auth/Providers";
+import { Toaster } from "sonner";
 
 
 // import { Cinzel } from "next/font/google";
@@ -59,7 +60,13 @@ export default function RootLayout({
         </Suspense>
 
         {/* Main растягивается */}
-        <main className="flex-1 bg-light-grey">
+          <main className="flex-1 bg-light-grey">
+          <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          expand={false}
+        />
           {children}
         </main>
 

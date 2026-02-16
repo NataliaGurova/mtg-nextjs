@@ -5,8 +5,7 @@
   align-items: center;
 
   width: 260px;
-  /* height: 405px; */
-  height: 475px;
+  height: 496px;
   padding: 20px;
   border-radius: 4px;
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Анімація для об'ємного ефекту */
@@ -75,6 +74,12 @@ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   align-items: center;
   margin-top: auto;
 }
+
+.foilType {
+  font-size: 14px;
+  color: #888;
+}
+
 .info {
   display: flex;
   width: 210px;

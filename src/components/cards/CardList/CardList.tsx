@@ -18,7 +18,7 @@ import CardItem from "../CardItem/CardItem";
 import css from "./CardList.module.css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Loader from "@/components/Loader/Loader";
+// import Loader from "@/components/Loader/Loader";
 
 const LIMIT = 20;
 
