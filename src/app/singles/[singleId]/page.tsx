@@ -106,47 +106,82 @@
 
 // export default SingleDetailsPage;
 
+// =================================================
+// import { notFound } from "next/navigation";
+
+// import { getCardById } from "@/db/cards";
+// import CardDetails from "@/components/cards/CardDetails/CardDetails";
+// import { DbCard } from "@/types/types";
+// import Container from "@/components/Container/Container";
+
+
+
+// interface PageProps {
+//   params: Promise<{ singleId: string }>;
+//   searchParams?: Promise<Record<string, string | string[] | undefined>>;
+// }
+
+// export default async function SingleDetailsPage({ params }: PageProps) {
+//   const { singleId } = await params;
+
+//   const card = await getCardById(singleId);
+//   if (!card) notFound();
+
+//   // Приводим _id к string (Next + RSC это любят)
+//   const plainCard: DbCard = {
+//     ...card,
+//     _id: card._id?.toString?.() ?? "",
+//   };
+
+//   const frontFace = plainCard.faces?.find(
+//     (face) => face.side === "front"
+//   );
+
+//   return (
+//     <Container>
+//       <section>
+//         <CardDetails card={plainCard} frontFace={frontFace} />
+//       </section>
+//     </Container>
+//   );
+// }
+
 
 import { notFound } from "next/navigation";
-
-import { getCardById } from "@/db/cards";
+import { getCardsByScryfallId } from "@/db/cards";
 import CardDetails from "@/components/cards/CardDetails/CardDetails";
-import { DbCard } from "@/types/types";
+// import { DbCard } from "@/types/types";
 import Container from "@/components/Container/Container";
-
-
-// import { notFound } from "next/navigation";
-// import Container from "@/components/Container";
-// import CardDetails from "@/components/CardDetails";
-// import { getCardById } from "@/lib/cards";
-// import type { DbCard } from "@/types/db";
 
 interface PageProps {
   params: Promise<{ singleId: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export default async function SingleDetailsPage({ params }: PageProps) {
   const { singleId } = await params;
 
-  const card = await getCardById(singleId);
-  if (!card) notFound();
+  const cards = await getCardsByScryfallId(singleId);
 
-  // Приводим _id к string (Next + RSC это любят)
-  const plainCard: DbCard = {
-    ...card,
-    _id: card._id?.toString?.() ?? "",
-  };
-
-  const frontFace = plainCard.faces?.find(
-    (face) => face.side === "front"
-  );
+  if (!cards.length) notFound();
 
   return (
     <Container>
-      <section>
-        <CardDetails card={plainCard} frontFace={frontFace} />
-      </section>
+      <CardDetails cards={cards} />
+      {/* <section>
+        {cards.map((card) => {
+          const frontFace = card.faces?.find(
+            (face) => face.side === "front"
+          );
+
+          return (
+            <CardDetails
+              key={card._id}
+              cards={cards}
+              frontFace={frontFace}
+            />
+          );
+        })}
+      </section> */}
     </Container>
   );
 }

@@ -42,7 +42,9 @@ const SinglesPage = async () => {
 
   return (
     <Container>
-    <div className="flex">
+      {/* <div className="flex"> */}
+      <div className="flex items-start gap-6">
+
       <FiltersSidebar />
       <section className="flex-1">
         <CardsList />

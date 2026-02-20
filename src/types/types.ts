@@ -1,4 +1,5 @@
 
+
 export type LegalityStatus =
   | "legal"
   | "not_legal"
@@ -6,6 +7,7 @@ export type LegalityStatus =
   | "restricted";
 
 // export type LegalitiesMap = Record<string, LegalityStatus>;
+export type Condition = "NM" | "LP" | "HP";
 
 export interface Face {
   side: "front" | "back";
@@ -30,10 +32,11 @@ export interface DbCard {
   isFoil: boolean;
 
   // condition: "NM" | "LP" | "HP";
-  condition: string;
+  condition: Condition;
   prices: number;
   quantity: number;
   lang: string;
 
   artist?: string; 
 }
+

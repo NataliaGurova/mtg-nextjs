@@ -1,26 +1,27 @@
 
 // types/image-card.ts
-import { Face } from "@/types/types";
 
 // export interface ImageCardProps {
-//   name: string;
-//   faces?: Face[];
-//   isFoil?: boolean;
-
-//   width: number;
-//   height: number;
-
-//   // priority?: boolean;
-//   // className?: string;
-
-//   flipButtonPosition?: {
-//     top?: number;
-//     left?: number;
-//     right?: number;
-//     bottom?: number;
-//   };
-// }
-
+  //   name: string;
+  //   faces?: Face[];
+  //   isFoil?: boolean;
+  
+  //   width: number;
+  //   height: number;
+  
+  //   // priority?: boolean;
+  //   // className?: string;
+  
+  //   flipButtonPosition?: {
+    //     top?: number;
+    //     left?: number;
+    //     right?: number;
+    //     bottom?: number;
+    //   };
+    // }
+    
+import { Face } from "@/types/types";
+    
 export interface ImageCardProps {
   name: string;
   faces?: Face[];

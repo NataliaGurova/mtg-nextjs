@@ -41,138 +41,201 @@
 
 // export default FiltersSidebar;
 
-"use client";
+// -------------------------------------------------
 
-import { useMemo } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import CardSet from "./CardSet/CardSet";
-import css from "./FiltersSidebar.module.css"
-import FiltersChips from "./FiltersChips/FiltersChips";
+// "use client";
+
+// import { useMemo } from "react";
+// import { usePathname, useRouter, useSearchParams } from "next/navigation";
+// import CardSet from "./CardSet/CardSet";
+// import css from "./FiltersSidebar.module.css"
+// import FiltersChips from "./FiltersChips/FiltersChips";
 
 
-// const Filters = ({ onChange, textValue, isFoil, onChangeFoil }) => {
+
 // const FiltersSidebar = () => {
+//   const sp = useSearchParams();
+//   const router = useRouter();
+//   const pathname = usePathname();
 
 
-//   const [selectedSets, setSelectedSets] = useState<string[]>([]);
+//   const selectedSets = useMemo(() => {
+//     return sp
+//       .getAll("sets")
+//       .map(s => s.trim().toLowerCase())
+//       .filter(Boolean);
+//   }, [sp]);
+  
+
+//   const updateParams = (updater: (p: URLSearchParams) => void) => {
+//     const p = new URLSearchParams(sp.toString());
+//     updater(p);
+
+//     // при любом изменении фильтров — сбрасываем page
+//     p.delete("page");
+
+//     const qs = p.toString();
+//     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+//   };
+
 
 //   const toggleSet = (code: string) => {
-//     setSelectedSets((prev) =>
-//       prev.includes(code) ? prev.filter((x) => x !== code) : [...prev, code]
-//     );
+//     updateParams((p) => {
+//       const current = p.getAll("sets");
+  
+//       const next = current.includes(code)
+//         ? current.filter(x => x !== code)
+//         : [...current, code];
+  
+//       p.delete("sets");
+//       next.forEach(s => p.append("sets", s));
+//     });
 //   };
+  
+
+//   const removeSet = (code: string) => {
+//     updateParams((p) => {
+//       const next = p.getAll("sets").filter(x => x !== code);
+  
+//       p.delete("sets");
+//       next.forEach(s => p.append("sets", s));
+//     });
+//   };
+          
+
+//   const clearAll = () => {
+//     updateParams((p) => {
+//       p.delete("sets");
+//       p.delete("q");
+//       p.delete("rarity");
+//       p.delete("type");
+//       p.delete("color");
+//       // добавляй сюда другие фильтры по мере появления
+//     });
+//   };
+
+
+
+// // --------------------------
+
+"use client";
+
+import { useMemo, useCallback } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import CardSet from "./CardSet/CardSet";
+import FiltersChips from "./FiltersChips/FiltersChips";
+import css from "./FiltersSidebar.module.css";
+
 const FiltersSidebar = () => {
-  const sp = useSearchParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  // const selectedSets = useMemo(() => {
-  //   const raw = sp.get("sets") ?? "";
-  //   return raw.split(",").map(s => s.trim()).filter(Boolean);
-  // }, [sp]);
-
+  // ---------- НОРМАЛЬНОЕ чтение сетов ----------
   const selectedSets = useMemo(() => {
-    return sp
+    return searchParams
       .getAll("sets")
-      .map(s => s.trim().toLowerCase())
+      .map((s) => s.toLowerCase())
       .filter(Boolean);
-  }, [sp]);
-  
+  }, [searchParams]);
 
-  const updateParams = (updater: (p: URLSearchParams) => void) => {
-    const p = new URLSearchParams(sp.toString());
-    updater(p);
+  // ---------- Универсальное обновление URL ----------
+  const updateParams = useCallback(
+    (updater: (p: URLSearchParams) => void) => {
+      const params = new URLSearchParams(searchParams.toString());
 
-    // при любом изменении фильтров — сбрасываем page
-    p.delete("page");
+      updater(params);
 
-    const qs = p.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  };
+      // Сброс page при изменении фильтра
+      params.delete("page");
 
-  // const toggleSet = (code: string) => {
-  //   updateParams((p) => {
-  //     const raw = p.get("sets") ?? "";
-  //     const arr = raw.split(",").map(s => s.trim()).filter(Boolean);
+      const query = params.toString();
+      router.replace(query ? `${pathname}?${query}` : pathname, {
+        scroll: false,
+      });
+    },
+    [searchParams, router, pathname]
+  );
 
-  //     const next = arr.includes(code)
-  //       ? arr.filter(x => x !== code)
-  //       : [...arr, code];
+  // ---------- Toggle set ----------
+  const toggleSet = useCallback(
+    (code: string) => {
+      updateParams((params) => {
+        const current = new Set(params.getAll("sets"));
 
-  //     if (next.length) p.set("sets", next.join(","));
-  //     else p.delete("sets");
-  //   });
-  // };
+        if (current.has(code)) {
+          current.delete(code);
+        } else {
+          current.add(code);
+        }
 
-  const toggleSet = (code: string) => {
-    updateParams((p) => {
-      const current = p.getAll("sets");
-  
-      const next = current.includes(code)
-        ? current.filter(x => x !== code)
-        : [...current, code];
-  
-      p.delete("sets");
-      next.forEach(s => p.append("sets", s));
+        params.delete("sets");
+        Array.from(current).forEach((s) => params.append("sets", s));
+      });
+    },
+    [updateParams]
+  );
+
+  // ---------- Remove single set ----------
+  const removeSet = useCallback(
+    (code: string) => {
+      updateParams((params) => {
+        const next = params.getAll("sets").filter((s) => s !== code);
+
+        params.delete("sets");
+        next.forEach((s) => params.append("sets", s));
+      });
+    },
+    [updateParams]
+  );
+
+  // ---------- Clear all ----------
+  const clearAll = useCallback(() => {
+    updateParams((params) => {
+      params.delete("sets");
+      params.delete("q");
+      params.delete("rarity");
+      params.delete("type");
+      params.delete("color");
     });
-  };
-  
+  }, [updateParams]);
 
-  // const removeSet = (code: string) => {
-  //   updateParams((p) => {
-  //     const raw = p.get("sets") ?? "";
-  //     const arr = raw.split(",").map(s => s.trim()).filter(Boolean);
-  //     const next = arr.filter(x => x !== code);
-
-  //     if (next.length) p.set("sets", next.join(","));
-  //     else p.delete("sets");
-  //   });
-  // };
-
-  const removeSet = (code: string) => {
-    updateParams((p) => {
-      const next = p.getAll("sets").filter(x => x !== code);
-  
-      p.delete("sets");
-      next.forEach(s => p.append("sets", s));
-    });
-  };
-          
-
-  const clearAll = () => {
-    updateParams((p) => {
-      p.delete("sets");
-      p.delete("q");
-      p.delete("rarity");
-      p.delete("type");
-      p.delete("color");
-      // добавляй сюда другие фильтры по мере появления
-    });
-  };
-
-
-
-// --------------------------
-  
   return (
+    <aside className={css.container}>
+      {/* <h2 className={css.filterTitle}>Filters</h2> */}
 
-      // <aside className="w-75 bg-white rounded-xl shadow-sm p-5 sticky top-20 h-fit">
-      <aside className={css.container}>
-      <h1 className={css.filterTitle}>Filters</h1>
-      {/* ЧИПЫ под словом Filters */}
       <FiltersChips onRemoveSet={removeSet} onClearAll={clearAll} />
+
       <div className={css.formContainer}>
-
         <CardSet selectedSets={selectedSets} onToggleSet={toggleSet} />
-
-
       </div>
-      </aside>
-
+    </aside>
   );
 };
 
 export default FiltersSidebar;
+
+  
+//   return (
+
+//       // <aside className="w-75 bg-white rounded-xl shadow-sm p-5 sticky top-20 h-fit">
+//       <aside className={css.container}>
+//       <h1 className={css.filterTitle}>Filters</h1>
+//       {/* ЧИПЫ под словом Filters */}
+//       <FiltersChips onRemoveSet={removeSet} onClearAll={clearAll} />
+//       <div className={css.formContainer}>
+
+//         <CardSet selectedSets={selectedSets} onToggleSet={toggleSet} />
+
+
+//       </div>
+//       </aside>
+
+//   );
+// };
+
+// export default FiltersSidebar;
+// ---------------------------------------------
 
 
 {/* <FoilNotFoil isFoil={isFoil} onChangeFoil={onChangeFoil} /> */}

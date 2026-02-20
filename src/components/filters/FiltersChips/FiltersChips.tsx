@@ -51,12 +51,12 @@ const FiltersChips = ({ onRemoveSet, onClearAll }: FiltersChipsProps) => {
 
       {hasAny && (
         <div className="mt-3 flex flex-wrap gap-2">
-          {q && (
+          {/* {q && (
             <span className={chipClass}>
               q: {q}
-              {/* если хочешь убирать q тоже — скажи, добавлю onRemoveQuery */}
             </span>
-          )}
+          )} */}
+          {/* если хочешь убирать q тоже — скажи, добавлю onRemoveQuery */}
 
           {sets.map((code) => (
             <button

@@ -34,7 +34,7 @@ export const AddToCartSection = ({ cardId, stock }: Props) => {
           <Minus size={16} />
         </button>
 
-        <span className="px-4 w-[48px] select-none">{qty}</span>
+        <span className="px-4 w-[46px] select-none text-end">{qty}</span>
 
         <button
           type="button"

@@ -265,9 +265,93 @@ export async function GET(req: Request) {
      * 5. Пагинация уже по сгруппированным данным
      */
 
-    const pipeline: PipelineStage[] = [ 
-      { $match: filters },
+    // const pipeline: PipelineStage[] = [
+    //   { $match: filters },
 
+    //   {
+    //     $addFields: {
+    //       conditionRank: {
+    //         $switch: {
+    //           branches: [
+    //             { case: { $eq: ["$condition", "NM"] }, then: 3 },
+    //             { case: { $eq: ["$condition", "LP"] }, then: 2 },
+    //             { case: { $eq: ["$condition", "HP"] }, then: 1 },
+    //           ],
+    //           default: 0,
+    //         },
+    //       },
+    //     },
+    //   },
+
+    //   { $sort: { conditionRank: -1 } },
+
+    //   {
+    //     $group: {
+    //       _id: {
+    //         scryfall_id: "$scryfall_id",
+    //         isFoil: "$isFoil",
+    //       },
+    //       doc: { $first: "$$ROOT" },
+    //     },
+    //   },
+
+    //   { $replaceRoot: { newRoot: "$doc" } },
+
+    //   { $sort: { name: 1, isFoil: 1 } },
+
+    //   {
+    //     $facet: {
+    //       items: [{ $skip: skip }, { $limit: limit }],
+    //       totalCount: [{ $count: "count" }],
+    //     },
+    //   },
+    // ];
+    
+    // 🔹 api/cards/route.ts
+
+// const pipeline: PipelineStage[] = [
+//   { $match: filters }, // сначала фильтры
+
+//   {
+//     $addFields: {
+//       conditionRank: {
+//         $switch: {
+//           branches: [
+//             { case: { $eq: ["$condition", "NM"] }, then: 3 },
+//             { case: { $eq: ["$condition", "LP"] }, then: 2 },
+//             { case: { $eq: ["$condition", "HP"] }, then: 1 },
+//           ],
+//           default: 0,
+//         },
+//       },
+//     },
+//   },
+
+//   { $sort: { conditionRank: -1 } }, // сортировка по condition
+
+//   // 🔹 Вставляешь сюда
+//   {
+//     $group: {
+//       _id: { scryfall_id: "$scryfall_id", isFoil: "$isFoil" },
+//       doc: { $first: "$$ROOT" },
+//     },
+//   },
+//   { $replaceRoot: { newRoot: "$doc" } },
+//   { $sort: { name: 1, isFoil: 1 } },
+//   {
+//     $facet: {
+//       items: [{ $skip: skip }, { $limit: limit }],
+//       totalCount: [{ $count: "count" }],
+//     },
+//   },
+    // ];
+
+    // =========================================
+    const pipeline: PipelineStage[] = [
+      // 1️⃣ Фильтры
+      { $match: filters },
+    
+      // 2️⃣ Ранжирование по condition
       {
         $addFields: {
           conditionRank: {
@@ -282,23 +366,38 @@ export async function GET(req: Request) {
           },
         },
       },
-
-      { $sort: { conditionRank: -1 } },
-
+    
+      // 3️⃣ Сортировка перед группировкой 
+    { 
+      $sort: { 
+      scryfall_id: 1, 
+      isFoil: 1, 
+      conditionRank: -1, 
+      _id: 1, // ✅ добавлено для стабильного порядка
+      } 
+    },
+    
+      // 4️⃣ Группировка по scryfall_id + isFoil
       {
         $group: {
-          _id: {
-            scryfall_id: "$scryfall_id",
-            isFoil: "$isFoil",
-          },
-          doc: { $first: "$$ROOT" },
+          _id: { scryfall_id: "$scryfall_id", isFoil: "$isFoil" },
+          doc: { $first: "$$ROOT" }, // берём лучший condition
         },
       },
-
+    
+      // 5️⃣ Возвращаем оригинальный документ
       { $replaceRoot: { newRoot: "$doc" } },
-
-      { $sort: { name: 1, isFoil: 1 } },
-
+    
+       // 6️⃣ Финальная сортировка для стабильного отображения 
+      {   
+        $sort: { 
+          name: 1, 
+          isFoil: 1, 
+          _id: 1, // ✅ добавлено для стабильного порядка
+        } 
+      },
+    
+      // 7️⃣ Фасет для пагинации
       {
         $facet: {
           items: [{ $skip: skip }, { $limit: limit }],
@@ -306,6 +405,8 @@ export async function GET(req: Request) {
         },
       },
     ];
+    
+
 
     const result = await Card.aggregate(pipeline);
 

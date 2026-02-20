@@ -49,8 +49,8 @@ const ImageCard = ({
           <Image
             src={front.imageUrl}
             alt={`${name} front`}
-            width={width}
-            height={height}
+            fill
+            sizes={`${width}px`}
             className={css.img}
           />
           {isFoil && <div className={css.foilOverlay} />}
@@ -62,8 +62,8 @@ const ImageCard = ({
             <Image
               src={back.imageUrl}
               alt={`${name} back`}
-              width={width}
-              height={height}
+              fill
+              sizes={`${width}px`}
               className={css.img}
             />
             {isFoil && <div className={css.foilOverlay} />}

@@ -13,9 +13,9 @@ const Loader = () => {
       <div className={`${css.circle} ${css.red}`}></div>
       <div className={`${css.circle} ${css.black}`}>
         <Image
-          src="/color/black.png"
+          src="/color/Mana_B.webp"
           alt="Spinner"
-          width={28}
+          width={29}
           height={28}
           className={css.imgColor}
           title="Black"

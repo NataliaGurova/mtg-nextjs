@@ -4,10 +4,11 @@
 .cardDetailsContainer {
   display: flex;
   justify-content: center;
+
   /* justify-content:space-between; */
   /* align-items: center; */
   padding: 20px;
-  gap: 150px;
+  /* gap: 150px; */
   width: 100%;
   /* outline: 1px solid blue; */
 }
@@ -35,6 +36,7 @@
   height: 453px;
 
   position: relative;
+  
 }
 
 
@@ -264,7 +266,8 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
-    width: 720px;
+    width: 820px;
+    margin-left: 150px;
     /* outline: 1px solid green; */
   }
   
@@ -274,13 +277,14 @@
   text-align: center;
   font-weight: bold;
   background-color: #fff;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
   background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
   width: 92px;
   border-radius: 4px;
   padding: 2px 10px;
   color: #333;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  
 }
 
 .nameCard {
@@ -301,6 +305,15 @@
 }
   
 /* Legalities */
+
+.legalities {
+  margin-bottom: 20px;
+  border: 1px solid rgba(29, 81, 5, 0.7);
+  border-radius: 4px;
+  padding: 10px;
+  width: 600px;
+}
+
 .format {
   display: flex;
   flex-wrap: wrap;
@@ -358,29 +371,56 @@
   }
   
   /* ------------------ */
+  .variant {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+  }
   
   .priceBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: auto;
-    gap: 20px;
+    /* gap: 20px; */
   }
   .conditionPrice {
     display: flex;
     
     align-items: flex-end;
   }
+
+  /*---- Price -----*/
   .price {
-    /* width: 100px; */
+    width: 125px;
+    text-align: end;
+
     /* text-align: center; */
-    font-size: 24px;
+    font-size: 21px;
     font-weight: bold;
     color: rgb(5, 85, 14);
   }
+
+  /* .price {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  } */
+  
+  .newPrice {
+    color: #ed6664;
+    font-weight: 700;
+  }
+  
+  .oldPrice {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 19px;
+  }
   
 
-
+/* ----------------------- */
 
   
     /* .type {
@@ -395,3 +435,7 @@
     height: 24px;
     margin-left: 2px;
     } */
+
+    .nonfoils {
+      width: 92px;
+    }
