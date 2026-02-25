@@ -11,7 +11,7 @@
 .container {
   width: 280px;
   position: sticky;
-  top: 140px; /* отступ от navbar */
+  top: 155px; /* отступ от navbar */
   align-self: flex-start;
   height: fit-content;
 }

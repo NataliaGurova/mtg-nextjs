@@ -1,4 +1,4 @@
-
+export type Color = "R" | "U" | "B" | "G" | "W" | "Colorless";
 
 export type LegalityStatus =
   | "legal"
@@ -26,6 +26,7 @@ export interface DbCard {
   faces?: Face[];
   legalities: Record<string, LegalityStatus>;
   // legalities: LegalitiesMap;
+  сolors: Color[]; // ["R", "U", "B", "G", "W", "Colorless"]
 
   // foilType: "nonfoil" | "foil" | "etched" | "surgefoil" | "rainbowfoil";
   foilType: string;
