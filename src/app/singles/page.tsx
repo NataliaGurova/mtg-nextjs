@@ -144,7 +144,6 @@ interface SinglesPageProps {
     page?: string;
     q?: string;
     sets?: string;
-    fromCard?: string;
   }>;
 }
 
@@ -156,13 +155,12 @@ const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
   const page = Math.max(Number(params.page ?? "1"), 1);
   const q = params.q?.trim() ?? "";
   const setsRaw = params.sets ?? "";
-  const fromCard = params.fromCard;
 
-  const skip = (page - 1) * LIMIT;
 
   const apiParams = new URLSearchParams();
   apiParams.set("page", String(page));
   apiParams.set("limit", String(LIMIT));
+
   if (q.length >= 3) apiParams.set("q", q);
   if (setsRaw) apiParams.set("sets", setsRaw);
 
@@ -174,10 +172,10 @@ const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
 
   const data: { items: DbCard[]; totalPages: number } = await res.json();
 
-  const plainItems = data.items.map((card) => ({
-    ...card,
-    _id: card._id.toString(),
-  }));
+  // const plainItems = data.items.map((card) => ({
+  //   ...card,
+  //   _id: card._id.toString(),
+  // }));
 
   return (
     <Container>
@@ -185,10 +183,9 @@ const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
         <FiltersSidebar />
         <section className="flex-1">
           <CardsList
-            items={plainItems}
+            items={data.items}
             page={page}
             totalPages={data.totalPages}
-            fromCard={fromCard}
           />
         </section>
       </div>
@@ -197,4 +194,6 @@ const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
 };
 
 export default SinglesPage;
+
+
 
