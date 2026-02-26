@@ -451,46 +451,80 @@ interface CardsListProps {
   items: DbCard[];
   page: number;
   totalPages: number;
-  fromCard?: string; // ⚡ можно указать карточку, к которой хотим вернуться
 }
 
-const CardsList = ({ items, page, totalPages, fromCard }: CardsListProps) => {
+const CardsList = ({ items, page, totalPages }: CardsListProps) => {
   const canGoPrev = page > 1;
   const canGoNext = page < totalPages;
 
+//   return (
+//     <div>
+//       <ul className={css.listCards}>
+//         {items.map((card) => {
+
+//           return (
+//             <li
+//               key={`${card.scryfall_id}-${card.isFoil}`}
+//               id={isTarget ? "fromCard" : undefined} // ⚡ якорь для скролла
+//               className={isTarget ? "scroll-mt-20" : undefined}
+//             >
+//               {/* <Link href={`/singles/${card.scryfall_id}`} className="block"> */}
+//               <Link
+//                 href={`/singles/${card.scryfall_id}?page=${page}`}
+//                 className="block"
+//               >
+//                 <CardItem card={card} />
+//               </Link>
+//             </li>
+//           );
+//         })}
+//       </ul>
+
+//       <div className="mt-10 flex justify-center gap-4">
+//         {canGoPrev && (
+//           <Link
+//             href={`/singles?page=${page - 1}`}
+//           >
+//             <Button variant="loadMore">Previous</Button>
+//           </Link>
+//         )}
+
+//         {canGoNext && (
+//           <Link
+//             href={`/singles?page=${page + 1}`}
+//           >
+//             <Button variant="loadMore">Next</Button>
+//           </Link>
+//         )}
+//       </div>
+//     </div>
+//   );
+  // };
+  
   return (
     <div>
       <ul className={css.listCards}>
-        {items.map((card) => {
-          const isTarget = fromCard === card.scryfall_id;
-
-          return (
-            <li
-              key={`${card.scryfall_id}-${card.isFoil}`}
-              id={isTarget ? "fromCard" : undefined} // ⚡ якорь для скролла
-              className={isTarget ? "scroll-mt-20" : undefined}
+        {items.map((card) => (
+          <li key={`${card.scryfall_id}-${card.isFoil}`}>
+            <Link
+              href={`/singles/${card.scryfall_id}?page=${page}`}
+              className="block"
             >
-              <Link href={`/singles/${card.scryfall_id}`} className="block">
-                <CardItem card={card} />
-              </Link>
-            </li>
-          );
-        })}
+              <CardItem card={card} />
+            </Link>
+          </li>
+        ))}
       </ul>
 
       <div className="mt-10 flex justify-center gap-4">
         {canGoPrev && (
-          <Link
-            href={`/singles?page=${page - 1}`}
-          >
+          <Link href={`/singles?page=${page - 1}`}>
             <Button variant="loadMore">Previous</Button>
           </Link>
         )}
 
         {canGoNext && (
-          <Link
-            href={`/singles?page=${page + 1}`}
-          >
+          <Link href={`/singles?page=${page + 1}`}>
             <Button variant="loadMore">Next</Button>
           </Link>
         )}
