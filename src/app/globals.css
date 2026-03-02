@@ -152,6 +152,15 @@
 
   }
 
+  input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  
+
   body {
     @apply bg-background text-main-text;
 /* background: var(--background); */
@@ -171,6 +180,7 @@
 }
 
 
+
 body {
   margin: 0;
   padding: 0;
@@ -186,8 +196,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-background);
   color: var(--color-main-text);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  /* убрать встроенный clear (X) */
+  input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
 }
