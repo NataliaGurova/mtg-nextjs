@@ -51,6 +51,14 @@ const CardSchema = new Schema(
   }
 );
 
+CardSchema.index({ name: 1 });
+CardSchema.index({ set: 1 });
+CardSchema.index({ rarity: 1 });
+CardSchema.index({ artist: 1 });
+CardSchema.index({ type_line: 1 });
+CardSchema.index({ colors: 1 });
+CardSchema.index({ createdAt: -1 });
+
 const Card = models.Card || model("Card", CardSchema);
 
 export default Card;
