@@ -1,237 +1,105 @@
 
-// "use client";
-
-// import * as React from "react";
-// import { Input } from "@/components/ui/input";
-// import { cn } from "@/lib/utils";
-// import { Search } from "lucide-react";
-
-// import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
-// interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {
-//   containerClassName?: string;
-//   showIcon?: boolean;
-//   iconClassName?: string;
-//   icon?: React.ReactNode;
-  
-//   /** debounce in ms (default 300) */
-//   debounceMs?: number;
-  
-//   /** query param name (default "q") */
-//   queryKey?: string;
-// }
-
-// const SearchBar: React.FC<SearchBarProps> = ({
-//   containerClassName,
-//   className,
-//   showIcon = true,
-//   iconClassName = "text-main-text",
-//   icon,
-//   debounceMs = 300,
-//   queryKey = "q",
-//   ...props
-// }) => {
-//   const router = useRouter();
-//   const pathname = usePathname();
-//   const searchParams = useSearchParams();
-  
-//   // ✅ синхронизация значения инпута с URL
-//   const urlValue = searchParams.get(queryKey) ?? "";
-//   const [value, setValue] = React.useState(urlValue);
-  
-//   React.useEffect(() => {
-//     setValue(urlValue);
-//   }, [urlValue]);
-  
-//   // ✅ debounce обновления URL + сброс cursor при новом поиске
-//   React.useEffect(() => {
-//     const timeout = window.setTimeout(() => {
-//       const params = new URLSearchParams(searchParams.toString());
-//       const trimmed = value.trim();
-
-//       // if (trimmed) {
-//       //   params.set(queryKey, trimmed);
-//       // } else {
-//       //   params.delete(queryKey);
-//       // }
-
-//       // ✅ поиск только если >= 3 символов
-//     if (trimmed.length >= 3) {
-//       params.set(queryKey, trimmed);
-//       params.delete("cursor"); // сброс cursor при новом поиске
-//     } else {
-//       params.delete(queryKey);
-//       params.delete("cursor");
-//     }
-      
-//       // ✅ сброс cursor при новом поиске
-//       params.delete("cursor");
-      
-//       const qs = params.toString();
-//       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-//     }, debounceMs);
-    
-//     return () => window.clearTimeout(timeout);
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [value, debounceMs, queryKey, pathname]);
-  
-//   return (
-//     <div className={cn("relative flex items-center", containerClassName)}>
-//       {showIcon && (
-//         <span className="absolute left-0.5 top-1/2 -translate-y-1/2">
-//           {icon ? icon : <Search className={cn("h-5 w-5", iconClassName)} />}
-//         </span>
-//       )}
-
-//       <Input
-//         type="search"
-//         value={value}
-//         onChange={(e) => setValue(e.target.value)}
-//         placeholder="search..."
-//         className={cn(
-//           "w-[350px] h-[30px] bg-light-grey border-none rounded-none shadow-none " +
-//           "focus-visible:ring-0 focus-visible:ring-offset-0 text-sm placeholder:text-gray-400 " +
-//           "border-b border-main-text",
-//           showIcon ? "pl-7" : "pl-2",
-//           className
-//         )}
-//         {...props}
-//         />
-
-//       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-black hidden md:block" />
-//     </div>
-//   );
-// };
-
-// export default SearchBar;
-
-
-// ===============================
 "use client";
 
-import * as React from "react";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
+import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import styles from "./SearchBar.module.css";
+import { Input } from "../ui/input";
 
-interface SearchBarProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  containerClassName?: string;
-  showIcon?: boolean;
-  iconClassName?: string;
-  icon?: React.ReactNode;
-  debounceMs?: number;
-  queryKey?: string;
+interface CardSuggestion {
+  _id: string;
+  name: string;
+  set_name: string;
+  collector_number: string;
+  scryfall_id: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({
-  containerClassName,
-  className,
-  showIcon = true,
-  iconClassName = "text-main-text",
-  icon,
-  debounceMs = 300,
-  queryKey = "q",
-  ...props
-}) => {
+interface SearchBarProps {
+  className?: string;
+  placeholder?: string;
+  debounceMs?: number;
+}
+
+const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: SearchBarProps) => {
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const [value, setValue] = useState("");
+  const [suggestions, setSuggestions] = useState<CardSuggestion[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const urlValue = searchParams.get(queryKey) ?? "";
-  const [value, setValue] = React.useState(urlValue);
+  const fetchSuggestions = useCallback(async (query: string) => {
+    if (query.length < 3) {
+      setSuggestions([]);
+      setIsOpen(false);
+      return;
+    }
 
-  // синхронизация с URL
-  React.useEffect(() => {
-    setValue(urlValue);
-  }, [urlValue]);
+    try {
+      const res = await fetch(`/api/cards/search?q=${encodeURIComponent(query)}`);
+      const data: CardSuggestion[] = await res.json();
+      setSuggestions(data);
+      setIsOpen(data.length > 0);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
 
-  React.useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      const trimmed = value.trim();
-      const currentQuery = searchParams.get(queryKey) ?? "";
+  useEffect(() => {
+    const timer = setTimeout(() => fetchSuggestions(value), debounceMs);
+    return () => clearTimeout(timer);
+  }, [value, fetchSuggestions, debounceMs]);
 
-      // 🔥 если значение не изменилось — не триггерим router.replace
-      if (trimmed === currentQuery) return;
+  const clearInput = () => {
+    setValue("");
+    setSuggestions([]);
+    setIsOpen(false);
+  };
 
-      const params = new URLSearchParams(searchParams.toString());
-
-      if (trimmed.length >= 3) {
-        params.set(queryKey, trimmed);
-        params.delete("cursor"); // сброс cursor при новом поиске
-      } else {
-        params.delete(queryKey);
-        params.delete("cursor");
-      }
-
-      const qs = params.toString();
-      router.replace(qs ? `${pathname}?${qs}` : pathname, {
-        scroll: false,
-      });
-    }, debounceMs);
-
-    return () => window.clearTimeout(timeout);
-  }, [value, debounceMs, queryKey, pathname, router, searchParams]);
+  const handleSelect = (scryfallId: string) => {
+    setIsOpen(false);
+    setSuggestions([]);
+    setValue("");
+    router.push(`/singles/${scryfallId}`);
+  };
 
   return (
-    <div className={cn("relative flex items-center", containerClassName)}>
-      {showIcon && (
-        <span className="absolute left-0.5 top-1/2 -translate-y-1/2">
-          {icon ? icon : <Search className={cn("h-5 w-5", iconClassName)} />}
-        </span>
-      )}
-
+    <div className={styles.container}>
       <Input
-        type="search"
+        type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="search..."
-        className={cn(
-          "w-[350px] h-[30px] bg-light-grey border-none rounded-none shadow-none " +
-            "focus-visible:ring-0 focus-visible:ring-offset-0 text-sm placeholder:text-gray-400 " +
-            "border-b border-main-text",
-          showIcon ? "pl-7" : "pl-2",
-          className
-        )}
-        {...props}
+        placeholder={placeholder}
+        className={cn(styles.input, className)}
       />
-      
+
       {value && (
-  <button
-    type="button"
-    onClick={() => setValue("")}
-    className="absolute right-2 top-1/2 -translate-y-1/2"
-  >
-    <X className="h-4 w-4 text-gray-400 hover:text-black" />
-  </button>
+        <button type="button" onClick={clearInput} className={styles.clearButton}>
+          <X size={16} className="text-gray-400 hover:text-black" />
+        </button>
+      )}
+
+{isOpen && (
+  <div className={styles.dropdown}>
+    {suggestions.map((card) => (
+      <button
+        key={`${card.scryfall_id}-${card.set_name}-${card.collector_number}`}
+        type="button"
+        onClick={() => handleSelect(card.scryfall_id)}
+        className={styles.dropdownItem}
+      >
+        <div className={styles.cardName}>{card.name}</div>
+        <div className={styles.cardMeta}>
+          {card.set_name} • {card.collector_number}
+        </div>
+      </button>
+    ))}
+  </div>
 )}
 
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-black hidden md:block" />
+
     </div>
   );
 };
 
 export default SearchBar;
-
-
-// 🔹 Скрыть иконку (например, на мобилке)
-// <SearchBar showIcon={false} />
-
-// 🔹 Другая иконка и цвет
-// <SearchBar
-//   iconClassName="text-nav-yellow"
-//   icon={<Search className="h-5 w-5 text-red-500" />}
-// />
-
-// 🔹 Тонкая иконка + серый цвет
-// <SearchBar iconClassName="text-gray-400" />
-
-
-
-  // {/* Icon */}
-  // <span className="absolute left-1 top-1/2 -translate-y-1/2 text-black">
-  //   🔍
-// </span>
