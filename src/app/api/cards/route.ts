@@ -1,3 +1,4 @@
+// src/app/api/cards/route.ts
 
 import { NextResponse } from "next/server";
 import Card from "@/db/models/Card";
