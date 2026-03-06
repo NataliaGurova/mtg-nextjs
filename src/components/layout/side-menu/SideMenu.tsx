@@ -83,7 +83,7 @@ const SideMenu: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       )}
     >
       {/* <div className="flex gap-1"> */}
-      <div className="flex">
+      <div className="flex gap-2">
         <SignIn />
         <span className="text-sm opacity-60">/</span>
         <SignUp />

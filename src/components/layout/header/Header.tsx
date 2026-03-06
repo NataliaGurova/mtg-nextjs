@@ -48,7 +48,7 @@ const Header = () => {
     <div className="flex items-center gap-6 md:gap-12">
 
       {/* Desktop user */}
-      <div className="hidden md:flex items-center gap-6">
+      <div className="hidden md:flex items-center gap-2">
         <UserMenu />
       </div>
 
