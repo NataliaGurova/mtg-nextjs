@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import styles from "./SearchBar.module.css";
 import { Input } from "../ui/input";
+import Image from "next/image";
 
 interface CardSuggestion {
   _id: string;
@@ -14,6 +15,7 @@ interface CardSuggestion {
   set_name: string;
   collector_number: string;
   scryfall_id: string;
+  imageUrl: string;
 }
 
 interface SearchBarProps {
@@ -27,6 +29,10 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState<CardSuggestion[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  // const [previewCard, setPreviewCard] = useState<CardSuggestion | null>(null);
 
   const fetchSuggestions = useCallback(async (query: string) => {
     if (query.length < 3) {
@@ -79,23 +85,72 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
         </button>
       )}
 
-{isOpen && (
-  <div className={styles.dropdown}>
-    {suggestions.map((card) => (
-      <button
-        key={`${card.scryfall_id}-${card.set_name}-${card.collector_number}`}
-        type="button"
-        onClick={() => handleSelect(card.scryfall_id)}
-        className={styles.dropdownItem}
-      >
-        <div className={styles.cardName}>{card.name}</div>
-        <div className={styles.cardMeta}>
-          {card.set_name} • {card.collector_number}
-        </div>
-      </button>
-    ))}
+
+      {isOpen && (
+  <div className={styles.dropdownWrapper}>
+    
+    <div className={styles.dropdown}>
+      {suggestions.map((card) => (
+        <button
+          key={`${card.scryfall_id}-${card.set_name}-${card.collector_number}`}
+          type="button"
+          onMouseEnter={() => setHoveredId(card._id)}
+          onMouseLeave={() => setHoveredId(null)}
+          onClick={() => handleSelect(card.scryfall_id)}
+          className={styles.dropdownItem}
+        >
+            <div className={styles.textContent}>
+    <div className={styles.cardName}>{card.name}</div>
+    <div className={styles.cardMeta}>
+      {card.set_name} • {card.collector_number}
+    </div>
+          </div>
+          
+          {/* {hoveredId === card._id && (
+    <Image
+      src={card.imageUrl}
+      alt={card.name}
+      width={120}
+      height={200}
+      className={styles.inlineImage}
+    />
+  )} */}
+
+        </button>
+      ))}
+            <div className={styles.imageContainer}>
+              {hoveredId && (
+                <Image
+                  src={suggestions.find((card) => card._id === hoveredId)?.imageUrl || ""}
+                  alt={suggestions.find((card) => card._id === hoveredId)?.name || ""}
+                  className={styles.inlineImage}
+                  width={180}
+                  height={260}
+                />
+              )}
+            </div>
+
+    </div>
+
+    {/* {previewCard && (
+      <div className={styles.preview}>
+        <Image
+          src={previewCard.imageUrl}
+          alt={previewCard.name}
+          className={styles.previewImage}
+          width={60}
+          height={100}
+        />
+      </div>
+    )} */}
+
   </div>
 )}
+
+      
+
+
+
 
 
     </div>
@@ -103,3 +158,5 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
 };
 
 export default SearchBar;
+
+

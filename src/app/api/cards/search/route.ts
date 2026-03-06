@@ -1,99 +1,3 @@
-// import { NextResponse } from "next/server";
-// import { connectDB } from "@/db/db";
-// import Card from "@/db/models/Card";
-
-// export async function GET(req: Request) {
-//   const { searchParams } = new URL(req.url);
-//   const q = searchParams.get("q");
-
-//   if (!q || q.length < 3) {
-//     return NextResponse.json([]);
-//   }
-
-//   await connectDB();
-
-//   const cards = await Card.find(
-//     {
-//       name: { $regex: `^${q}`, $options: "i" }, // начинается с этих букв
-//     },
-//     { name: 1, _id: 1 }
-//   )
-//     .limit(8)
-//     .lean();
-
-//   return NextResponse.json(cards);
-// }
-
-// app/api/cards/suggest/route.ts
-
-// import { NextResponse } from "next/server";
-// import { connectDB } from "@/db/db";
-// import Card from "@/db/models/Card";
-
-// export async function GET(req: Request) {
-//   const { searchParams } = new URL(req.url);
-//   const q = searchParams.get("q");
-
-//   if (!q || q.length < 3) {
-//     return NextResponse.json([]);
-//   }
-
-//   await connectDB();
-
-//   const cards = await Card.aggregate([
-//     {
-//       $match: {
-//         name: { $regex: `^${q}`, $options: "i" },
-//       },
-//     },
-//     {
-//       $group: {
-//         _id: "$scryfall_id", // 🔥 группируем варианты
-//         name: { $first: "$name" },
-//         scryfall_id: { $first: "$scryfall_id" },
-//       },
-//     },
-//     { $limit: 8 },
-//   ]);
-
-//   return NextResponse.json(cards);
-// }
-
-
-
-// ===========================
-// // app/api/cards/search/route.ts
-// import { NextResponse } from "next/server";
-// import Card from "@/db/models/Card";
-// import { connectDB } from "@/db/db";
-
-// export async function GET(req: Request) {
-//   const { searchParams } = new URL(req.url);
-//   const q = searchParams.get("q")?.trim() || "";
-
-//   if (q.length < 3) return NextResponse.json([], { status: 200 });
-
-//   try {
-//     await connectDB();
-
-//     const regex = new RegExp(q, "i");
-
-//     const cards = await Card.find(
-//       { name: regex },
-//       { _id: 1, name: 1, set_name: 1, collector_number: 1, scryfall_id: 1 }
-//     )
-//       .limit(10)
-//       .lean();
-
-//     return NextResponse.json(cards);
-//   } catch (error) {
-//     console.error(error);
-//     return NextResponse.json({ error: "Server error" }, { status: 500 });
-//   }
-// }
-
-
-
 // app/api/cards/search/route.ts
 
 import { NextResponse } from "next/server";
@@ -128,6 +32,20 @@ export async function GET(req: Request) {
       { $sort: { name: 1 } },
 
       // убираем дубликаты вариаций
+      // {
+      //   $group: {
+      //     _id: {
+      //       scryfall_id: "$scryfall_id",
+      //       set_name: "$set_name",
+      //       collector_number: "$collector_number",
+      //     },
+      //     _idDoc: { $first: "$_id" },
+      //     name: { $first: "$name" },
+      //     set_name: { $first: "$set_name" },
+      //     collector_number: { $first: "$collector_number" },
+      //     scryfall_id: { $first: "$scryfall_id" },
+      //   },
+      // },
       {
         $group: {
           _id: {
@@ -140,6 +58,29 @@ export async function GET(req: Request) {
           set_name: { $first: "$set_name" },
           collector_number: { $first: "$collector_number" },
           scryfall_id: { $first: "$scryfall_id" },
+      
+          // 👇 берём front image
+          imageUrl: {
+            $first: {
+              $let: {
+                vars: {
+                  frontFace: {
+                    $arrayElemAt: [
+                      {
+                        $filter: {
+                          input: "$faces",
+                          as: "face",
+                          cond: { $eq: ["$$face.side", "front"] },
+                        },
+                      },
+                      0,
+                    ],
+                  },
+                },
+                in: "$$frontFace.imageUrl",
+              },
+            },
+          },
         },
       },
 
@@ -150,6 +91,7 @@ export async function GET(req: Request) {
           set_name: 1,
           collector_number: 1,
           scryfall_id: 1,
+          imageUrl: 1,
         },
       },
 
