@@ -8,15 +8,8 @@ import { cn } from "@/lib/utils";
 import styles from "./SearchBar.module.css";
 import { Input } from "../ui/input";
 import Image from "next/image";
+import { CardListItem } from "@/types/cards";
 
-interface CardSuggestion {
-  _id: string;
-  name: string;
-  set_name: string;
-  collector_number: string;
-  scryfall_id: string;
-  imageUrl: string;
-}
 
 interface SearchBarProps {
   className?: string;
@@ -27,7 +20,7 @@ interface SearchBarProps {
 const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: SearchBarProps) => {
   const router = useRouter();
   const [value, setValue] = useState("");
-  const [suggestions, setSuggestions] = useState<CardSuggestion[]>([]);
+  const [suggestions, setSuggestions] = useState<CardListItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -43,7 +36,7 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
 
     try {
       const res = await fetch(`/api/cards/search?q=${encodeURIComponent(query)}`);
-      const data: CardSuggestion[] = await res.json();
+      const data: CardListItem[] = await res.json();
       setSuggestions(data);
       setIsOpen(data.length > 0);
     } catch (err) {
@@ -118,7 +111,7 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
 
         </button>
       ))}
-            <div className={styles.imageContainer}>
+            
               {hoveredId && (
                 <Image
                   src={suggestions.find((card) => card._id === hoveredId)?.imageUrl || ""}
@@ -128,7 +121,6 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
                   height={260}
                 />
               )}
-            </div>
 
     </div>
 
