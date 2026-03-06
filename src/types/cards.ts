@@ -13,4 +13,6 @@ export interface CardListItem {
   condition: Condition;
   prices: number;
   quantity: number;
+  set_name: string;
+  collector_number: string;
 }
