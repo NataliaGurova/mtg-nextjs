@@ -44,27 +44,17 @@
 }
 
 /* -----dropdown -----   */
-
-
-/* .dropdownItem {
+  
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
   width: 100%;
-  text-align: left;
-  padding: 8px 12px;
-  font-size: 14px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  } */
-  .dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: white;
-    color: #141517;
-    box-shadow: 0 4px 12px rgb(20, 21, 23, 0.2);
-    z-index: 50;
-  }
+  background: white;
+  color: #141517;
+  box-shadow: 0 4px 12px rgb(20, 21, 23, 0.2);
+  z-index: 50;
+}
 
 .dropdownItem {
   position: relative;
@@ -73,11 +63,16 @@
   align-items: center;
   padding: 8px 12px;
   width: 100%;
-
 }
 
 .dropdownItem:hover {
   background: #eff2f8; 
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .cardName {
@@ -91,25 +86,14 @@
 }
 
 
-.textContent {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
 .inlineImage {
   position: absolute;  /* 🔥 */
   right: -144px;         
   top: 34px;
-  border-radius: 10px;
+  border-radius: 6px;
+  border: 1px solid #eff2f8;
   pointer-events: none;
   z-index: 50;
-
-  border: 1px solid #eff2f8;
-    
-  margin-left: 12px;
-  border-radius: 6px;
-  flex-shrink: 0;
 }
 
 @media (min-width: 767px) {
