@@ -137,14 +137,7 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
     )} */}
 
   </div>
-)}
-
-      
-
-
-
-
-
+  )}
     </div>
   );
 };

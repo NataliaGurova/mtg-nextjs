@@ -59,6 +59,12 @@ CardSchema.index({ type_line: 1 });
 CardSchema.index({ colors: 1 });
 CardSchema.index({ createdAt: -1 });
 
+CardSchema.index({ name: "text", set_name: "text" });
+
+CardSchema.index({ name: 1, set: 1 });
+CardSchema.index({ scryfall_id: 1, isFoil: 1 });
+CardSchema.index({ rarity: 1, set: 1 });
+
 const Card = models.Card || model("Card", CardSchema);
 
 export default Card;
