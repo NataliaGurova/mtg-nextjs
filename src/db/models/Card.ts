@@ -3,10 +3,25 @@ import { Schema, model, models } from "mongoose";
 
 const FaceSchema = new Schema(
   {
-    side: { type: String, required: true },
-    imageUrl: { type: String, required: true },
+    side: {
+      type: String,
+      required: true,
+      enum: ["front", "back"],
+    },
+
+    images: {
+      small: {
+        type: String,
+        required: true,
+      },
+
+      normal: {
+        type: String,
+        required: true,
+      },
+    },
   },
-  { _id: false } // 🔥 КРИТИЧНО
+  { _id: false }
 );
 
 

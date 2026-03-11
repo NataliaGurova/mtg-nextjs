@@ -11,7 +11,10 @@ export type Condition = "NM" | "LP" | "HP";
 
 export interface Face {
   side: "front" | "back";
-  imageUrl: string;
+  images: {
+    small: string;
+    normal: string;
+  };
 }
 
 export interface DbCard {
