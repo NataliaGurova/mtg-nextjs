@@ -36,7 +36,7 @@ const CardItem = ({ card }: CardItemProps) => {
         {card.isFoil && <p className={css.foilType}>{card.foilType}</p>}
         <div className={css.info}>
           <p>{card.condition}</p>
-          <p>{card.prices} грн</p>
+          <p>{card.prices} ₴</p>
         </div>
         <div className={css.cart}>
         
