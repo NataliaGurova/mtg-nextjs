@@ -1,7 +1,7 @@
 'use client';
 
 import Logo from "../../logo/Logo";
-import CartIcon from "../../cart-icon/CartIcon";
+import CartIcon from "../../cart/CartIcon/CartIcon";
 import FavoriteBtn from "../../favorite-btn/FavoriteBtn";
 
 import { navLinks } from "@/constants/data";

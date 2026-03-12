@@ -128,7 +128,6 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
         {/* ВАРИАНТЫ КАРТ */}
         <div className={css.variant}>
 
-          {/* {cards.map((card) => ( */}
           {cards.map((card) => {
             const cardId = card._id.toString(); // гарантируем string
 
