@@ -96,8 +96,9 @@ const AddToCartSection = ({ card, stock }: AddToCartButtonProps) => {
     addToCart({
       id: card._id,
       name: card.name,
-      image: card.faces && card.faces.length > 0 ? card.faces[0].images.normal : "",
-      quantity: qty,
+      image: card.faces?.[0]?.images?.small ?? "",
+      price: card.prices,
+      quantity: qty
     });
   };
 
