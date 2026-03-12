@@ -25,15 +25,16 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
 
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
+  
   // const [previewCard, setPreviewCard] = useState<CardSuggestion | null>(null);
-
+  
   const fetchSuggestions = useCallback(async (query: string) => {
     if (query.length < 3) {
       setSuggestions([]);
       setIsOpen(false);
       return;
     }
-
+    
     try {
       const res = await fetch(`/api/cards/search?q=${encodeURIComponent(query)}`);
       const data: CardListItem[] = await res.json();
@@ -43,7 +44,7 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
       console.error(err);
     }
   }, []);
-
+  
   useEffect(() => {
     const timer = setTimeout(() => fetchSuggestions(value), debounceMs);
     return () => clearTimeout(timer);
@@ -54,13 +55,18 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
     setSuggestions([]);
     setIsOpen(false);
   };
-
+  
   const handleSelect = (scryfallId: string) => {
     setIsOpen(false);
     setSuggestions([]);
     setValue("");
     router.push(`/singles/${scryfallId}`);
   };
+  
+  // const hoveredCard = suggestions.find((card) => String(card._id) === String(hoveredId));
+  const hoveredCard = suggestions.find((card) => card._id === hoveredId);
+  // console.log("Hovered card:", hoveredCard);
+
 
   return (
     <div className={styles.container}>
@@ -99,42 +105,41 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
     </div>
           </div>
           
-          {/* {hoveredId === card._id && (
-    <Image
-      src={card.imageUrl}
-      alt={card.name}
-      width={120}
-      height={200}
-      className={styles.inlineImage}
-    />
-  )} */}
 
         </button>
       ))}
             
-              {hoveredId && (
+            {hoveredCard?.image && (
+<Image
+  src={hoveredCard.image}
+  alt={hoveredCard.name}
+  width={180}
+  height={260}
+  className={styles.inlineImage}
+/>
+)}
+              {/* {hoveredId && (
                 <Image
-                  src={suggestions.find((card) => card._id === hoveredId)?.imageUrl || ""}
+                  src={suggestions.find((card) => card._id === hoveredId)?.faces[0].images.small || ""}
                   alt={suggestions.find((card) => card._id === hoveredId)?.name || ""}
                   className={styles.inlineImage}
                   width={180}
                   height={260}
                 />
-              )}
-
+              )} */}
+{/* {hoveredCard?.faces?.[0]?.images?.small && ( */}
+{/* {hoveredCard && hoveredCard.faces?.[0]?.images?.small && (
+  <Image
+    src={hoveredCard.faces[0].images.small}
+    alt={hoveredCard.name}
+    width={180}
+    height={260}
+    className={styles.inlineImage}
+  />
+)} */}
+            
     </div>
 
-    {/* {previewCard && (
-      <div className={styles.preview}>
-        <Image
-          src={previewCard.imageUrl}
-          alt={previewCard.name}
-          className={styles.previewImage}
-          width={60}
-          height={100}
-        />
-      </div>
-    )} */}
 
   </div>
   )}
@@ -145,3 +150,15 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
 export default SearchBar;
 
 
+
+{/* {previewCard && (
+  <div className={styles.preview}>
+    <Image
+      src={previewCard.imageUrl}
+      alt={previewCard.name}
+      className={styles.previewImage}
+      width={60}
+      height={100}
+    />
+  </div>
+)} */}

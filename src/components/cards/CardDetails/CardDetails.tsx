@@ -1,13 +1,13 @@
 
 import { DbCard} from "@/types/types";
 
-
 import css from "./CardDetails.module.css";
-import { AddToCartSection } from "../AddToCartSection/AddToCartSection";
-import SetIcon from "@/components/SetIcon/SetIcon";
 
-import ImageCard from "@/components/ImageCard/ImageCard";
 import Container from "@/components/Container/Container";
+import SetIcon from "@/components/SetIcon/SetIcon";
+import CardFlipper from "@/components/CardFlipper/CardFlipper";
+import AddToCartSection from "../AddToCartSection/AddToCartSection";
+
 
 
 interface CardDetailsProps {
@@ -43,8 +43,7 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
   return (
     <Container className={css.cardDetailsContainer}>
 
-      {/* IMAGE — 1 раз */}
-      <ImageCard
+      {/* <ImageCard
         name={mainCard.name}
         faces={mainCard.faces}
         isFoil={false}
@@ -56,15 +55,48 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
           width: 50,
           height: 50,
         }}
-      />
+      /> */}
+            {/* {frontImage && (
+        <CardFlipper
+          frontImage={frontImage}
+          backImage={backImage}
+          // width={325}
+          // height={453}
+          width={220}
+          height={310}
+          isFoil={card.isFoil}
+          flipButtonPosition={{
+            top: 274,
+            right: 90,
+          }}
+        /> */}
+
+      {/* IMAGE */}
+      {mainCard.faces && (
+        <CardFlipper
+          frontImage={mainCard.faces[0].images.normal}
+          
+          // Если есть вторая сторона — передаем backImage и flipButtonPosition
+          {...(mainCard.faces.length > 1
+            ? {
+                backImage: mainCard.faces[1].images.normal,
+                flipButtonPosition: { top: 410, right: 138, width: 50, height: 50 },
+              }
+            : {})}
+          
+          width={325}
+          height={453}
+          isFoil={mainCard.isFoil}
+        />
+      )}
 
 
       <div className={css.cardDetails}>
 
-        {/* NAME — 1 раз */}
+        {/* NAME */}
         <h2 className={css.title}>{mainCard.name}</h2>
 
-        {/* SET — 1 раз */}
+        {/* SET */}
         <div className="flex items-center gap-2 mb-2">
           <SetIcon
             setCode={mainCard.set}
@@ -73,7 +105,7 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
           <h3 className={css.set}>{mainCard.set_name}</h3>
         </div>
 
-        {/* LEGALITIES — 1 раз */}
+        {/* LEGALITIES */}
         <div className={css.legalities}>
           <b>Legalities</b>
           <ul className={css.format}>
@@ -127,7 +159,7 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
                 </strong>
 
                 <AddToCartSection
-                  cardId={card._id}
+                  card={card}
                   stock={card.quantity}
                 />
 

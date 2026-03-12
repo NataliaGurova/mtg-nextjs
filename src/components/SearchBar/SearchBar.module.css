@@ -46,6 +46,7 @@
   color: #141517;
   box-shadow: 0 4px 12px rgb(20, 21, 23, 0.2);
   z-index: 50;
+
 }
 
 .dropdownItem {
@@ -85,7 +86,7 @@
   border-radius: 6px;
   border: 1px solid #eff2f8;
   pointer-events: none;
-  z-index: 50;
+  z-index: 100;
 }
 
 @media (min-width: 767px) {
