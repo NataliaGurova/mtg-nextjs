@@ -5,9 +5,14 @@ import { usePathname } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import clsx from "clsx";
 
+import { useCartStore } from "@/store/cartStore";
+
 const CartIcon = () => {
   const pathname = usePathname();
   const isActive = pathname === "/cart";
+
+  const { items } = useCartStore();
+  const totalCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <Link
@@ -25,7 +30,7 @@ const CartIcon = () => {
                   rounded-full bg-dark-green text-light-grey
                   hoverEffect transform group-hover:scale-110 group-hover:bg-green-600"
       >
-        3
+        {totalCount}
       </span>
     </Link>
   );

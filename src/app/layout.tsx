@@ -7,6 +7,7 @@ import { Suspense } from "react";
 
 import { Providers } from "@/components/auth/Providers";
 import { Toaster } from "sonner";
+import { CartSlide } from "@/components/cart/CartSlide/CartSlide";
 
 
 // import { Cinzel } from "next/font/google";
@@ -67,7 +68,8 @@ export default function RootLayout({
           closeButton
           expand={false}
         />
-          {children}
+            {children}
+            <CartSlide /> {/* Slide доступен на всех страницах */}
         </main>
 
         <Suspense fallback={null}>

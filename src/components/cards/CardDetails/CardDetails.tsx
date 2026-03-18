@@ -6,7 +6,7 @@ import css from "./CardDetails.module.css";
 import Container from "@/components/Container/Container";
 import SetIcon from "@/components/SetIcon/SetIcon";
 import CardFlipper from "@/components/CardFlipper/CardFlipper";
-import AddToCartSection from "../AddToCartSection/AddToCartSection";
+import CardStockItem from "@/components/CardStockItem/CardStockItem";
 
 
 
@@ -127,8 +127,15 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
 
         {/* ВАРИАНТЫ КАРТ */}
         <div className={css.variant}>
+            {cards.map((card) => (    
+              <CardStockItem                
+                key={card._id.toString()}                
+                card={card}                
+              />              
+            ))}
+          
 
-          {cards.map((card) => {
+          {/* {cards.map((card) => {
             const cardId = card._id.toString(); // гарантируем string
 
             return (
@@ -164,7 +171,7 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
 
               </div>
             )
-          })}
+          })} */}
         </div>
       </div>
     </Container>

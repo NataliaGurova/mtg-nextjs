@@ -87,20 +87,31 @@ interface AddToCartButtonProps {
 const AddToCartSection = ({ card, stock }: AddToCartButtonProps) => {
   const [qty, setQty] = useState(1);
 
+  // const frontImage = card.faces?.[0]?.images?.normal || "";
+  // const backImage = card.faces?.[1]?.images?.normal;
+
   const addToCart = useCartStore((state) => state.addToCart);
+  const setCartOpen = useCartStore((store) => store.setCartOpen);
 
   const dec = () => setQty((v) => Math.max(1, v - 1));
   const inc = () => setQty((v) => Math.min(stock, v + 1));
 
   const handleAdd = () => {
     addToCart({
-      id: card._id,
+      id: card._id.toString(),
       name: card.name,
+      set_name: card.set_name,
       image: card.faces?.[0]?.images?.small ?? "",
       price: card.prices,
-      quantity: qty
+      quantity: qty,
+      stock: stock,
+      condition: card.condition,
+      language: card.lang,
+      foil: card.foilType ?? null,
     });
+    setCartOpen(true);
   };
+
 
   return (
     <div className="flex items-center gap-4">
@@ -144,3 +155,7 @@ const AddToCartSection = ({ card, stock }: AddToCartButtonProps) => {
 };
 
 export default AddToCartSection;
+
+
+
+
