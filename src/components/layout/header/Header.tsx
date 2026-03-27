@@ -25,6 +25,7 @@ const Header = () => {
 
   {/* TOP BAR */}
   <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text">
+  {/* <Container className="flex items-center justify-between py-0 bg-[#e3ece6] max-w-full text-main-text"> */}
 
     {/* LEFT */}
     <div className="flex items-center gap-10">
@@ -85,11 +86,7 @@ const Header = () => {
 
   {/* MOBILE SEARCH */}
   <Container className="md:hidden bg-dark-green text-light-grey">
-    <SearchBar
-      // containerClassName="py-2"
-      // className="w-full py-2"
-      // showIcon={false}
-    />
+    <SearchBar />
   </Container>
 
   </header>

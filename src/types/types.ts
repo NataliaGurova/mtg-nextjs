@@ -42,5 +42,7 @@ export interface DbCard {
   lang: string;
 
   artist?: string; 
+
+  availableQty?: number;
 }
 

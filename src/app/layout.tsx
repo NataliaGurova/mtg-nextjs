@@ -7,7 +7,9 @@ import { Suspense } from "react";
 
 import { Providers } from "@/components/auth/Providers";
 import { Toaster } from "sonner";
-import { CartSlide } from "@/components/cart/CartSlide/CartSlide";
+import { AuthRequiredModal } from "@/components/auth/AuthRequiredModal/AuthRequiredModal";
+import { CartModal } from "@/components/cart/CartModal/CartModal";
+import { CartTimer } from "@/components/cart/CartTimer/CartTimer";
 
 
 // import { Cinzel } from "next/font/google";
@@ -62,14 +64,17 @@ export default function RootLayout({
 
         {/* Main растягивается */}
           <main className="flex-1 bg-light-grey">
-          <Toaster
-          position="top-right"
-          richColors
-          closeButton
-          expand={false}
-        />
+            <Toaster
+              position="top-right"
+              richColors
+              closeButton
+              expand={false}
+            />
+            {/* Добавляем нашего невидимого наблюдателя */}
+            <CartTimer />
             {children}
-            <CartSlide /> {/* Slide доступен на всех страницах */}
+            <AuthRequiredModal />
+            <CartModal /> 
         </main>
 
         <Suspense fallback={null}>

@@ -1,3 +1,5 @@
+// в корзине показывать количество товаров, а не количество позиций для header.tsx
+
 "use client";
 
 import Link from "next/link";

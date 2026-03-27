@@ -1,5 +1,6 @@
 export type CartItem = {
   id: string;
+  scryfallId: string   // ← добавляем
   name: string;
   set_name: string;
   image: string;
@@ -9,4 +10,6 @@ export type CartItem = {
   condition: string;
   language: string;
   foil: string | null;
+
+  availableQty?: number;
 };

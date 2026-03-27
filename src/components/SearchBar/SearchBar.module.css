@@ -58,7 +58,12 @@
   width: 100%;
 }
 
-.dropdownItem:hover {
+/* .dropdownItem:hover {
+  background: #eff2f8; 
+} */
+
+.dropdownItem:hover,
+.dropdownItem.active {
   background: #eff2f8; 
 }
 
