@@ -14,6 +14,10 @@
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   z-index: 50;
   cursor: default;
+  
+  animation: slideDownFade 0.25s ease-out forwards;
+  /* 🔹 Указываем, что трансформация (если бы мы ее масштабировали) идет сверху */
+  transform-origin: top;
 }
 
 .header {
@@ -123,4 +127,15 @@
 
 .flexBtn {
   flex: 1;
+}
+
+@keyframes slideDownFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px); /* Начинаем чуть выше */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Опускаемся на свое законное место */
+  }
 }
