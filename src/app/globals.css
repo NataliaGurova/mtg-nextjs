@@ -12,7 +12,8 @@
   --inputs: #eff2f8; */
 
 @theme {
-  --font-inter: Inter, PT Serif, sans-serif;
+  /* --font-inter: Inter, PT Serif, sans-serif; */
+  --font-inter: Montserrat, PT Serif, sans-serif;
   --color-light-grey: #eff2f8;
   --color-dark-green: rgb(29, 81, 5);
   /* --color-dark-green: #1d5105; */

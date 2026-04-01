@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/layout/footer/Footer";
 import Header from "@/components/layout/header/Header";
@@ -20,8 +21,15 @@ import { CartTimer } from "@/components/cart/CartTimer/CartTimer";
 
 
 
-export const inter = Inter({ subsets: ['latin'], weight: ["400", "700"] })
-export const montserrat = Inter({ subsets: ['latin'], weight: ["400", "500", "600", "700"] })
+// export const inter = Inter({ subsets: ['latin'], weight: ["400", "700"] })
+
+// 2. Настраиваем шрифт
+const montserrat = Montserrat({ 
+  subsets: ["latin", "cyrillic"], // cyrillic нужен, если у вас есть русский/украинский текст
+  display: "swap",
+  variable: "--font-montserrat", // Создаем CSS-переменную для Tailwind
+  weight: ["400", "500", "600", "700"], 
+});
 
 export const metadata: Metadata = {
   title: {
@@ -56,7 +64,8 @@ export default function RootLayout({
     //   </body>
     // </html>
     <html lang="en">
-    <body className={`${inter.className} min-h-screen flex flex-col`}>
+      {/* <body className={`${inter.className} min-h-screen flex flex-col`}> */}
+      <body className={`${montserrat.variable} font-sans antialiased`}>
       <Providers>
         <Suspense fallback={null}>
           <Header />
