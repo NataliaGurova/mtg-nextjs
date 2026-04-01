@@ -1,3 +1,4 @@
+// components/cards/CardList/CardList.tsx
 
 "use client";
 

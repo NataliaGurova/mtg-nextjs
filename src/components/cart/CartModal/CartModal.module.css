@@ -1,0 +1,126 @@
+/* components/cart/CartModal/CartModal.module.css */
+
+.modalOverlay {
+  position: absolute;
+  right:-103px ;
+  top: 58px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  background-color: var(--background, #ffffff);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 4px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  cursor: default;
+}
+
+.header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.body {
+  padding: 8px 24px;
+}
+
+.bodyScroll {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.emptyText {
+  color: hsl(var(--muted-foreground, 215.4 16.3% 46.9%));
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 16px 0;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border, #e5e7eb);
+  padding: 12px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.itemImage {
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.itemName {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemMeta {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground, 215.4 16.3% 46.9%));
+}
+
+.itemPrice {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border, #e5e7eb);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.flexBtn {
+  flex: 1;
+}

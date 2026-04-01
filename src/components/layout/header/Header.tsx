@@ -14,10 +14,13 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import Container from "@/components/Container/Container";
 import UserMenu from "./UserMenu";
 import { Search } from "lucide-react";
+import { useCartStore } from "@/store/cartStore";
+import { CartModal } from "@/components/cart/CartModal/CartModal";
 
 
 const Header = () => {
   const pathname = usePathname();
+  const setCartOpen = useCartStore((state) => state.setCartOpen);
 
   return (
 
@@ -51,9 +54,19 @@ const Header = () => {
       {/* Desktop user */}
       <div className="hidden md:flex items-center gap-2">
         <UserMenu />
-      </div>
+          </div>
+          
+          {/* 🔹 Обертка для иконки и выпадающей корзины */}
+        <div 
+          className="relative flex items-center h-full py-4" 
+          onMouseEnter={() => setCartOpen(true)}
+          onMouseLeave={() => setCartOpen(false)}
+        >
+          <CartIcon />
+          <CartModal /> {/* Рендерим её здесь, прямо под иконкой */}
+        </div>
 
-      <CartIcon />
+      {/* <CartIcon /> */}
       <FavoriteBtn />
 
       {/* Mobile menu */}

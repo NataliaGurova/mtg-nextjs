@@ -8,7 +8,6 @@ import { Suspense } from "react";
 import { Providers } from "@/components/auth/Providers";
 import { Toaster } from "sonner";
 import { AuthRequiredModal } from "@/components/auth/AuthRequiredModal/AuthRequiredModal";
-import { CartModal } from "@/components/cart/CartModal/CartModal";
 import { CartTimer } from "@/components/cart/CartTimer/CartTimer";
 
 
@@ -22,6 +21,7 @@ import { CartTimer } from "@/components/cart/CartTimer/CartTimer";
 
 
 export const inter = Inter({ subsets: ['latin'], weight: ["400", "700"] })
+export const montserrat = Inter({ subsets: ['latin'], weight: ["400", "500", "600", "700"] })
 
 export const metadata: Metadata = {
   title: {
@@ -74,7 +74,6 @@ export default function RootLayout({
             <CartTimer />
             {children}
             <AuthRequiredModal />
-            <CartModal /> 
         </main>
 
         <Suspense fallback={null}>
