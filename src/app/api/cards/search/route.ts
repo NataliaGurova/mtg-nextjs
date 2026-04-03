@@ -172,7 +172,7 @@ export async function GET(req: Request) {
                     ],
                   },
                 },
-                in: "$$frontFace.images.small",
+                in: "$$frontFace.images.normal",
               },
             },
           },

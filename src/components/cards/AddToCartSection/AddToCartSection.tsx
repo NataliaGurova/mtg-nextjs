@@ -28,8 +28,23 @@ const AddToCartSection = ({ card, disabled }: Props) => {
   const itemInCart = cartItems.find((i) => i.id === card._id.toString());
   const inCartQty = itemInCart?.quantity || 0;
 
-  // 🔹 3. Вычисляем ЖЕСТКИЙ ЛИМИТ: (Всего в базе) минус (Уже в корзине)
-  const maxAvailableToAdd = card.quantity - inCartQty;
+  // // 🔹 3. Вычисляем ЖЕСТКИЙ ЛИМИТ: (Всего в базе) минус (Уже в корзине)
+  // const maxAvailableToAdd = card.quantity - inCartQty;
+
+  // // 🔹 4. Защита: если счетчик qty больше, чем осталось доступно, сбрасываем его
+  // useEffect(() => {
+  //   if (qty > maxAvailableToAdd && maxAvailableToAdd > 0) {
+  //     setQty(maxAvailableToAdd);
+  //   }
+  // }, [maxAvailableToAdd, qty]);
+
+  // // Флаг полной блокировки (если закончились в базе ИЛИ мы уже всё положили в корзину)
+  // const isCompletelyOutOfStock = disabled || maxAvailableToAdd <= 0;
+
+  // 🔹 3. ИСПРАВЛЕННАЯ МАТЕМАТИКА ОСТАТКОВ
+  const serverAvailable = card.availableQty ?? card.quantity;
+  const maxAllowedInCart = Math.min(card.quantity, inCartQty + serverAvailable);
+  const maxAvailableToAdd = maxAllowedInCart - inCartQty;
 
   // 🔹 4. Защита: если счетчик qty больше, чем осталось доступно, сбрасываем его
   useEffect(() => {
@@ -38,7 +53,7 @@ const AddToCartSection = ({ card, disabled }: Props) => {
     }
   }, [maxAvailableToAdd, qty]);
 
-  // Флаг полной блокировки (если закончились в базе ИЛИ мы уже всё положили в корзину)
+  // Флаг полной блокировки
   const isCompletelyOutOfStock = disabled || maxAvailableToAdd <= 0;
 
   const inc = () => {
@@ -67,7 +82,7 @@ const AddToCartSection = ({ card, disabled }: Props) => {
         image: card.faces?.[0]?.images?.normal || "", 
         price: card.prices,
         quantity: qty, 
-        stock: card.quantity, // В стор передаем абсолютный сток из базы
+        stock: maxAllowedInCart, // 👈 ПЕРЕДАЕМ ПРАВИЛЬНЫЙ ЛИМИТ
         condition: card.condition,
         language: card.lang,
         foil: card.foilType ?? null,

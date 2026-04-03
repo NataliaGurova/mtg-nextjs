@@ -1,3 +1,4 @@
+// app/singles/[singleId]/page.tsx
 
 import { notFound } from "next/navigation";
 import CardDetails from "@/components/cards/CardDetails/CardDetails";

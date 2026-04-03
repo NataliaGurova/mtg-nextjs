@@ -26,14 +26,29 @@ const CardItem = ({ card }: CardItemProps) => {
   const cartItems = useCartStore((store) => store.items);
   const addToCart = useCartStore((store) => store.addToCart);
 
-  // 🔹 2. Высчитываем, сколько карт уже в корзине, и блокируем кнопку, если достигли лимита
+  // // 🔹 2. Высчитываем, сколько карт уже в корзине, и блокируем кнопку, если достигли лимита
+  // const id = card._id.toString();
+  // const itemInCart = cartItems.find((item) => item.id === id);
+  // const qtyInCart = itemInCart ? itemInCart.quantity : 0;
+  
+  // const totalStock = card.availableQty ?? card.quantity;
+  // const availableQty = totalStock - qtyInCart;
+  // const isOutOfStock = availableQty <= 0;
+  // 🔹 2. Сколько карт УЖЕ в корзине
   const id = card._id.toString();
   const itemInCart = cartItems.find((item) => item.id === id);
   const qtyInCart = itemInCart ? itemInCart.quantity : 0;
   
-  const totalStock = card.availableQty ?? card.quantity;
-  const availableQty = totalStock - qtyInCart;
-  const isOutOfStock = availableQty <= 0;
+  // 🔹 3. ИСПРАВЛЕННАЯ МАТЕМАТИКА ОСТАТКОВ
+  // Что говорит сервер (остаток после всех резервов, включая наши)
+  const serverAvailable = card.availableQty ?? card.quantity;
+  
+  // Сколько всего мы имеем право держать в корзине:
+  const maxAllowedInCart = Math.min(card.quantity, qtyInCart + serverAvailable);
+  
+  // Сколько еще можно докинуть прямо сейчас:
+  const remainingToAdd = maxAllowedInCart - qtyInCart;
+  const isOutOfStock = remainingToAdd <= 0;
 
   const handleAdd = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -53,7 +68,7 @@ const CardItem = ({ card }: CardItemProps) => {
         image: frontImage,
         price: card.prices,
         quantity: 1, 
-        stock: totalStock, // Передаем абсолютный сток из базы
+        stock: maxAllowedInCart, // 👈 ПЕРЕДАЕМ ПРАВИЛЬНЫЙ ЛИМИТ В СТОР
         condition: card.condition,
         language: card.lang,
         foil: card.foilType ?? null,

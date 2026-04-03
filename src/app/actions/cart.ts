@@ -9,6 +9,9 @@ import { connectDB } from "@/db/db";
 import Card from "@/db/models/Card";
 import { CART_RESERVATION_MS } from "@/lib/constants/constants";
 
+import { revalidatePath } from "next/cache"; 
+
+
 interface IReservation {
   userId: string;
   qty: number;
@@ -90,6 +93,12 @@ export async function reserveCard(cardId: string, quantityToAdd: number = 1) {
     // 8. Сохраняем изменения и коммитим транзакцию
     await card.save({ session: dbSession });
     await dbSession.commitTransaction();
+
+    // 🔹 КАК ТОЛЬКО ТРАНЗАКЦИЯ УСПЕШНА, СБРАСЫВАЕМ КЭШ СТРАНИЦ
+    // Укажите пути, где у вас выводятся карты. Например:
+    revalidatePath("/singles"); // Страница каталога
+    revalidatePath("/"); // Главная страница (если там есть новинки)
+    revalidatePath(`/singles/${card.scryfall_id}`); // Страница самой карты
     
     return { success: true };
     
@@ -137,6 +146,10 @@ export async function removeReservation(cardId: string) {
 
     await card.save({ session: dbSession });
     await dbSession.commitTransaction();
+
+    // 🔹 СБРАСЫВАЕМ КЭШ ПРИ УДАЛЕНИИ (чтобы карты вернулись на витрину)
+    revalidatePath("/singles");
+    revalidatePath("/");
     
     return { success: true };
     

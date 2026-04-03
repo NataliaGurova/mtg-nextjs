@@ -129,7 +129,7 @@ const FiltersChips = ({ onRemoveItem, onClearAll }: FiltersChipsProps) => {
         {filters.colors.length > 0 && renderChips("colors", filters.colors)}
         {filters.rarity.length > 0 && renderChips("rarity", filters.rarity)}
         {filters.type.length > 0 && renderChips("type", filters.type)}
-        {/* {filters.q && renderChips("q", [filters.q])} */}
+        {filters.q && renderChips("q", [filters.q])}
       </div>
     </section>
   );
