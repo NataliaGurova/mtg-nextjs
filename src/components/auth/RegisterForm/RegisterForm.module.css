@@ -7,6 +7,7 @@
 
 .title {
   letter-spacing: -0.9px;
+  letter-spacing: -1.5px;
   font-size: 32px;
   font-weight: 600;
   color: rgba(40, 39, 39, 0.7);
@@ -118,6 +119,8 @@
   width: 350px;
   margin-top: 15px;
   justify-content: space-between;
+
+  letter-spacing: -0.6px;
 }
 
 .link {

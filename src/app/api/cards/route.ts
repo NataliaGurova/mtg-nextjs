@@ -49,11 +49,24 @@ export async function GET(req: Request) {
     if (setsRaw) {
       const sets = setsRaw
         .split(",")
-        .map((s) => s.trim().toLowerCase())
+        .map((s) => s.trim()) // убрали toLowerCase(), так как регулярка сама всё найдет
         .filter(Boolean);
 
-      if (sets.length) filters.set = { $in: sets };
+      if (sets.length) {
+        // 🔹 ИСПРАВЛЕНИЕ: Используем регулярное выражение с флагом "i" (ignore case)
+        // Теперь база найдет и "pip", и "PIP", и "pIp"
+        filters.set = { $in: sets.map((s) => new RegExp(`^${s}$`, "i")) };
+      }
     }
+
+    // if (setsRaw) {
+    //   const sets = setsRaw
+    //     .split(",")
+    //     .map((s) => s.trim().toLowerCase())
+    //     .filter(Boolean);
+
+    //   if (sets.length) filters.set = { $in: sets };
+    // }
 
     if (rarity) filters.rarity = rarity;
 

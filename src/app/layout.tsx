@@ -1,5 +1,14 @@
-import type { Metadata } from "next";
 // import { Inter } from "next/font/google";
+// import { Cinzel } from "next/font/google";
+
+
+// export const cinzel = Cinzel({
+//   subsets: ["latin"],
+//   weight: ["500", "600", "700"],
+// });
+
+// export const inter = Inter({ subsets: ['latin'], weight: ["400", "700"] })
+import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/layout/footer/Footer";
@@ -12,16 +21,6 @@ import { AuthRequiredModal } from "@/components/auth/AuthRequiredModal/AuthRequi
 import { CartTimer } from "@/components/cart/CartTimer/CartTimer";
 
 
-// import { Cinzel } from "next/font/google";
-
-// export const cinzel = Cinzel({
-//   subsets: ["latin"],
-//   weight: ["500", "600", "700"],
-// });
-
-
-
-// export const inter = Inter({ subsets: ['latin'], weight: ["400", "700"] })
 
 // 2. Настраиваем шрифт
 const montserrat = Montserrat({ 
@@ -49,52 +48,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    
-    // <html lang="en">
-    //   <body className={inter.className}>
-    //     <Providers>
-    //     <Suspense fallback={null}>
-    //       <Header />
-    //     </Suspense>
-    //         {children}
-    //       <Suspense fallback={null}>
-    //         <Footer />
-    //       </Suspense>
-    //     </Providers>
-    //   </body>
-    // </html>
     <html lang="en">
-      {/* <body className={`${inter.className} min-h-screen flex flex-col`}> */}
-      <body className={`${montserrat.variable} font-sans antialiased`}>
-      <Providers>
-        <Suspense fallback={null}>
-          <Header />
-        </Suspense>
+      {/* 🔹 1. Вернули flex-классы для футера */}
+      <body className={`${montserrat.variable} font-sans antialiased flex flex-col min-h-screen`}>
+        <Providers>
+          <Suspense fallback={null}>
+            <Header />
+          </Suspense>
 
-        {/* Main растягивается */}
+          {/* 🔹 2. Main теперь чистый, только для контента */}
           <main className="flex-1 bg-light-grey">
-            <Toaster
-              position="top-right"
-              richColors
-              closeButton
-              expand={false}
-            />
-            {/* Добавляем нашего невидимого наблюдателя */}
-            <CartTimer />
             {children}
-            <AuthRequiredModal />
-        </main>
+          </main>
 
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
-      </Providers>
-    </body>
-  </html>
-    
+          {/* 🔹 3. Все глобальные/невидимые штуки лежат отдельно */}
+          <Toaster
+            position="top-right"
+            richColors
+            closeButton
+            expand={false}
+          />
+          <CartTimer />
+          <AuthRequiredModal />
+
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
+        </Providers>
+      </body>
+    </html>
   );
 }
-
-
-
-

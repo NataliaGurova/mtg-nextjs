@@ -97,6 +97,7 @@
 
 .setName {
   flex: 1;
+  color: var(--color-main-text);
   /* white-space: nowrap;    */
   /* не переносить */
   /* overflow: hidden;

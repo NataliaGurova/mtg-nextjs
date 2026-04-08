@@ -68,6 +68,8 @@
 // };
 
 // export default FiltersChips;
+// components/filters/FiltersChips/FiltersChips.tsx
+
 "use client";
 
 import { useMemo } from "react";

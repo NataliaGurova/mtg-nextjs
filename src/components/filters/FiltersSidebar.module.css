@@ -8,19 +8,39 @@
   height: fit-content;
 } */
 
-.container {
-  width: 280px;
-  position: sticky;
-  top: 155px; /* отступ от navbar */
-  align-self: flex-start;
-  height: fit-content;
-}
-/* ------------------------------------ */
 /* .filterTitle {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 15px;
 } */
+/* ------------------------------------ */
+/* .container {
+  width: 280px;
+  position: sticky;
+  top: 155px; 
+  align-self: flex-start;
+  height: fit-content;
+} */
+
+.container {
+  width: 280px;
+  position: sticky;
+  top: 155px; /* отступ от navbar */
+  align-self: flex-start;
+  
+  max-height: calc(100vh - 175px); 
+  overflow-y: auto; 
+  overscroll-behavior: contain; 
+
+  /* 🔹 ПРЯЧЕМ СКРОЛЛБАР */
+  scrollbar-width: none; /* Прячет в Firefox */
+  -ms-overflow-style: none; /* Прячет в старом Edge и IE */
+}
+
+/* 🔹 Прячет в Chrome, Safari и современном Edge */
+.container::-webkit-scrollbar {
+  display: none;
+}
 .filterTitle {
   font-size: 22px;
   font-weight: 700;
