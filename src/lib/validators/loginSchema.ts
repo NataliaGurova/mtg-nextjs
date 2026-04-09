@@ -6,8 +6,9 @@ const passwordRegExp = /^(?=.*[A-Z]).{8,}$/;
 export const loginSchema = z.object({
   email: z
     .string()
-    .min(1, "This field is required")
-    .regex(emailRegExp, "Invalid email address"),
+    // .min(1, "This field is required")
+    .regex(emailRegExp, "Invalid email address")
+    .toLowerCase(),
 
   password: z
     .string()
@@ -16,3 +17,4 @@ export const loginSchema = z.object({
 });
 
 export type LoginFormData = z.infer<typeof loginSchema>;
+

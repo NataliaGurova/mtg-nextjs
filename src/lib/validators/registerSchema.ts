@@ -1,8 +1,9 @@
-// lib/validators/registerSchema.ts
+// src/lib/validators/registerSchema.ts
 import { z } from 'zod';
 
 const emailRegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-const passwordRegExp = /^(?=.*[A-Z]).{8,}$/;
+// const passwordRegExp = /^(?=.*[A-Z]).{8,}$/;
+const passwordRegExp = /[A-Z]/;
 const capitalize = (value: string = "") =>
   value.trim().charAt(0).toUpperCase() + value.trim().slice(1).toLowerCase()
 
@@ -21,7 +22,8 @@ export const registerSchema = z
       .transform(capitalize),
     email: z
       .string()
-      .regex(emailRegExp, 'Invalid email address'),
+      .regex(emailRegExp, 'Invalid email address')
+      .toLowerCase(), // 🔹 заодно можно сразу всё опускать в нижний регистр!
     password: z
       .string()
       .min(8, 'Must be at least 8 characters long')

@@ -1,25 +1,36 @@
 
+import { authConfig } from "@/auth";
 import RegisterForm from "@/components/auth/RegisterForm/RegisterForm";
 import Container from "@/components/Container/Container";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 // import { getServerSession } from "next-auth";
 // import { authConfig } from "@/auth";
 // import { redirect } from "next/navigation";
 
-
-
 export const metadata = {
   title: "Register | Citadel",
+  description: "Create a new account",
 };
 
-const RegisterPage = () => {
+
+const RegisterPage = async () => {
 
   // const session = await getServerSession(authConfig);
 
   // if (session) {
   //   redirect("/account");
   // }
+
+  // 1. Проверяем, авторизован ли пользователь
+  const session = await getServerSession(authConfig);
+
+  // 2. Если да — отправляем в аккаунт
+  if (session) {
+    redirect("/account");
+  }
 
 
   return (

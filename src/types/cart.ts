@@ -13,3 +13,15 @@ export type CartItem = {
 
   availableQty?: number;
 };
+
+// Описываем структуру ответа из базы данных (после populate)
+export interface DbPopulatedCartItem {
+  quantity: number;
+  cardId: {
+    _id: string;
+    name: string;
+    price: number;
+    image: string;
+    stock: number;
+  };
+}

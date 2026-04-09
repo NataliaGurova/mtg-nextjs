@@ -38,6 +38,9 @@
 
 // export default models.User || model("User", UserSchema);
 
+
+// src/db/models/User.ts
+
 import { Schema, model, models } from "mongoose";
 
 export interface IUser {
@@ -84,6 +87,8 @@ const UserSchema = new Schema(
       select: false, // 🔐 не отдаём пароль
     },
 
+    // role: { type: String, default: "user" }, // "user" или "admin"
+
     resetPasswordToken: {
       type: String,
     },
@@ -100,3 +105,4 @@ const UserSchema = new Schema(
 );
 
 export default models.User || model<IUser>("User", UserSchema);
+

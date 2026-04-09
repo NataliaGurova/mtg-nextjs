@@ -1,12 +1,16 @@
 
 import { getServerSession } from "next-auth";
+import { authConfig } from "@/auth";
 import { redirect } from "next/navigation";
+import LoginForm from "@/components/auth/LoginForm/LoginForm";
 
 import Container from "@/components/Container/Container";
-
 import Image from "next/image";
-import { authConfig } from "@/auth";
-import LoginForm from "@/components/auth/LoginForm/LoginForm";
+
+export const metadata = {
+  title: "Login | Citadel",
+  description: "Sign in to your account",
+};
 
 const LoginPage = async () => {
 
@@ -46,3 +50,4 @@ const LoginPage = async () => {
 }
 
 export default LoginPage;
+

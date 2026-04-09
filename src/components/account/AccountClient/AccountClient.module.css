@@ -1,0 +1,334 @@
+/* AccountClient.module.css */
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* --- ШАПКА ПРОФИЛЯ --- */
+.headerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 40px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 40px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .headerCard {
+    flex-direction: row;
+  }
+}
+
+.avatar {
+  width: 112px;
+  height: 112px;
+  background: linear-gradient(135deg, #10b981 0%, #0f766e 100%);
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 700;
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.3);
+}
+
+.infoSection {
+  text-align: center;
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .infoSection {
+    text-align: left;
+  }
+}
+
+.nameWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+  .nameWrapper {
+    justify-content: flex-start;
+  }
+}
+
+.userName {
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.025em;
+}
+
+.badge {
+  padding: 4px 12px;
+  background-color: #ecfdf5;
+  color: #059669;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 9999px;
+  border: 1px solid #d1fae5;
+}
+
+.userEmail {
+  font-size: 18px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background-color: #f9fafb;
+  color: #4b5563;
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logoutBtn:hover {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+/* --- СЕТКА КАРТОЧЕК --- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 32px;
+  border: 1px solid #f3f4f6;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: #d1fae5;
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.iconWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .iconWrapper {
+  transform: scale(1.1);
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.cardDesc {
+  color: #9ca3af;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* --- СЕКЦИЯ НАСТРОЕК --- */
+.settingsCard {
+  background-color: #ffffff;
+  border-radius: 40px;
+  border: 1px solid #f3f4f6;
+  overflow: hidden;
+}
+
+.settingsHeader {
+  padding: 32px 40px;
+  border-bottom: 1px solid #f9fafb;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.settingsTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.settingsContent {
+  padding: 16px 40px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .row {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.rowLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.rowValue {
+  color: #111827;
+  font-weight: 600;
+}
+
+.editBtn {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background-color: #ecfdf5;
+  color: #059669;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+@media (min-width: 768px) {
+  .editBtn {
+    margin-top: 0;
+  }
+}
+
+.editBtn:hover {
+  background-color: #d1fae5;
+}
+
+
+/* ================ */
+
+/* AccountClient.module.css */
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+
+/* --- НОВАЯ КЛАССИЧЕСКАЯ ШАПКА --- */
+.classicHeader {
+  margin-bottom: 40px;
+  /* Для идеального попадания в стиль нужен шрифт с засечками */
+  font-family: "Georgia", "Times New Roman", serif; 
+}
+
+.welcomeRow {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.heading {
+  font-size: 36px;
+  font-weight: 400; /* В классике заголовки не делают слишком жирными */
+  color: #041e3a; /* Темно-синий, почти черный (Navy) */
+  letter-spacing: 0.02em;
+}
+
+.signOutBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #111827;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #111827;
+  padding: 0 0 2px 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.signOutBtn:hover {
+  opacity: 0.6;
+}
+
+/* --- МЕНЮ НАВИГАЦИИ --- */
+.navMenu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  border-bottom: 1px solid transparent; /* Убираем общую линию, если она не нужна */
+}
+
+.navItem {
+  font-size: 16px;
+  color: #9ca3af; /* Светло-серый для неактивных */
+  background: none;
+  border: none;
+  padding: 0 0 4px 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.3s ease;
+}
+
+.navItem:hover {
+  color: #4b5563;
+}
+
+.navItemActive {
+  color: #041e3a; /* Темно-синий */
+  border-bottom: 1px solid #041e3a; /* Тонкая линия подчеркивания */
+}
+
+/* ... дальше оставляете стили для .grid, .card и .settingsCard, которые мы писали в прошлый раз ... */

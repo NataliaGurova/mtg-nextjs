@@ -90,11 +90,12 @@
 
 
 // src/auth.ts или src/authOptions.ts (можно выбрать любое имя, главное — не забыть импортировать в api роуты)
+// auth.ts
 import { type AuthOptions } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import bcrypt from "bcrypt"
+import bcrypt from "bcryptjs";
 import User from "@/db/models/User"
-import { connectDB } from "./db/db"
+import { connectDB } from "@/db/db"
 
 // Расширяем типы next-auth чтобы не было ошибок TS
 declare module "next-auth" {
@@ -128,7 +129,9 @@ export const authConfig: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Введите email и пароль");
+        }
 
         await connectDB()
 
@@ -136,7 +139,10 @@ export const authConfig: AuthOptions = {
         if (!user) return null
 
         const isValid = await bcrypt.compare(credentials.password, user.password)
-        if (!isValid) return null
+        // if (!isValid) return null
+        if (!isValid) {
+          throw new Error("Неверный пароль");
+        }
 
         return {
           id: user._id.toString(),

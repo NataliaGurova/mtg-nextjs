@@ -129,10 +129,10 @@ const UserMenu = () => {
       <button
         onClick={() => signOut({ callbackUrl: "/" })}
         className="relative flex items-center gap-1 border-b-[2px] pb-1 transition-colors border-transparent hover:border-main-text"
-        title="Sign out"
+        title="Logout"
       >
         <LogOut className="w-4 h-4" />
-        <span className="inline">Sign out</span>
+        <span className="inline">Logout</span>
       </button>
     </div>
   );

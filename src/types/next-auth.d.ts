@@ -28,6 +28,7 @@ declare module "next-auth" {
       firstName?: string | null;
     } & DefaultSession["user"];
   }
+  
   interface User {
     id: string;
     firstName?: string | null;
