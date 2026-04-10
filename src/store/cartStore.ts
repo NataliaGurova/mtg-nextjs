@@ -52,24 +52,51 @@ export const useCartStore = create<CartStore>()(
       fetchFromServer: async () => {
         try {
           const res = await fetch("/api/cart");
-          if (!res.ok) return; // 401 игнорируем (гость)
           
+          // Если пользователь не авторизован, сервер вернет 401. 
+          // В этом случае просто выходим, оставляя корзину пустой или из LocalStorage.
+          if (!res.ok) return;
+      
           const data = await res.json();
-          if (!data.items || data.items.length === 0) return;
           
-          // Мапим данные из БД под интерфейс UI
-          const mappedItems: CartItem[] = data.items.map((dbItem: DbPopulatedCartItem) => ({
-            id: dbItem.cardId._id,
-            name: dbItem.cardId.name,
-            price: dbItem.cardId.price,
-            image: dbItem.cardId.image,
-            stock: dbItem.cardId.stock, 
-            quantity: dbItem.quantity,
-          }));
-          
-          set({ items: mappedItems });
+          if (data.items && Array.isArray(data.items)) {
+            const mappedItems: CartItem[] = data.items
+              .map((dbItem: DbPopulatedCartItem) => {
+                const card = dbItem.cardId;
+                
+                // Проверка на случай, если карта была удалена из базы, 
+                // но ссылка в корзине осталась
+                if (!card) return null;
+      
+                // Логика извлечения картинки:
+                // У твоих карт (даже обычных) данные лежат в массиве faces.
+                const imageUrl = 
+                  card.faces?.[0]?.images?.normal || 
+                  card.faces?.[0]?.images?.small || 
+                  // card.images?.normal || 
+                  "";
+      
+                return {
+                  id: card._id,
+                  scryfallId: card.scryfall_id,
+                  name: card.name,
+                  set_name: card.set_name,
+                  image: imageUrl,
+                  price: card.prices || 0,
+                  quantity: dbItem.quantity,    // Кол-во, которое выбрал юзер
+                  stock: card.quantity || 0,    // Остаток на складе из модели Card
+                  condition: card.condition || "NM",
+                  language: card.lang || "en",
+                  foil: card.foilType === "nonfoil" ? null : card.foilType,
+                };
+              })
+              // Явно указываем типы для фильтра, чтобы убрать ошибку 'item' implicitly has an 'any' type
+              .filter((item: CartItem | null): item is CartItem => item !== null);
+      
+            set({ items: mappedItems });
+          }
         } catch (error) {
-          console.error("Ошибка при загрузке корзины из БД:", error);
+          console.error("Критическая ошибка при синхронизации корзины с БД:", error);
         }
       },
       

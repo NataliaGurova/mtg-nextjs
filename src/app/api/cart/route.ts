@@ -4,9 +4,12 @@ import { getServerSession } from "next-auth";
 import { authConfig } from "@/auth"; // Проверьте путь к конфигу
 import { connectDB } from "@/db/db";
 import Cart from "@/db/models/Cart";
+import Card from "@/db/models/Card";
 
 // 🔹 1. ПОЛУЧЕНИЕ КОРЗИНЫ ИЗ БАЗЫ (GET)
 export async function GET() {
+
+  console.log("Card model registered:", !!Card); // Это формальное использование
   try {
     // Проверяем, залогинен ли пользователь
     const session = await getServerSession(authConfig);
