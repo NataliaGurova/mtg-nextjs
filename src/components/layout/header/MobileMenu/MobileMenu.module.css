@@ -13,8 +13,8 @@
 }
 
 .icon {
-  width: 1.5rem; /* w-6 */
-  height: 1.5rem; /* h-6 */
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
 }
 
 /* Выезжающая панель */
@@ -22,13 +22,18 @@
   position: fixed;
   top: 70px;
   right: 0;
-  height: 100%;
-  width: 16rem; /* w-64 */
+  height: calc(100vh - 70px); /* Занимает всю высоту под хедером */
+  width: 100%; /* На всю ширину экрана */
   padding: 1.25rem 0.75rem; /* pt-5 p-3 */
+  padding: 2rem 1.5rem; /* Увеличенные отступы для «воздуха» */
   background-color: var(--color-light-grey);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); */
   z-index: 50;
-  transition: transform 0.3s ease;
+  
+  /* Используем более плавную кривую анимации (как в iOS) */
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+
+  font-size: 1rem; /* 16px */
 }
 
 .sidebarOpen {
@@ -42,18 +47,46 @@
 .userSection {
   display: flex;
   gap: 0.5rem; /* gap-2 */
+
+  /* Опционально: можно добавить отступ снизу, чтобы отделить юзера от навигации */
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
 }
+
+/* 🔥 Принудительно заставляем все ссылки, кнопки и текст внутри стать крупными */
+.userSection a,
+.userSection button,
+.userSection span {
+  font-size: 1.25rem; /* Строго 20px */
+  font-weight: 500;
+}
+
+/* 🔹 Если иконки человечка и выхода покажутся мелковатыми рядом с большим текстом,
+   их можно точечно увеличить прямо отсюда, не ломая десктоп: */
+  .userSection svg {
+    width: 1.5rem;  /* 24px */
+    height: 1.5rem; /* 24px */
+  }
 
 .nav {
   display: flex;
   flex-direction: column;
-  margin-top: 1.25rem; /* mt-5 */
-  gap: 1.5rem; /* gap-6 */
+  margin-top: 2rem;
+  gap: 1.75rem; /* Большое расстояние между ссылками, чтобы не промазать пальцем */
+
 }
 
 .link {
+  font-size: 1rem; /* 16px */
+
+  font-size: 1.25rem; /* 20px - крупно и читаемо */
+  font-weight: 500;
+
   border-bottom: 2px solid transparent;
+
   padding-bottom: 0.25rem; /* pb-1 */
+  padding-bottom: 0.5rem;
+
   transition: border-color 0.3s ease, color 0.3s ease;
   text-decoration: none;
   color: var(--color-main-text);
@@ -67,3 +100,5 @@
   color: var(--color-nav-yellow);
   border-bottom-color: var(--color-nav-yellow);
 }
+
+

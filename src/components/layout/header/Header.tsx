@@ -2,7 +2,6 @@
 
 import Logo from "../../logo/Logo";
 import CartIcon from "./CartIcon/CartIcon";
-import FavoriteBtn from "./WishlistIcon/WishlistIcon";
 
 import { navLinks } from "@/constants/data";
 import Link from "next/link";
@@ -16,6 +15,7 @@ import { Search } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { CartModal } from "@/components/cart/CartModal/CartModal";
 import MobileMenu from "./MobileMenu/MobileMenu";
+import WishlistIcon from "./WishlistIcon/WishlistIcon";
 
 
 const Header = () => {
@@ -27,7 +27,7 @@ const Header = () => {
     <header className="sticky top-0 z-50">
 
   {/* TOP BAR */}
-  <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text">
+  <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text font-medium">
   {/* <Container className="flex items-center justify-between py-0 bg-[#e3ece6] max-w-full text-main-text"> */}
 
     {/* LEFT */}
@@ -66,7 +66,7 @@ const Header = () => {
             <CartModal /> {/* Рендерим её здесь, прямо под иконкой */}
           </div>
 
-          <FavoriteBtn />
+          <WishlistIcon />
 
       {/* Mobile menu */}
       <div className="md:hidden">
@@ -79,7 +79,7 @@ const Header = () => {
 
   {/* DESKTOP NAV */}
   <Container className="hidden md:block bg-dark-green text-light-grey">
-    <nav className="flex gap-[72px]">
+    <nav className="flex gap-[72px] text-[16px]">
       {navLinks.map(({ href, label }) => (
         <Link
           href={href}

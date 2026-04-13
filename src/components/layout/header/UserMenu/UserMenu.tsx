@@ -167,7 +167,7 @@ const UserMenu = () => {
     const isRegisterActive = pathname === "/register";
 
     return (
-      <>
+      <div className={css.container}>
         <Link
           href="/login"
           className={clsx(css.link, isLoginActive ? css.active : css.default)}
@@ -186,7 +186,7 @@ const UserMenu = () => {
         >
           <span>Register</span>
         </Link>
-      </>
+      </div>
     );
   }
 

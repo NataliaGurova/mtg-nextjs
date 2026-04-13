@@ -15,7 +15,7 @@
   --color-light-text: rgba(40, 39, 39, 0.7);
   --color-nav-yellow: #fcd21a;
   --color-logo: #B50828;  
-  --color-inputs: #eff2f8;
+  /* --color-inputs: #eff2f8; */
 
   /* Кастомная тень */
   --shadow-text-custom: 2px 2px 1px rgb(132, 5, 27);
