@@ -31,7 +31,7 @@ export const AuthRequiredModal = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent className="max-w-sm text-center">
+      <DialogContent className="max-w-sm text-center rounded-[4px]">
         <DialogHeader className="items-center">
           <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
             <ShoppingBag size={22} />

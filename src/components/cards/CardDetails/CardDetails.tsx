@@ -78,6 +78,9 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
           <h3 className={css.set}>{mainCard.set_name}</h3>
         </div>
 
+        {/* ARTIST */}
+        <div className={css.artist}><b>Artist:</b> {mainCard.artist}</div>
+
         {/* LEGALITIES */}
         <div className={css.legalities}>
           <b>Legalities</b>

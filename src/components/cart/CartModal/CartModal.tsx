@@ -108,8 +108,8 @@
 // };
 
 
-// components/cart/CartModal/CartModal.tsx
-// components/cart/CartModal/CartModal.tsx
+
+// components/cart/CartModal/CartModal.tsx для отображения содержимого корзины в layout.tsx
 "use client";
 
 import { useCartStore } from "@/store/cartStore";
