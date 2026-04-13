@@ -210,7 +210,8 @@ const SearchBar = ({ className, placeholder = "Search...", debounceMs = 300 }: S
               alt={hoveredCard.name}
               width={180}
               height={260}
-              className={styles.inlineImage}
+              className={cn(styles.inlineImage, "hidden md:block")}
+              // className={styles.inlineImage}
             />
           )}
         </div>

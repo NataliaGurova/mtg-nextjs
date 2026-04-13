@@ -1,0 +1,43 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.25rem;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.wrapper:hover:not(.active) {
+  border-bottom-color: var(--color-main-text);
+}
+
+.active {
+  color: var(--color-nav-yellow);
+  border-bottom-color: var(--color-nav-yellow);
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+.badge {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.75rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--color-dark-green);
+  color: var(--color-light-grey);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.wrapper:hover .badge {
+  transform: scale(1.1);
+  background-color: var(--color-light-green);
+}

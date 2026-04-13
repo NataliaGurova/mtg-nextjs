@@ -1,21 +1,21 @@
 'use client';
 
 import Logo from "../../logo/Logo";
-import CartIcon from "../../cart/CartIcon/CartIcon";
-import FavoriteBtn from "../../favorite-btn/FavoriteBtn";
+import CartIcon from "./CartIcon/CartIcon";
+import FavoriteBtn from "./WishlistIcon/WishlistIcon";
 
 import { navLinks } from "@/constants/data";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from 'next/navigation';
 
-import NavbarMobil from "../navbar-mobil/NavbarMobil";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Container from "@/components/Container/Container";
-import UserMenu from "./UserMenu";
+import UserMenu from "./UserMenu/UserMenu";
 import { Search } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { CartModal } from "@/components/cart/CartModal/CartModal";
+import MobileMenu from "./MobileMenu/MobileMenu";
 
 
 const Header = () => {
@@ -52,26 +52,26 @@ const Header = () => {
     <div className="flex items-center gap-6 md:gap-12">
 
       {/* Desktop user */}
-      <div className="hidden md:flex items-center gap-2">
-        <UserMenu />
+          <div className="hidden md:flex items-center gap-2">
+            <UserMenu />
           </div>
           
           {/* 🔹 Обертка для иконки и выпадающей корзины */}
-        <div 
-          className="relative flex items-center h-full py-4" 
-          onMouseEnter={() => setCartOpen(true)}
-          onMouseLeave={() => setCartOpen(false)}
-        >
-          <CartIcon />
-          <CartModal /> {/* Рендерим её здесь, прямо под иконкой */}
-        </div>
+          <div className="relative flex items-center h-full py-4"
+            onMouseEnter={() => setCartOpen(true)}
+            onMouseLeave={() => setCartOpen(false)}
+          >
 
-      {/* <CartIcon /> */}
-      <FavoriteBtn />
+            <CartIcon />
+            <CartModal /> {/* Рендерим её здесь, прямо под иконкой */}
+          </div>
+
+          <FavoriteBtn />
 
       {/* Mobile menu */}
       <div className="md:hidden">
-        <NavbarMobil />
+        {/* <NavbarMobil /> */}
+        <MobileMenu />
       </div>
 
     </div>

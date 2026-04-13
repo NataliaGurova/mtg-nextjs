@@ -1,0 +1,69 @@
+.toggleBtn {
+  color: var(--color-main-text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.toggleBtn:focus {
+  outline: none;
+}
+
+.icon {
+  width: 1.5rem; /* w-6 */
+  height: 1.5rem; /* h-6 */
+}
+
+/* Выезжающая панель */
+.sidebar {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  height: 100%;
+  width: 16rem; /* w-64 */
+  padding: 1.25rem 0.75rem; /* pt-5 p-3 */
+  background-color: var(--color-light-grey);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  transition: transform 0.3s ease;
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+.sidebarClosed {
+  transform: translateX(100%);
+}
+
+.userSection {
+  display: flex;
+  gap: 0.5rem; /* gap-2 */
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.25rem; /* mt-5 */
+  gap: 1.5rem; /* gap-6 */
+}
+
+.link {
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.25rem; /* pb-1 */
+  transition: border-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  color: var(--color-main-text);
+}
+
+.link:hover:not(.linkActive) {
+  border-bottom-color: var(--color-main-text);
+}
+
+.linkActive {
+  color: var(--color-nav-yellow);
+  border-bottom-color: var(--color-nav-yellow);
+}
