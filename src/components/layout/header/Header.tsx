@@ -79,7 +79,7 @@ const Header = () => {
 
   {/* DESKTOP NAV */}
   <Container className="hidden md:block bg-dark-green text-light-grey">
-    <nav className="flex gap-[72px] text-[16px]">
+    <nav className="flex gap-[72px] text-[18px]">
       {navLinks.map(({ href, label }) => (
         <Link
           href={href}

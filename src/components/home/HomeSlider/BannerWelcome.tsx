@@ -1,4 +1,5 @@
 
+import Logo from "@/components/logo/Logo";
 import Image from "next/image";
 
 const BannerWelcome = () => {
@@ -28,7 +29,7 @@ const BannerWelcome = () => {
               text-[#F5F0E6]
               drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]
             `}>
-            Вітаю в
+            Made for Endless Battles
           </h1>
 
           {/* <p className="mt-1 text-[32px] tracking-wide">в</p> */}
@@ -43,13 +44,13 @@ const BannerWelcome = () => {
           >
 
             <Image
-              src="/citadel.jpg"
-              alt="MTG Logo"
-              width={140}
-              height={120}
+              src="/logoMagic2.png"
+              alt="Citadel logo"
+              width={200}
+              height={200}
+              className="rounded-md"
               priority
             />
-            <span className="ml-4 text-[58px] font-semibold">Citadel</span>
           </div>
 
         </div>

@@ -27,17 +27,25 @@ const Logo = () => {
   return (
     <Link
       href="/"
-      className="flex items-center gap-2" // ← лого + текст в ряд с отступом
+      className="flex items-end gap-1" // ← лого + текст в ряд с отступом
     >
       <Image
-        src="/citadel.jpg"
+        src="/logoMagic2.png"
         alt="Citadel"
         width={60}
         height={60}
         className="rounded-md"
         priority
       />
-      <span className="text-xl font-bold">Citadel</span>
+      <Image
+        src="/logo-kir.png"
+        alt="Citadel"
+        width={150}
+        height={150}
+        className="rounded-md"
+        priority
+      />
+      {/* <span className="text-xl font-bold">Citadel</span> */}
     </Link>
   );
 };
