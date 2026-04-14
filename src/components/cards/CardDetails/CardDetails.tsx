@@ -75,7 +75,7 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
             setCode={mainCard.set}
             setName={mainCard.set_name}
             />
-          <h3 className={css.set}>{mainCard.set_name}</h3>
+          <h3 className={css.set}>{mainCard.set_name} # {mainCard.collector_number}</h3>
         </div>
 
         {/* ARTIST */}
