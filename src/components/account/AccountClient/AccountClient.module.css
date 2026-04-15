@@ -267,7 +267,8 @@
 .classicHeader {
   margin-bottom: 40px;
   /* Для идеального попадания в стиль нужен шрифт с засечками */
-  font-family: "Georgia", "Times New Roman", serif; 
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 500; 
 }
 
 .welcomeRow {
