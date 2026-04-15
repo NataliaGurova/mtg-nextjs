@@ -199,7 +199,7 @@ const UserMenu = () => {
         className={clsx(css.link, isAccountActive ? css.active : css.default)}
         title="My account"
       >
-        <User className={css.icon} />
+        <User className={css.icon} size={20}/>
         <span>{firstName}</span>
       </Link>
 
@@ -208,7 +208,7 @@ const UserMenu = () => {
         className={clsx(css.link, css.default)}
         title="Logout"
       >
-        <LogOut className={css.iconSmall} />
+        <LogOut className={css.iconSmall} size={18}/>
         <span>Logout</span>
       </button>
     </div>
