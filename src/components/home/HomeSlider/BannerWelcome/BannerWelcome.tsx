@@ -1,5 +1,5 @@
 
-import Logo from "@/components/logo/Logo";
+import Logo from "@/components/Mogo/Logo";
 import Image from "next/image";
 
 const BannerWelcome = () => {
@@ -44,7 +44,7 @@ const BannerWelcome = () => {
           >
 
             <Image
-              src="/logoMagic2.png"
+              src="/logoMagic.png"
               alt="Citadel logo"
               width={200}
               height={200}

@@ -1,5 +1,6 @@
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Button } from "../../ui/button";
+// import { Button } from "../../ui/button";
 import Link from "next/link";
 
 const BannerAvatar = () => {

@@ -30,7 +30,7 @@ const Logo = () => {
       className="flex items-end gap-1" // ← лого + текст в ряд с отступом
     >
       <Image
-        src="/logoMagic2.png"
+        src="/logoMagic.png"
         alt="Citadel"
         width={60}
         height={60}

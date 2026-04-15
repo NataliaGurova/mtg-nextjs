@@ -4,8 +4,9 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import BannerWelcome from "./BannerWelcome";
-import BannerAvatar from "./BannerAvatar";
+import BannerWelcome from "./BannerWelcome/BannerWelcome";
+import BannerAvatar from "./BannerAvatar/BannerAvatar";
+// import BannerAvatar from "./BannerAvatar";
 
 const SLIDES = [
   { id: "welcome", Component: BannerWelcome },

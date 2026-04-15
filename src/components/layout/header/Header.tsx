@@ -1,6 +1,6 @@
 'use client';
 
-import Logo from "../../logo/Logo";
+import Logo from "../../Mogo/Logo";
 import CartIcon from "./CartIcon/CartIcon";
 
 import { navLinks } from "@/constants/data";
