@@ -2,7 +2,7 @@
 
 .modalOverlay {
   position: absolute;
-  right:-103px ;
+  right: -100px;
   top: 58px;
   margin-top: 8px;
   display: flex;

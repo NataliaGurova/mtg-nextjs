@@ -54,7 +54,7 @@ const Header = () => {
     </div>
 
     {/* RIGHT */}
-    <div className="flex items-center gap-6 md:gap-12">
+    <div className="flex items-center gap-6 lg:gap-12">
 
       {/* Desktop user */}
           <div className="hidden md:flex items-center gap-2">
@@ -65,11 +65,12 @@ const Header = () => {
           {/* <div className="relative flex items-center h-full py-4"
             onMouseEnter={() => setCartOpen(true)}
             onMouseLeave={() => setCartOpen(false)}
-          >
-
+            >
+            
             <CartIcon />
             <CartModal /> 
-          </div> */}
+            </div> */}
+          {/* Десктопная корзина */}
           <div
             className="relative hidden md:flex items-center h-full py-4"
             onMouseEnter={() => setCartOpen(true)}
@@ -78,19 +79,16 @@ const Header = () => {
             <CartIcon />
             <CartModal />
           </div>
+            <div className="flex items-center h-full">
+              <WishlistIcon />
+            </div>
 
-          {/* На мобильном CartIcon сам открывает по клику */}
-          <div className="md:hidden">
+          {/* Mobile: Wishlist + Cart + Burger */}
+          <div className="flex md:hidden items-center gap-4 mr-5">
             <CartIcon />
+            <MobileMenu />
+            <WishlistIcon />
           </div>
-
-          <WishlistIcon />
-
-      {/* Mobile menu */}
-      <div className="md:hidden">
-        {/* <NavbarMobil /> */}
-        <MobileMenu />
-      </div>
 
     </div>
   </Container>

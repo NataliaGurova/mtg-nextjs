@@ -155,7 +155,7 @@ const MobileMenu = () => {
   return (
     <>
       <button onClick={toggleMenu} aria-label="Toggle menu" className={css.toggleBtn}>
-        {isOpen ? <X className={css.icon} /> : <AlignRight className={css.icon} />}
+        {isOpen ? <X className={css.icon} /> : <AlignRight className={css.icon} size={26} />}
       </button>
 
       <div className={clsx(css.sidebar, isOpen ? css.sidebarOpen : css.sidebarClosed)}>
