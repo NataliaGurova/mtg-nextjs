@@ -1,6 +1,6 @@
 'use client';
 
-import Logo from "../../Mogo/Logo";
+import Logo from "../../Logo/Logo";
 import CartIcon from "./CartIcon/CartIcon";
 
 import { navLinks } from "@/constants/data";
@@ -35,7 +35,12 @@ const Header = () => {
       <Logo />
 
       {/* 🔍 Desktop search */}
-      <div className="hidden md:block relative md:ml-10">
+      <div className="hidden md:flex items-center relative md:ml-10">
+        <Search size={18} className="absolute top-1/2 -translate-y-1/2 pointer-events-none" />
+        <SearchBar className="pl-9 border-b border-main-text" />
+      </div>  
+
+      {/* <div className="hidden md:block relative md:ml-10">
         <SearchBar
           // containerClassName="border-b border-main-text"
           className="pl-6 border-b border-main-text"
@@ -45,7 +50,7 @@ const Header = () => {
           size={18}
           className="absolute right-[330px] top-[50%] -translate-y-1/2 pointer-events-none"
         />
-      </div>
+      </div> */}
     </div>
 
     {/* RIGHT */}
@@ -57,13 +62,26 @@ const Header = () => {
           </div>
           
           {/* 🔹 Обертка для иконки и выпадающей корзины */}
-          <div className="relative flex items-center h-full py-4"
+          {/* <div className="relative flex items-center h-full py-4"
             onMouseEnter={() => setCartOpen(true)}
             onMouseLeave={() => setCartOpen(false)}
           >
 
             <CartIcon />
-            <CartModal /> {/* Рендерим её здесь, прямо под иконкой */}
+            <CartModal /> 
+          </div> */}
+          <div
+            className="relative hidden md:flex items-center h-full py-4"
+            onMouseEnter={() => setCartOpen(true)}
+            onMouseLeave={() => setCartOpen(false)}
+          >
+            <CartIcon />
+            <CartModal />
+          </div>
+
+          {/* На мобильном CartIcon сам открывает по клику */}
+          <div className="md:hidden">
+            <CartIcon />
           </div>
 
           <WishlistIcon />

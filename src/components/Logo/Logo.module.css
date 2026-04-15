@@ -1,0 +1,23 @@
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.iconImage {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .link {
+    align-items: flex-end;
+  }
+  .iconImage {
+    width: 60px;
+    height: 60px;
+  }
+}

@@ -1,5 +1,5 @@
 
-import Logo from "@/components/Mogo/Logo";
+import Logo from "@/components/Logo/Logo";
 import Image from "next/image";
 
 const BannerWelcome = () => {
