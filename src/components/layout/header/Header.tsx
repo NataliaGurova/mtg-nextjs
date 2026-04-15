@@ -27,7 +27,7 @@ const Header = () => {
     <header className="sticky top-0 z-50">
 
   {/* TOP BAR */}
-  <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text font-medium">
+  <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text">
   {/* <Container className="flex items-center justify-between py-0 bg-[#e3ece6] max-w-full text-main-text"> */}
 
     {/* LEFT */}
