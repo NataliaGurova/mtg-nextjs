@@ -2,7 +2,8 @@
 
 .modalOverlay {
   position: absolute;
-  right: -100px;
+  /* right: -100px; */
+  right: 0;
   top: 58px;
   margin-top: 8px;
   display: flex;
@@ -138,4 +139,17 @@
     opacity: 1;
     transform: translateY(0); /* Опускаемся на свое законное место */
   }
+}
+
+@media screen and (min-width: 768px) {
+  .modalOverlay {
+    right: -77px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .modalOverlay {
+    right: -100px;
+  }
+
 }
