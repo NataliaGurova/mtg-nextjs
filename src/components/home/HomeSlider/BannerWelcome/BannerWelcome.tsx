@@ -44,7 +44,7 @@ const BannerWelcome = () => {
           >
 
             <Image
-              src="/logoMagic.png"
+              src="/citadelTowerLight.svg"
               alt="Citadel logo"
               width={200}
               height={200}
