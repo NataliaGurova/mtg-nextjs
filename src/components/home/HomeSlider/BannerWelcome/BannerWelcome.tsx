@@ -1,6 +1,7 @@
 
-import Logo from "@/components/Logo/Logo";
+// import Logo from "@/components/Logo/Logo";
 import Image from "next/image";
+import css from "./BannerWelcome.module.css";
 
 const BannerWelcome = () => {
   return (
@@ -17,18 +18,20 @@ const BannerWelcome = () => {
 
       {/* Text content */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center text-white">
+        <div className={css.content}>
           <h1
-            className={`
-              mt-20
-              text-[38px]
-              font-semibold
-              font-inter
-              tracking-[0.15em]
-              uppercase
-              text-[#F5F0E6]
-              drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]
-            `}>
+            className={css.title}
+            // className={`
+            //   mt-20
+            //   text-[38px]
+            //   font-georgia
+            //   font-inter
+            //   tracking-[0.15em]
+            //   uppercase
+            //   text-[#F5F0E6]
+            //   drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]
+          // `}
+          >
             Made for Endless Battles
           </h1>
 
