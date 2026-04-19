@@ -53,3 +53,15 @@
 .separator {
   font-size: 0.875rem; /* text-sm */
 }
+
+@media (min-width: 768px) {
+  .logoutButton {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .logoutButton {
+    display: flex;
+  }
+}

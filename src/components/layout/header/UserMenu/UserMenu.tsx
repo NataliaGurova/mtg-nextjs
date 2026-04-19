@@ -205,7 +205,7 @@ const UserMenu = () => {
 
       <button
         onClick={() => signOut({ callbackUrl: "/" })}
-        className={clsx(css.link, css.default)}
+        className={clsx(css.link, css.default, css.logoutButton)}
         title="Logout"
       >
         <LogOut className={css.iconSmall} size={18}/>

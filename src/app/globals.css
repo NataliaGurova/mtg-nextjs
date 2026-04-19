@@ -176,3 +176,14 @@
     @apply flex justify-between items-center;
   }
 }
+
+@layer base {
+  :root {
+    --font-georgia: "Georgia", "Times New Roman", serif;
+  }
+}
+
+.font-georgia {
+  font-family: var(--font-georgia);
+  font-weight: 500;
+}

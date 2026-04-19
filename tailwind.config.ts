@@ -12,7 +12,8 @@ const config: Config = {
       // 🔹 Добавляем или обновляем семейство шрифтов
       fontFamily: {
         // Теперь класс 'font-sans' будет использовать Montserrat
-        sans: ["var(--font-montserrat)", "sans-serif"], 
+        sans: ["var(--font-montserrat)", "sans-serif"],
+        georgia: ["var(--font-georgia)"],
       },
       // ... ваши остальные цвета и настройки
     },

@@ -1,16 +1,119 @@
+
+/* ОБЩАЯ ОБЕРТКА */
+.section {
+  position: relative;
+  width: 100%;
+  height: 100%; /* 🔥 Теперь баннер подстраивается под высоту HomeSlider */
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 550px;
+  max-width: 1520px;
+  display: flex;
+  /* На мобилке картинка будет сверху, текст снизу */
+  /* flex-direction: column-reverse;  */
+  align-items: stretch;
+}
+
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Легкое затемнение фона, чтобы белый текст читался лучше */
+  /* background-color: rgba(0, 0, 0, 0.15);  */
+}
+
 .content {
   text-align: center;
   color: #E1CEF4;
-  /* font-family: "Georgia", "Times New Roman", serif;
-  font-weight: 500; */
+  padding: 0 1rem; /* Отступы по бокам для телефонов */
 }
 
+/* =========================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================= */
+  .logoCitadel {
+     /* margin-top: 1.5rem; */
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+  }
+   
+  .logo {
+     border-radius: var(--radius-md, 6px);
+     width: 200px; /* Уменьшаем логотип */
+     height: auto;
+  }
+
 .title {
-  font-family: "Georgia", "Times New Roman", serif;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+  /* font-size: 1.8rem; */
+  font-size: 1.75rem; /* 28px */
+  font-family: var(--font-georgia);
+  /* font-family: "Georgia", "Times New Roman", serif; */
   font-weight: 500;
-  font-size: 2.5rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em; /* Чуть меньше разрядка */
   text-transform: uppercase;
-  margin-top: 100px;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  color: #E1CEF4;
+  /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); */
+  /* filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6)); */
+}
+
+.highlight {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  /* margin-bottom: 2rem; */
+}
+
+
+/* =========================================
+   ПЛАНШЕТЫ (от 768px)
+   ========================================= */
+@media (min-width: 768px) {
+  .logo {
+    width: 250px;
+  }
+
+  .title {
+    font-size: 2rem; /* 32px */
+    letter-spacing: 0.15em;
+    margin-bottom: 3rem;
+  }
+
+  .highlight {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    /* margin-bottom: 2rem; */
+  }
+  
+}
+
+/* =========================================
+   ДЕСКТОПЫ (от 1024px - Ваш оригинальный дизайн)
+   ========================================= */
+@media (min-width: 1024px) {
+  .logo {
+    width: 300px;
+  }
+
+  .title {
+    /* margin-top: 5rem; */
+    font-size: 38px;
+    margin-bottom: 2rem;
+  }
+  
 }

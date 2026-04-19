@@ -1,6 +1,6 @@
 const Roadmap = () => {
   return (
-    <section className="px-6 max-w-5xl mx-auto">
+    <section className="px-6 max-w-5xl mx-auto backgraund-[#161621]">
       <h2 className="text-2xl font-semibold mb-6">
         Що буде далі
       </h2>

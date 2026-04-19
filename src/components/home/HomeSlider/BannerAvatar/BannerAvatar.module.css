@@ -1,0 +1,192 @@
+/* BannerAvatar.module.css */
+
+/* .section {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  background-color: #F4F2EB; 
+}
+
+.left {
+  display: flex;
+  width: 50%;
+  flex-shrink: 0;
+  align-items: center;
+  padding-left: 4rem;
+  z-index: 10;
+
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.right {
+  position: relative;
+  flex: 1;
+  height: 500px;
+  overflow: hidden;
+
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
+}
+
+@media (max-width: 767px) {
+  .left {
+    width: 100%;
+    padding-left: 1.5rem;
+  }
+
+  .right {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .left {
+    width: 55%;
+  }
+} */
+
+
+/* --------------------- */
+
+/* ОБЩАЯ ОБЕРТКА */
+.section {
+  width: 100%;
+  background-color: var(--color-avatar-bg, #F4F2EB);
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* Центрируем контейнер на сверхшироких мониторах */
+}
+
+.container {
+  flex-direction: column-reverse; 
+  align-items: stretch;
+  width: 100%;
+  height: 550px;
+  max-width: 1520px;
+  display: flex;
+}
+
+/* =========================================
+   МОБИЛЬНАЯ ВЕРСИЯ (По умолчанию)
+   ========================================= */
+
+/* ЛЕВАЯ ЧАСТЬ — Контент */
+.textContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрируем текст на мобилке */
+  padding: 0 1.5rem 3rem 1.5rem;
+  /* 🔥 1. Заставляем текстовый блок занять всю оставшуюся высоту (550px - 300px = 250px) */
+  flex: 1; 
+  
+  /* 🔥 2. Центрируем сам текст и кнопку по вертикали внутри этого блока */
+  justify-content: center;
+}
+
+.textImage {
+  width: 100%; /* На мобилке картинка-текст резиновая */
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.actionButton {
+  margin-left: 0; /* На мобилке кнопка по центру */
+}
+
+/* ПРАВАЯ ЧАСТЬ — Арт */
+.imageAvatar {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Делаем картинку ниже на телефоне */
+
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+}
+
+.artwork {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* =========================================
+  ПЕРЕКЛЮЧАТЕЛЬ КАРТИНОК (MOBILE FIRST)
+   ========================================= */
+  .desktopArt {
+    display: none; /* Прячем широкую картинку на мобилках */
+  }
+  
+  .mobileArt {
+    display: block; /* Показываем вертикальную */
+  }
+
+/* =========================================
+   ПЛАНШЕТЫ (от 768px)
+   ========================================= */
+@media (min-width: 768px) {
+  .desktopArt {
+    display: block;
+  }
+  .mobileArt {
+    display: none;
+  }
+
+  .container {
+    flex-direction: row; /* Ставим в один ряд */
+    height: 400px;
+    align-items: center;
+  }
+
+  .textContent {
+    flex: 1; /* Занимает половину ширины */
+    align-items: center;
+    padding: 0 2rem 2rem 3rem;
+    margin: 0 auto;
+  }
+
+  .textImage {
+    width: 300px; 
+    margin-bottom: 1.5rem;
+  }
+
+  .imageAvatar {
+    flex: 1.5; /* Арт занимает чуть больше половины */
+    height: 100%;
+    /* Срез переезжает на левый бок (менее агрессивный, 10%) */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+  }
+}
+
+/* =========================================
+   ДЕСКТОПЫ (от 1024px - Ваш оригинальный дизайн)
+   ========================================= */
+@media (min-width: 1024px) {
+  .container {
+    height: 500px; /* Оригинальная высота */
+  }
+
+  .textContent {
+    padding-left: 6.25rem; /* Оригинальный ml-25 (100px) */
+  }
+
+  .textImage {
+    max-width: 660px;
+    width: 500px;
+  }
+
+  .imageAvatar {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+  }
+}
+
+
+
+
