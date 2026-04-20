@@ -57,86 +57,86 @@
   margin-bottom: 16px;
 }
 
-.title {
+/* .title {
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
-}
+} */
 
-.formContainer {
+/* .formContainer {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
+} */
 
 /* Скрываем стандартные инпуты (чекбоксы/радио) */
-.input {
+/* .input {
   display: none;
-}
+} */
 
 /* =========================================
   3. КНОПКИ FOIL / NON-FOIL
    ========================================= */
-.toggleFoil {
+/* .toggleFoil {
   display: flex;
-  gap: 20px; /* Уменьшил с 40px, чтобы точно влезло в 280px */
-}
+  gap: 20px; 
+} */
 
-.label {
+/* .label {
   position: relative;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+} */
 
-.label:hover {
+/* .label:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-}
+} */
 
 /* Базовые стили "таблеток" */
-.notFoils, .foils {
+/* .notFoils, .foils {
   display: inline-block;
   width: 115px;
   padding: 5px 10px;
   border-radius: 4px;
   transition: all 0.2s ease;
-}
+} */
 
-.notFoils {
+/* .notFoils {
   background-color: #f0f0f0;
   color: #333;
   border: 1px solid #ccc;
-}
+} */
 
-.foils {
+/* .foils {
   background-color: #fff;
   border: 1px solid transparent;
   background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
   color: #333;
-}
+} */
 
 /* Активные состояния */
-.input:checked + .notFoils {
+/* .input:checked + .notFoils {
   background-color: #1d5105;
   color: white;
   border-color: #1d5105;
-}
+} */
 
-@keyframes gradientShift {
+/* @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-}
+} */
 
-.input:checked + .foils {
+/* .input:checked + .foils {
   background: linear-gradient(90deg, green, yellow, red);
   background-size: 300% 300%;
   animation: gradientShift 3s ease infinite;
   color: white;
-}
+} */
 
 /* =========================================
   4. КАСТОМНЫЕ ЧЕКБОКСЫ (ПЕЧАТЬ/СЕТЫ)

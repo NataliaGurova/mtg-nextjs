@@ -30,6 +30,7 @@ export async function GET(req: Request) {
     const rarity = searchParams.get("rarity");
     const pageRaw = searchParams.get("page");
     const limitRaw = searchParams.get("limit");
+    const isFoilRaw = searchParams.get("isFoil");
 
     const limit = Math.min(
       Math.max(Number(limitRaw) || DEFAULT_LIMIT, 1),
@@ -69,6 +70,12 @@ export async function GET(req: Request) {
     // }
 
     if (rarity) filters.rarity = rarity;
+
+    if (isFoilRaw === "true") {
+      filters.isFoil = true;
+    } else if (isFoilRaw === "false") {
+      filters.isFoil = false;
+    }
 
     const pipeline: PipelineStage[] = [
       { $match: filters },

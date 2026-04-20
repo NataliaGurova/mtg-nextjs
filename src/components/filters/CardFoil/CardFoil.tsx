@@ -1,19 +1,17 @@
 "use client";
 
 import React from "react";
-import css from "../FiltersSidebar.module.css";
+// 🔥 Изменили путь импорта на локальный файл
+import css from "./CardFoil.module.css"; 
 
 interface CardFoilProps {
-  // Может быть "foil", "nonfoil" или null (если ничего не выбрано)
   selectedFoil: string | null; 
   onToggle: (value: string) => void;
 }
 
 const CardFoil = ({ selectedFoil, onToggle }: CardFoilProps) => {
   return (
-    <div className={css.formContainer}>
-      <h3 className={css.title}>Покриття</h3>
-      
+    <div className={css.formContainer}>     
       <div className={css.toggleFoil}>
         
         {/* Кнопка Not Foils */}
@@ -24,7 +22,7 @@ const CardFoil = ({ selectedFoil, onToggle }: CardFoilProps) => {
             checked={selectedFoil === "nonfoil"}
             onChange={() => onToggle("nonfoil")}
           />
-          <span className={css.notFoils}>Not Foils</span>
+          <span className={css.notFoils}>Non-Foil</span>
         </label>
 
         {/* Кнопка Foils */}
@@ -35,7 +33,7 @@ const CardFoil = ({ selectedFoil, onToggle }: CardFoilProps) => {
             checked={selectedFoil === "foil"}
             onChange={() => onToggle("foil")}
           />
-          <span className={css.foils}>Foils</span>
+          <span className={css.foils}>Foil</span>
         </label>
 
       </div>

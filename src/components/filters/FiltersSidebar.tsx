@@ -11,9 +11,10 @@ import CardColor from "./CardColor/CardColor";
 import FiltersChips from "./FiltersChips/FiltersChips";
 import css from "./FiltersSidebar.module.css";
 import { Color } from "@/types/types";
+import CardFoil from "./CardFoil/CardFoil";
 
 
-type FilterKey = "colors" | "sets" | "rarity" | "type" | "q";
+type FilterKey = "colors" | "sets" | "rarity" | "type" | "q" | "finish";
 
 const FiltersSidebar = () => {
   const searchParams = useSearchParams();
@@ -47,14 +48,14 @@ const FiltersSidebar = () => {
 
   // ---------- Выборка фильтров ----------
   const selectedFilters = useMemo(() => {
-    const obj: Record<FilterKey, string[]> = {
+    return {
       colors: searchParams.get("colors")?.split(",").filter(Boolean) ?? [],
       sets: searchParams.getAll("sets").map(s => s.toLowerCase()).filter(Boolean),
       rarity: searchParams.get("rarity") ? [searchParams.get("rarity")!] : [],
       type: searchParams.get("type") ? [searchParams.get("type")!] : [],
       q: searchParams.get("q") ? [searchParams.get("q")!] : [],
+      finish: searchParams.get("finish") ?? null, 
     };
-    return obj;
   }, [searchParams]);
 
   // ---------- Toggle любого фильтра ----------
@@ -83,10 +84,32 @@ const FiltersSidebar = () => {
     [updateParams]
   );
 
+  // ---------- Toggle эксклюзивного фильтра (Один выбор) ----------
+  //  Добавлена функция для Foil
+  const toggleExclusiveFilter = useCallback(
+    (key: FilterKey, value: string) => {
+      updateParams((params) => {
+        const current = params.get(key);
+        if (current === value) {
+          params.delete(key); // Если нажали на активный - сбрасываем
+        } else {
+          params.set(key, value); // Иначе устанавливаем новый
+        }
+      });
+    },
+    [updateParams]
+  );
+
   // ---------- Remove одного элемента ----------
   const removeFilterItem = useCallback(
     (key: FilterKey, value: string) => {
       updateParams((params) => {
+
+        if (key === "finish") {
+          params.delete(key);
+          return;
+        }
+
         const next =
           key === "sets"
             ? params.getAll("sets").filter((s) => s !== value)
@@ -105,7 +128,7 @@ const FiltersSidebar = () => {
   // ---------- Очистка всех фильтров ----------
   const clearAll = useCallback(() => {
     updateParams((params) => {
-      ["colors", "sets", "rarity", "type", "q"].forEach((key) => params.delete(key));
+      ["colors", "sets", "rarity", "type", "q", "finish"].forEach((key) => params.delete(key));
     });
   }, [updateParams]);
 
@@ -149,6 +172,12 @@ const FiltersSidebar = () => {
         />
 
         <div className={css.formContainer}>
+
+          <CardFoil
+            selectedFoil={selectedFilters.finish as string | null}
+            onToggle={(val) => toggleExclusiveFilter("finish", val)}
+          />
+          
           <CardSet
             selectedSets={selectedFilters.sets}
             onToggleSet={(s) => toggleFilter("sets", s)}
@@ -157,18 +186,7 @@ const FiltersSidebar = () => {
             selectedColors={selectedFilters.colors as Color[]}
             onToggleColor={(c) => toggleFilter("colors", c)}
           />
-          <CardColor
-            selectedColors={selectedFilters.colors as Color[]}
-            onToggleColor={(c) => toggleFilter("colors", c)}
-          />
-          <CardColor
-            selectedColors={selectedFilters.colors as Color[]}
-            onToggleColor={(c) => toggleFilter("colors", c)}
-          />
-          <CardColor
-            selectedColors={selectedFilters.colors as Color[]}
-            onToggleColor={(c) => toggleFilter("colors", c)}
-          />
+          
         </div>
       </aside>
     </>
