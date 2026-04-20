@@ -15,16 +15,11 @@
   outline: none;
 }
 
-.icon {
-  /* width: 1.5rem;  */
-  /* height: 2rem;
-  padding-bottom: 6px; */
-}
-
 /* Выезжающая панель */
 .sidebar {
   position: fixed;
-  top: 70px;
+  /* top: 70px; */
+  top: 56px;
   right: 0;
   height: calc(100vh - 70px); /* Занимает всю высоту под хедером */
   width: 100%; /* На всю ширину экрана */
@@ -103,6 +98,17 @@
 .linkActive {
   color: var(--color-nav-yellow);
   border-bottom-color: var(--color-nav-yellow);
+}
+
+
+@media (min-width: 768px) {
+  .toggleBtn {
+    display: none;
+  }
+
+  .sidebar {
+    display: none;
+  }
 }
 
 
