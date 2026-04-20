@@ -18,7 +18,6 @@
 /* Выезжающая панель */
 .sidebar {
   position: fixed;
-  /* top: 70px; */
   top: 56px;
   right: 0;
   height: calc(100vh - 70px); /* Занимает всю высоту под хедером */
