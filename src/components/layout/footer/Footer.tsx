@@ -7,7 +7,7 @@ const Footer = () => {
       {/* Линия сверху футера */}
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[100%] border-t border-gray-400"></div>
 
-      <Container>
+      <Container className="py-4 bg-light-grey">
       <div className="max-w-[1600px] mx-auto px-4 py-4 text-sm text-gray-500 flex justify-between">
         <span>© {new Date().getFullYear()} CITADEL</span>
         <span>Magic: The Gathering is © Wizards of the Coast.</span>

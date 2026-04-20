@@ -27,7 +27,7 @@ const Header = () => {
     <header className="sticky top-0 z-50">
 
   {/* TOP BAR */}
-  <Container className="flex items-center justify-between py-0 bg-light-grey max-w-full text-main-text">
+  <Container className="flex items-center justify-between bg-light-grey max-w-full text-main-text">
   {/* <Container className="flex items-center justify-between py-0 bg-[#e3ece6] max-w-full text-main-text"> */}
 
     {/* LEFT */}
@@ -69,7 +69,7 @@ const Header = () => {
   </Container>
 
   {/* DESKTOP NAV */}
-  <Container className="hidden md:block bg-dark-green text-light-grey">
+  <Container className="hidden md:block py-4 bg-dark-green text-light-grey">
     <nav className="flex gap-[72px] text-[18px]">
       {navLinks.map(({ href, label }) => (
         <Link
@@ -89,7 +89,7 @@ const Header = () => {
   </Container>
 
   {/* MOBILE SEARCH */}
-  <Container className="md:hidden bg-dark-green text-light-grey">
+  <Container className="py-3 md:hidden bg-dark-green text-light-grey">
     <SearchBar />
   </Container>
 

@@ -1,149 +1,61 @@
 
-/* .container {
-  width: 300px;
-  padding-right: 10px;
-  margin-right: 10px;
-  position: sticky;
-  top: 20px;
-  height: fit-content;
-} */
-
-/* .filterTitle {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 15px;
-} */
-/* ------------------------------------ */
-/* .container {
-  width: 280px;
-  position: sticky;
-  top: 155px; 
-  align-self: flex-start;
-  height: fit-content;
-} */
-
+  /* =========================================
+  1. ОБЩИЙ КОНТЕЙНЕР (MOBILE FIRST)
+   ========================================= */
 .container {
-  width: 280px;
-  position: sticky;
-  top: 155px; /* отступ от navbar */
-  align-self: flex-start;
+  /* Мобильные стили (выезжающая панель) */
+  position: fixed;
+  top: 0;
+  /* top: 155px; */
+  left: 0;
+  width: 85%;
+  max-width: 320px;
+  height: 100vh;
+  background-color: var(--color-light-grey, #f4f2eb);
+  z-index: 50;
+  padding: 1.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transition: transform 0.3s ease;
   
-  max-height: calc(100vh - 175px); 
-  overflow-y: auto; 
-  overscroll-behavior: contain; 
-
-  /* 🔹 ПРЯЧЕМ СКРОЛЛБАР */
-  scrollbar-width: none; /* Прячет в Firefox */
-  -ms-overflow-style: none; /* Прячет в старом Edge и IE */
+  /* Прячем скроллбар */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
-/* 🔹 Прячет в Chrome, Safari и современном Edge */
 .container::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome/Safari */
 }
+
+.closed { transform: translateX(-100%); }
+.open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25); }
+
+/* ДЕСКТОП (Обычный сайдбар) */
+@media (min-width: 768px) {
+  .container {
+    position: sticky;
+    top: 155px; /* Отступ от navbar */
+    align-self: flex-start;
+    width: 280px; /* Ваша ширина */
+    max-height: calc(100vh - 175px);
+    
+    /* Сброс мобильных стилей */
+    transform: none;
+    padding: 0;
+    z-index: 10;
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+/* =========================================
+  2. ТИПОГРАФИКА И СТРУКТУРА
+   ========================================= */
 .filterTitle {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 16px;
 }
-
-/* ----------------------------------- */
-
-
-/* .formContainer {
-  margin-top: 20px;
-} */
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-
-/* ---------------------------------- */
-
-/* ============== 1 варіант*/
-.toggleFoil {
-  display: flex;
-  gap: 40px;
-}
-
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.label {
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease; 
-}
-
-.label:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Сірий фон для Not Foils */
-.notFoils {
-  background-color: #f0f0f0;
-  color: #333;
-  border: 1px solid #ccc;
-  width: 115px;
-  border-radius: 4px;
-  padding: 5px 10px;
-}
-
-/* Фон-картинка для Foils */
-.foils {
-  background-color: #fff;
-  border: 1px solid transparent;
-  background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
-  width: 115px;
-  border-radius: 4px;
-  padding: 5px 10px;
-  color: #333;
-}
-
-/* Приховує стандартний input (синій кружечок) */
-.input {
-  display: none;
-}
-
-/* Активний стан для Not Foils */
-.input:checked + .text.notFoils {
-  background-color: #1d5105; /* Зелений фон */
-  color: white; /* Білий текст */
-  width: 115px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-/* Активний стан для Foils із динамічним градієнтом */
-.input:checked + .text.foils {
-  background: linear-gradient(90deg, green, yellow, red);
-  background-size: 300% 300%;
-  animation: gradientShift 3s ease infinite; /* Використовуємо анімацію */
-  color: white;
-  width: 115px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-
-/* ---------------------------- */
-
 
 .title {
   margin-top: 20px;
@@ -152,43 +64,109 @@
   font-weight: bold;
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Скрываем стандартные инпуты (чекбоксы/радио) */
+.input {
+  display: none;
+}
+
+/* =========================================
+  3. КНОПКИ FOIL / NON-FOIL
+   ========================================= */
+.toggleFoil {
+  display: flex;
+  gap: 20px; /* Уменьшил с 40px, чтобы точно влезло в 280px */
+}
+
 .label {
   position: relative;
-  /* margin-right: 40px; */
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.label:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Базовые стили "таблеток" */
+.notFoils, .foils {
+  display: inline-block;
+  width: 115px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.notFoils {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.foils {
+  background-color: #fff;
+  border: 1px solid transparent;
+  background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
+  color: #333;
+}
+
+/* Активные состояния */
+.input:checked + .notFoils {
+  background-color: #1d5105;
+  color: white;
+  border-color: #1d5105;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.input:checked + .foils {
+  background: linear-gradient(90deg, green, yellow, red);
+  background-size: 300% 300%;
+  animation: gradientShift 3s ease infinite;
+  color: white;
+}
+
+/* =========================================
+  4. КАСТОМНЫЕ ЧЕКБОКСЫ (ПЕЧАТЬ/СЕТЫ)
+   ========================================= */
+.checkboxLabel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 28px; /* 🔥 Обязательно: двигаем текст вправо, чтобы чекбокс влез */
 }
 
 .printCard {
-    /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); /* Идеально центрируем по вертикали относительно текста */
   width: 16px;
   height: 20px;
-  /* width: 22px;
-  height: 25px; */
   border-radius: 4px;
   border: 2px solid #ccc;
   background: #f0f0f0;
-
-  /* cursor: pointer; */
   transition: all 0.2s ease;
-
-
-  position: absolute;
-  left: 0;
-
-  /* display: none; */
 }
 
-.input:checked + .printCard{
-    border-color: rgb(29, 81, 5);
+.input:checked + .printCard {
+  border-color: rgb(29, 81, 5);
   background-color: rgb(29, 81, 5);
-  color: rgb(247, 250, 253);
-}
-
-.input {
-  /* opacity: 0; */
 }
 
 .inputName {
-  width: 300px;
+  width: 100%; /* 🔥 Исправлено: теперь не вылазит за пределы контейнера */
 }

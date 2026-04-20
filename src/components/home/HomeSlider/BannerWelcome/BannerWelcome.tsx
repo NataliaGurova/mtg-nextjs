@@ -145,7 +145,7 @@ const BannerWelcome = () => {
             />
           </div>
           <h1 className={css.title}>
-            <span className={css.highlight}>Made for</span>
+            <span className={css.highlight}>Forged for</span>
             Endless Battles
           </h1>
         </div>

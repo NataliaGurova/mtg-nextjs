@@ -51,10 +51,11 @@ const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
     }));
 
   return (
-    <Container>
-      <div className="flex items-start gap-6">
+    <Container className="py-5 md:py-10">
+      {/* <div className="flex items-start gap-6"> */}
+      <div className="flex flex-col md:flex-row items-start gap-6">
         <FiltersSidebar />
-        <section className="flex-1">
+        <section className="flex-1 w-full">
           <CardsList
             items={items}
             page={page}
