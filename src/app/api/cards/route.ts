@@ -74,6 +74,8 @@ export async function GET(req: Request) {
     if (isFoilRaw === "true") {
       filters.isFoil = true;
     } else if (isFoilRaw === "false") {
+      // // Ищем те, где isFoil = false, ИЛИ где этого поля вообще нет
+      // filters.isFoil = { $ne: true };
       filters.isFoil = false;
     }
 

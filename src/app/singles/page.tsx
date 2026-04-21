@@ -15,7 +15,11 @@ interface SinglesPageProps {
   searchParams: Promise<{
     page?: string;
     q?: string;
+    finish?: string;
     sets?: string;
+    // type?: string;
+    color?: string;
+    // rarity?: string;
   }>;
 }
 
@@ -27,6 +31,8 @@ const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
   const page = Math.max(Number(params.page ?? "1"), 1);
   const q = params.q?.trim() ?? "";
   const setsRaw = params.sets ?? "";
+  const finish = params.finish ?? "";
+  const color = params.color ?? "";
 
 
   const apiParams = new URLSearchParams();
@@ -35,6 +41,15 @@ const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
 
   if (q.length >= 3) apiParams.set("q", q);
   if (setsRaw) apiParams.set("sets", setsRaw);
+
+  // 👈 Передаем в API
+  if (finish === "foil") {
+    apiParams.set("isFoil", "true");
+  } else if (finish === "nonfoil") {
+    apiParams.set("isFoil", "false");
+  }
+  // if (finish) apiParams.set("isFoil", finish === "foil" ? "foil" : "nonfoil");
+  if (color) apiParams.set("color", color);
 
   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/cards?${apiParams.toString()}`, {
     cache: "no-store",

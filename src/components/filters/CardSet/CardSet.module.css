@@ -112,14 +112,22 @@
   max-height: 300px;
   overflow: auto;
   padding-right: 6px;
+  scrollbar-width: none; 
+  /* 🔹 Прячем скроллбар в старых IE/Edge */
+  -ms-overflow-style: none;
+}
+
+/* 🔹 Прячем скроллбар в Chrome, Safari и современных браузерах */
+.listWrap::-webkit-scrollbar {
+  display: none;
 }
 
 /* тонкий скролл */
-.listWrap::-webkit-scrollbar {
+/* .listWrap::-webkit-scrollbar {
   width: 6px;
-}
+} */
 
-.listWrap::-webkit-scrollbar-track {
+/* .listWrap::-webkit-scrollbar-track {
   background: transparent;
 }
 
@@ -130,10 +138,10 @@
 
 .listWrap:hover::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.35);
-}
+} */
 
 /* Firefox */
-.listWrap {
+/* .listWrap {
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.35) transparent;
-}
+} */

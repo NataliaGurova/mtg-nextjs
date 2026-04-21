@@ -170,6 +170,10 @@ CardSchema.index({ scryfall_id: 1, isFoil: 1 });
 CardSchema.index({ rarity: 1, set: 1 });
 CardSchema.index({ name: "text", set_name: "text" });
 
+CardSchema.index({ isFoil: 1 });
+// Текстовый индекс для поиска по имени, чтобы поиск работал еще быстрее
+CardSchema.index({ name: 'text' });
+
 const Card = models.Card || model("Card", CardSchema);
 
 export default Card;
