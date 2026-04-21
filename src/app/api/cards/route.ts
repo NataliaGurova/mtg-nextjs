@@ -31,6 +31,7 @@ export async function GET(req: Request) {
     const pageRaw = searchParams.get("page");
     const limitRaw = searchParams.get("limit");
     const isFoilRaw = searchParams.get("isFoil");
+    const colorsRaw = searchParams.get("colors");
 
     const limit = Math.min(
       Math.max(Number(limitRaw) || DEFAULT_LIMIT, 1),
@@ -77,6 +78,18 @@ export async function GET(req: Request) {
       // // Ищем те, где isFoil = false, ИЛИ где этого поля вообще нет
       // filters.isFoil = { $ne: true };
       filters.isFoil = false;
+    }
+
+    // 🔹 ЛОГИКА ДЛЯ ЦВЕТОВ (Упрощенная, так как "Colorless" — это строка в базе
+    if (colorsRaw) {
+      // 1. Разбиваем строку из URL на массив: "W,Colorless" -> ["W", "Colorless"]
+      const selectedColors = colorsRaw.split(",").map((c) => c.trim()).filter(Boolean);
+
+      // 2. Если массив не пустой, просто отдаем его базе
+      if (selectedColors.length > 0) {
+        // $in найдет карты, у которых в массиве colors есть хотя бы один из выбранных
+        filters.colors = { $in: selectedColors };
+      }
     }
 
     const pipeline: PipelineStage[] = [
