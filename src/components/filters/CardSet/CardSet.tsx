@@ -195,10 +195,15 @@ const CardSet = ({ selectedSets, onToggleSet }: CardSetProps) => {
     run();
   }, [q]);
 
-  // 🔹 Фильтруем сеты по локальному поисковому запросу
-  const filteredItems = items.filter((s) =>
-    s.set_name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // 🔹 Фильтруем сеты по локальному поисковому запросу с учетом лишних пробелов
+  const filteredItems = items.filter((s) => {
+    const cleanQuery = searchQuery.trim().toLowerCase();    
+    // Если после очистки осталась пустая строка, показываем все сеты
+    if (!cleanQuery) return true;
+
+    return s.set_name.toLowerCase().includes(cleanQuery);
+  });
+  
 
   if (items.length === 0 && !loading) return null;
 
