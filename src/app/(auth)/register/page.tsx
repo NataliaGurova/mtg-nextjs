@@ -34,15 +34,14 @@ const RegisterPage = async () => {
 
 
   return (
-    // <main className="min-h-screen flex items-center justify-center">
-    // <Container>
-    <Container className=" flex-1 flex items-center justify-center">
-  <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 mx-25">
+
+    <Container className=" flex-1 flex items-center justify-center py-10">
+      <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 lg:gap-20 w-full max-w-[1300px] mx-auto">
 
     {/* Форма */}
-    <div className="flex-1">
+    {/* <div className="flex-1"> */}
       <RegisterForm />
-    </div>
+    {/* </div> */}
 
     {/* Картинка */}
     <div className="hidden md:block w-[800px] overflow-hidden rounded-[4px]">

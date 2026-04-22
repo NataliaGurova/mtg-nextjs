@@ -188,7 +188,7 @@ const LoginPage = async () => {
   if (session) redirect("/account");
 
   return (
-    <Container className="flex-1 flex items-center justify-center py-10 px-4">
+    <Container className="flex-1 flex items-center justify-center py-10">
       {/* <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 lg:gap-20 w-full max-w-5xl"> */}
       <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 lg:gap-20 w-full max-w-[1300px] mx-auto">
 
