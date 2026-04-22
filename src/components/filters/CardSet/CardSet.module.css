@@ -21,10 +21,25 @@
   font-weight: bold;
 }
 
-.title {
-  font-size: 18px;
-  font-weight: bold;
+/* Поиск */
+.searchInput {
+  width: 100%;
+  /* pl-8 (32px), pr-2 (8px), py-1.5 (6px) */
+  padding: 0.375rem 0.5rem 0.375rem 2rem; 
+  font-size: 0.875rem; /* text-sm (14px) */
+  line-height: 1.25rem; /* 20px */
+  background-color: transparent;
+  border: 1px solid #ccc; /* border-gray-300 */
+  border-radius: 0.25rem; /* rounded-md (4px) */
+  transition: border-color 0.15s ease-in-out;
 }
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-dark-green);
+  
+}
+/* ------ */
 
 .item {
   display: flex;

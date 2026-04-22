@@ -160,7 +160,7 @@ const UserMenu = () => {
     return <div className={css.skeleton} />;
   }
 
-  const firstName = session?.user?.name?.split(" ")[0];
+  const firstName = session?.user?.firstName;
 
   if (!session?.user) {
     const isLoginActive = pathname === "/login";
