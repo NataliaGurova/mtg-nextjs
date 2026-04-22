@@ -54,6 +54,7 @@ export async function POST(req: Request) {
         user: {
           id: newUser._id,
           firstName: newUser.firstName,
+          lastName: newUser.lastName,
           email: newUser.email,
         },
       },

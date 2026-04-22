@@ -1,95 +1,100 @@
-// // src/auth.ts
 
-// import { type AuthOptions } from "next-auth";
-// // import GoggleProvider from 'next-auth/providers/google'
-// import Credentials from "next-auth/providers/credentials";
-// import bcrypt from "bcrypt";
+// auth.ts
+// import { type AuthOptions } from "next-auth"
+// import Credentials from "next-auth/providers/credentials"
+// import bcrypt from "bcryptjs";
+// import User from "@/db/models/User"
+// import { connectDB } from "@/db/db"
 
-// import User from "@/db/models/User";
-// import { connectDB } from "./db/db";
+// // Расширяем типы next-auth чтобы не было ошибок TS
+// declare module "next-auth" {
+//   interface User {
+//     id: string
+//     firstName?: string
+//   }
+//   interface Session {
+//     user: {
+//       id: string
+//       email: string
+//       firstName?: string
+//       lastName?: string
+//     }
+//   }
+// }
 
+// declare module "next-auth/jwt" {
+//   interface JWT {
+//     id: string
+//     firstName?: string
+//     lastName?: string
+//   }
+// }
 
 // export const authConfig: AuthOptions = {
 //   providers: [
-
-//     // GoogleProvider({
-//     //   clientId: process.env.GOOGLE_CLIENT_ID,
-//     //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//     // }),
-
-
 //     Credentials({
 //       name: "Credentials",
-
 //       credentials: {
 //         email: { label: "Email", type: "email" },
 //         password: { label: "Password", type: "password" },
 //       },
-
 //       async authorize(credentials) {
 //         if (!credentials?.email || !credentials?.password) {
-//           return null;
+//           throw new Error("Введите email и пароль");
 //         }
 
-//         await connectDB();
+//         await connectDB()
 
-//         const user = await User.findOne({
-//           email: credentials.email,
-//         }).select("+password");
+//         const user = await User.findOne({ email: credentials.email }).select("+password")
+//         if (!user) return null
 
-//         if (!user) return null;
-
-//         const isValid = await bcrypt.compare(
-//           credentials.password,
-//           user.password
-//         );
-
-//         if (!isValid) return null;
+//         const isValid = await bcrypt.compare(credentials.password, user.password)
+//         // if (!isValid) return null
+//         if (!isValid) {
+//           throw new Error("Неверный пароль");
+//         }
 
 //         return {
 //           id: user._id.toString(),
 //           email: user.email,
-//           // name: user.name,
 //           name: `${user.firstName} ${user.lastName}`,
-//         };
-
+//           firstName: user.firstName,  // ← передаём отдельно для персонализации
+//         }
 //       },
 //     }),
 //   ],
 
-//   session: {
-//     strategy: "jwt",
-//   },
+//   session: { strategy: "jwt" },
 
 //   callbacks: {
 //     async jwt({ token, user }) {
+//       // user есть только при первом входе — сохраняем в токен
 //       if (user) {
-//         token.id = user.id;
-//         token.name = user.name; // добавьте это!
-//         token.firstName = user.firstName;
+//         token.id = user.id
+//         token.name = user.name
+//         token.firstName = user.firstName
 //       }
-//       return token;
+//       return token
 //     },
 
 //     async session({ session, token }) {
 //       if (session.user) {
-//         session.user.id = token.id as string;
-//         session.user.name = token.name as string; // добавьте это!
-//         session.user.firstName = token.firstName as string;
+//         session.user.id = token.id
+//         session.user.name = token.name as string
+//         session.user.firstName = token.firstName
 //       }
-//       return session;
+//       return session
 //     },
 //   },
 
-//   pages: {
-//     signIn: "/login",
-//   },
-// };
+//   pages: { signIn: "/login" },
+
+//   // ✅ Обязательно для продакшна
+//   secret: process.env.NEXTAUTH_SECRET,
+// }
 
 
 
-
-// src/auth.ts или src/authOptions.ts (можно выбрать любое имя, главное — не забыть импортировать в api роуты)
 // auth.ts
 import { type AuthOptions } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
@@ -97,18 +102,20 @@ import bcrypt from "bcryptjs";
 import User from "@/db/models/User"
 import { connectDB } from "@/db/db"
 
-// Расширяем типы next-auth чтобы не было ошибок TS
+// 1. Расширяем типы корректно
 declare module "next-auth" {
   interface User {
     id: string
     firstName?: string
+    lastName?: string // Добавили сюда
   }
   interface Session {
     user: {
       id: string
       email: string
-      name: string
+      name?: string
       firstName?: string
+      lastName?: string // И сюда
     }
   }
 }
@@ -117,6 +124,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string
     firstName?: string
+    lastName?: string // И в токен
   }
 }
 
@@ -139,16 +147,17 @@ export const authConfig: AuthOptions = {
         if (!user) return null
 
         const isValid = await bcrypt.compare(credentials.password, user.password)
-        // if (!isValid) return null
         if (!isValid) {
           throw new Error("Неверный пароль");
         }
 
+        // Возвращаем объект со всеми полями
         return {
           id: user._id.toString(),
           email: user.email,
           name: `${user.firstName} ${user.lastName}`,
-          firstName: user.firstName,  // ← передаём отдельно для персонализации
+          firstName: user.firstName,
+          lastName: user.lastName, // 👈 Добавили фамилию
         }
       },
     }),
@@ -158,11 +167,11 @@ export const authConfig: AuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      // user есть только при первом входе — сохраняем в токен
+      // Сохраняем данные в токен при логине
       if (user) {
         token.id = user.id
-        token.name = user.name
         token.firstName = user.firstName
+        token.lastName = user.lastName // 👈 Сохраняем фамилию
       }
       return token
     },
@@ -170,26 +179,18 @@ export const authConfig: AuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id
-        session.user.name = token.name as string
         session.user.firstName = token.firstName
+        session.user.lastName = token.lastName // 👈 Пробрасываем в сессию
+        // Обновляем общее поле name, если нужно
+        session.user.name = `${token.firstName} ${token.lastName}`
       }
       return session
     },
   },
 
   pages: { signIn: "/login" },
-
-  // ✅ Обязательно для продакшна
   secret: process.env.NEXTAUTH_SECRET,
 }
-
-
-
-
-
-
-// export const { handlers, auth, signIn, signOut } =
-//   NextAuth(authConfig);
 
 
 

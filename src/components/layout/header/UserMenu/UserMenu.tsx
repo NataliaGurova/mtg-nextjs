@@ -203,14 +203,14 @@ const UserMenu = () => {
         <span>{firstName}</span>
       </Link>
 
-      <button
+      {/* <button
         onClick={() => signOut({ callbackUrl: "/" })}
         className={clsx(css.link, css.default, css.logoutButton)}
         title="Logout"
       >
         <LogOut className={css.iconSmall} size={18}/>
         <span>Logout</span>
-      </button>
+      </button> */}
     </div>
   );
 };

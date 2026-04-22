@@ -117,12 +117,13 @@
 import { useState } from "react";
 import { signOut } from "next-auth/react";
 // import { Package, Heart, Settings, CreditCard, LogOut, User, Pencil, Mail } from "lucide-react";
-import { Settings, User, Pencil, Mail } from "lucide-react";
+// import { Settings, User, Pencil, Mail } from "lucide-react";
 import css from "./AccountClient.module.css";
+import Profile from "../Profile/Profile";
 
 interface AccountUser {
   id: string;
-  email?: string | null;
+  email?: string;
   name?: string | null;
   firstName?: string;
   lastName?: string;
@@ -133,7 +134,7 @@ interface AccountClientProps {
 }
 
 // Список наших вкладок (я убрал RL Wardrobe и адаптировал под магазин)
-const TABS = ["Profile", "Wishlist", "Orders/Returns", "Addresses", "Payments"];
+const TABS = ["Profile", "Wishlist", "My Orders", "Addresses", "Saved Cards"];
 
 export default function AccountClient({ user }: AccountClientProps) {
   const [activeTab, setActiveTab] = useState("Profile");
@@ -142,23 +143,15 @@ export default function AccountClient({ user }: AccountClientProps) {
     <div className={css.container}>
       
       {/* --- НОВАЯ КЛАССИЧЕСКАЯ ШАПКА --- */}
-      <div className={css.classicHeader}>
+      <div className={css.headerProfile}>
         <div className={css.welcomeRow}>
-          <h1 className={css.heading}>
+          <h1 className={css.title}>
             Welcome to Citadel, {user.firstName || "Guest"}
           </h1>
-          {/* <button
-            onClick={() => signOut({ callbackUrl: "/" })}
-            className={css.signOutBtn}
-            title="Logout"
-            
-          >
-            <LogOut className="w-4 h-4" />
-            <span className="inline">Logout</span>
-          </button> */}
+
           <button 
             onClick={() => signOut({ callbackUrl: "/" })}
-            className={css.signOutBtn}
+            className={css.logoutBtn}
           >
           Logout
           </button>
@@ -209,7 +202,7 @@ export default function AccountClient({ user }: AccountClientProps) {
           </div>
         )} */}
 
-        {/* Показываем этот блок только если выбрана вкладка Profile */}
+        {/* Показываем этот блок только если выбрана вкладка Profile
         {activeTab === "Profile" && (
           <div className={css.settingsCard}>
             <div className={css.settingsHeader}>
@@ -233,10 +226,15 @@ export default function AccountClient({ user }: AccountClientProps) {
               </div>
             </div>
           </div>
+        )} */}
+        
+        {/* Показываем этот блок только если выбрана вкладка Profile */}
+        {activeTab === "Profile" && (
+          <Profile user={user} />
         )}
 
         {/* Заглушки для остальных вкладок */}
-        {["Wishlist", "Orders/Returns", "Addresses", "Payments"].includes(activeTab) && (
+        {["Wishlist", "My Orders", "Addresses", "Saved Cards"].includes(activeTab) && (
           <div className="text-gray-500 py-10 text-center font-serif">
             Content for {activeTab} will be here.
           </div>

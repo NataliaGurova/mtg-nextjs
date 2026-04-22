@@ -68,6 +68,7 @@ import { authConfig } from "@/auth";
 import { redirect } from "next/navigation";
 import AccountClient from "@/components/account/AccountClient/AccountClient";
 import FixedBackgroundHome from "@/components/home/FixedBackgroundHome";
+import Container from "@/components/Container/Container";
 // import AccountClient from "@/components/account/AccountClient";
 
 export default async function AccountPage() {
@@ -81,10 +82,10 @@ export default async function AccountPage() {
   return (
     <>
       <FixedBackgroundHome />
-      <main className="relative z-10 bg-[#eff2f8]/40">
-      {/* <div className="min-h-screen bg-[#f8f9fa] py-12"> */}
+      <main className="relative z-10 min-h-screen bg-[#eff2f8]/50">
+      <Container className="py-10">
         <AccountClient user={session.user} />
-        {/* </div> */}
+        </Container>
         </main>
     </>
   );
