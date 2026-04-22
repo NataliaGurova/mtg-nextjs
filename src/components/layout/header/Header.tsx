@@ -35,7 +35,7 @@ const Header = () => {
       <Logo />
 
       {/* 🔍 Desktop search */}
-      <div className="hidden md:flex items-center relative lg:ml-10">
+      <div className="hidden md:flex ml-6 items-center relative lg:ml-6">
         <Search size={18} className="absolute top-1/2 -translate-y-1/2 pointer-events-none" />
         <SearchBar className="pl-9 border-b border-main-text" />
       </div>  

@@ -100,7 +100,7 @@
   }
   
   .input {
-    width: 350px;
+    width: 320px;
     background-color: transparent;
     border-bottom: 1px solid var(--main-text, #000);
     outline: none;
@@ -110,4 +110,11 @@
     right: 2px;
   }
 
+}
+
+@media screen and (min-width: 1024px) {
+  .input {
+    width: 350px;
+  }
+  
 }
