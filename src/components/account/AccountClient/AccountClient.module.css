@@ -19,7 +19,7 @@
 
 .welcomeRow {
   display: flex;
-  align-items: baseline;
+  align-items: start;
   gap: 16px;
   margin-bottom: 32px;
 }
