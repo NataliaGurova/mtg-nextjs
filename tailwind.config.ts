@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        desk: "1440px",
+      },
       // 🔹 Добавляем или обновляем семейство шрифтов
       fontFamily: {
         // Теперь класс 'font-sans' будет использовать Montserrat

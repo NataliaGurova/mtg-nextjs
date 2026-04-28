@@ -32,7 +32,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: {
-    default: "Citadel -- MTG shop",
+    default: "Citadel | MTG shop",
     template: "%s | MTG",
     absolute: "",
   },
