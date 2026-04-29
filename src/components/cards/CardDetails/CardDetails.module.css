@@ -1,184 +1,268 @@
-/* outline: 1px solid red; */
+/* =========================================
+   MOBILE FIRST (Телефоны и небольшие планшеты)
+   ========================================= */
 
-.cardDetailsContainer {
-  display: flex;
-  justify-content: center;
-
-  padding: 20px;
-  width: 100%;
-}
-
-.imgContainer {
-  perspective: 1000px;
-  perspective: 1200px;
-  width: 325px;
-  height: 453px;
-
-  position: relative; 
-}
-
-.cardDetails {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* gap: 10px;
-  gap: 6px; */
-  width: 820px;
-  margin-left: 150px;
-}
-
-  /* Фон-картинка для Foils */
-.foils {
-  /* display: none; */
-  text-align: center;
-  font-weight: bold;
-  background-color: #fff;
-  /* border: 1px solid transparent; */
-  background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
-  width: 92px;
-  border-radius: 4px;
-  padding: 2px 10px;
-  color: #333;  
-  margin-bottom: 6px;
-}
-
-.nameCard {
-  display: flex;
-  gap: 5px;
-}
-
-.title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.set {
-  font-size: 20px;
-  font-weight: bold;
+   .cardDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
   
-  color: rgb(29, 81, 5);
-}
-
-.artist {
-  font-size: 16px;
-  color: rgb(29, 81, 5);
-  font-style: italic;
-  margin-bottom: 5px;
-  padding-left: 28px;
-}
+    padding: 20px 0;
+    outline: 1px solid red;
+  }
   
-/* Legalities */
-
-.legalities {
-  margin-bottom: 20px;
-  border: 1px solid rgba(29, 81, 5, 0.7);
-  border-radius: 4px;
-  padding: 10px;
-  width: 600px;
-}
-
-.format {
-  display: flex;
-  flex-wrap: wrap;
-    width: 600px;
-    gap: 5px 40px;
+  .cardDetailsWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    gap: 30px;
+  
+    outline: 1px solid green;
+  }
+  
+  .imgContainer {}
+  
+  .imgLarge {
+    display: flex;
+  }
+  
+  .imgSmall {
+    display: none;
+  }
+  
+  .cardDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    width: 100%;
+    margin-left: 0;
+  
+    outline: 1px solid rgb(170, 255, 0);
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  
+  .backName {
+    display: inline;
+  }
+  
+  .set {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(29, 81, 5);
+  }
+  
+  .artist {
+    font-size: 16px;
+    color: rgb(29, 81, 5);
+    font-style: italic;
+    margin-bottom: 15px;
+    padding-left: 28px;
+  }
+  
+  /* Legalities */
+  
+  .legalities {
+    width: 100%;
+    margin-bottom: 20px;
+  
+    border: 1px solid rgba(29, 81, 5, 0.7);
+    border-radius: 4px;
+    padding: 15px 28px;
+  }
+  
+  .format {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .legal,
+  .notLegal,
+  .restricted,
+  .banned {
+    width: 105px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 14px;
   }
   
   .legal {
-    width: 110px;
-    text-align: center;
-    background-color: rgb(29, 81, 5, 0.58);
+    background-color: rgba(29, 81, 5, 0.58);
     color: white;
-    /* color: #141517; */
-    padding: 5px;
-    border-radius: 4px;
-    display: inline-block;
-    margin: 2px;
   }
   
   .notLegal {
-    width: 110px;
-    text-align: center;
-    background-color: rgb(154, 153, 153, 0.75);
+    background-color: rgba(154, 153, 153, 0.75);
     color: white;
-    /* color: #141517; */
-    padding: 5px;
-    border-radius: 4px;
-    display: inline-block;
-    margin: 2px;
   }
   
   .restricted {
-    width: 110px;
-    text-align: center;
-    color: #141517;
-    color: #eff2f8;
     background-color: rgba(36, 103, 130, 0.58);
-    padding: 5px;
-    border-radius: 4px;
-    display: inline-block;
-    margin: 2px;
+    color: #eff2f8;
   }
   
   .banned {
-    width: 110px;
-    text-align: center;
-    background-color: rgb(132, 5, 27, 0.58);
-    /* background-color: rgb(252, 210, 26, 0.7); */
+    background-color: rgba(132, 5, 27, 0.58);
     color: #eff2f8;
-    /* color: #141517; */
-    padding: 5px;
-    border-radius: 4px;
-    display: inline-block;
-    margin: 2px;
   }
   
-  /* ------------------ */
   .variant {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: auto;
+    width: 100%;
+    gap: 12px;
+    margin-top: 20px;
+  
+    outline: 1px solid blue;
   }
   
-  .priceBox {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    /* gap: 20px; */
-  }
-  .conditionPrice {
-    display: flex;
-    
-    align-items: flex-end;
-  }
-
-  /*---- Price -----*/
-  .price {
-    width: 125px;
-    text-align: end;
-    /* text-align: center; */
-    font-size: 21px;
-    font-weight: bold;
-    color: rgb(5, 85, 14);
+  .variantDesktop {
+    display: none;
   }
   
-  .newPrice {
-    color: #ed6664;
-    font-weight: 700;
-  }
+  /* =========================================
+     DESKTOP (≥768px)
+     ========================================= */
   
-  .oldPrice {
-    text-decoration: line-through;
-    color: #888;
-    font-size: 19px;
-  }
-  
-
-/* ----------------------- */
-
-    .nonfoils {
-      width: 92px;
+  @media (min-width: 768px) {
+    .cardDetailsWrapper {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-around;
+      gap: 0;
     }
+  
+    .imgLarge {
+      display: none;
+    }
+  
+    .imgSmall {
+      display: flex;
+    }
+  
+    .backName {
+      display: block;
+      margin-top: 4px;
+    }
+  
+    .cardDetails {
+      margin-left: 80px;
+    }
+  
+    .legalities {
+      max-width: 600px;
+      padding: 10px;
+    }
+  
+    .format {
+      gap: 10px 40px;
+    }
+  }
+  
+  /* =========================================
+     DESKTOP (≥1024px)
+     ========================================= */
+  
+  @media (min-width: 1024px) {
+    .cardDetailsWrapper {
+      justify-content: space-between;
+      padding: 20px 20px;
+    }
+  
+    .cardDetails {
+      margin-left: 80px;
+    }
+  }
+  
+  /* =========================================
+     DESKTOP (≥1440px)
+     ========================================= */
+  
+  @media (min-width: 1440px) {
+    .cardDetailsContainer {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    .cardDetailsWrapper {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+    }
+  
+    .imgLarge {
+      display: flex;
+    }
+  
+    .imgSmall {
+      display: none;
+    }
+  
+    .cardDetails {
+      margin-left: 130px;
+      width: auto;
+    }
+  
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+    }
+  
+    .backName {
+      display: inline;
+      margin-top: 0;
+    }
+  
+    .set {
+      font-size: 20px;
+    }
+  
+    .artist {
+      margin-bottom: 5px;
+    }
+  
+    .format {
+      gap: 5px 40px;
+    }
+  
+    .legal,
+    .notLegal,
+    .restricted,
+    .banned {
+      width: 110px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  
+    .variantDesktop {
+      display: flex;
+      flex-direction: column;
+      width: 820px;
+      gap: 14px;
+  
+      outline: 1px solid blue;
+    }
+  
+    .variant {
+      display: none;
+    }
+  }

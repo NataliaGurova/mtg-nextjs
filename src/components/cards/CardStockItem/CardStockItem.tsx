@@ -39,6 +39,7 @@ const CardStockItem = ({ card }: Props) => {
 
   return (
     <div className={css.priceBox}>
+      <div className={css.stockInfo}>
       <p title="Language">{lang.toUpperCase()}</p>
 
       {isFoil && foilType ? (
@@ -53,7 +54,8 @@ const CardStockItem = ({ card }: Props) => {
         <span> ({availableQty})</span>
       </div>
 
-      <strong className={css.price}>{price} ₴</strong>
+        <strong className={css.price}>{price} ₴</strong>
+        </div>
 
       {isDbCard && (
         <AddToCartSection

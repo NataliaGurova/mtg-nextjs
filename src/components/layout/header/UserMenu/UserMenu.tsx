@@ -146,8 +146,8 @@
 "use client";
 
 import Link from "next/link";
-import { User, LogOut } from "lucide-react";
-import { useSession, signOut } from "next-auth/react";
+import { User } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import css from "./UserMenu.module.css";

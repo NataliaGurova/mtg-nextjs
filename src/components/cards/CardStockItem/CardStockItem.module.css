@@ -1,54 +1,119 @@
+
+  /* =========================================
+    MOBILE FIRST (Телефоны)
+   ========================================= */
 .priceBox {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-  /* gap: 20px; */
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0, 0.05);
+  border-radius: 4px;
+  background-color: #fff;
+  width: 100%;
+  align-items: flex-end; /* На мобилке прижимает элементы вправо */
 }
+
+.stockInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Центрируем текст и цену по вертикали */
+  width: 100%;
+  height: 33px;
+  margin-bottom: 12px;
+  outline: 1px solid rgba(62, 3, 43, 0.9); /* Для отладки, удалить позже */
+}
+
+/* Уменьшаем шрифты для телефона */
+.priceBox > p, 
+.priceBox > div > strong {
+  font-size: 14px; 
+}
+
 .conditionPrice {
   display: flex;
-  
   align-items: flex-end;
 }
 
-/*---- Price -----*/
+/* Price */
 .price {
-  width: 125px;
-  text-align: end;
-  /* text-align: center; */
-  font-size: 21px;
+  min-width: 80px; 
+  text-align: right;
+  font-size: 18px; 
   font-weight: bold;
   color: rgb(5, 85, 14);
+  white-space: nowrap; 
 }
 
-.newPrice {
-  color: #ed6664;
-  font-weight: 700;
+.newPrice { color: #ed6664; font-weight: 700; }
+.oldPrice { text-decoration: line-through; color: #888; font-size: 16px; }
+
+/* Таблетки Foil / NonFoil */
+.nonfoils, .foils {
+  width: 75px; 
+  font-size: 12px;
 }
 
-.oldPrice {
-  text-decoration: line-through;
-  color: #888;
-  font-size: 19px;
-}
-
-
-/* ----------------------- */
-
-  .nonfoils {
-    width: 92px;
-  }
-
-   /* Фон-картинка для Foils */
 .foils {
-  /* display: none; */
   text-align: center;
   font-weight: bold;
   background-color: #fff;
-  /* border: 1px solid transparent; */
   background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
-  width: 92px;
   border-radius: 4px;
-  padding: 2px 10px;
+  padding: 2px 5px;
   color: #333;  
+}
+
+/* =========================================
+    ПЛАНШЕТЫ И ДЕСКТОПЫ (От 768px и выше)
+   ========================================= */
+/* Убрал max-width! Теперь эти стили применяются и для ПК */
+@media (min-width: 768px) {
+  .priceBox {
+    flex-direction: row;
+    align-items: center; /* 🔹 ВАЖНО: Перебиваем flex-end с мобилки, чтобы элементы встали ровно по центру вертикали */
+  }
+  
+  .stockInfo {
+    margin-bottom: 0px; 
+    margin-right: 20px; /* Базовый отступ для планшета */
+  }
+  
+  .priceBox > p, 
+  .priceBox > div > strong {
+    font-size: 16px;
+  }
+  
+  .price {
+    width: 125px; 
+    font-size: 21px;
+  }
+  
+  .oldPrice {
+    font-size: 19px;
+  }
+  
+  .nonfoils, .foils {
+    width: 92px; 
+    font-size: 14px;
+    padding: 2px 10px;
+  }
+}
+
+/* =========================================
+ТОЛЬКО ДЕСКТОП (От 1024px и выше)
+========================================= */
+/* @media (min-width: 1024px) { */
+@media (min-width: 1440px) {
+  
+  .priceBox {
+    border: none; /* Убираем рамку навсегда */
+    background-color: transparent; /* Убираем белый фон */
+    padding: 0; /* Если на десктопе паддинг не нужен, обнуляем его */
+  }
+
+  /* Сюда пишем только то, что отличается от планшета */
+  .stockInfo {
+    /* margin-right: 70px;  */
+    margin-right: 80px; 
+  }
 }
