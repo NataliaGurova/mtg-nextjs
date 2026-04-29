@@ -1,15 +1,14 @@
 /* =========================================
-   MOBILE FIRST (Телефоны и небольшие планшеты)
+    MOBILE FIRST (Телефоны и небольшие планшеты)
    ========================================= */
 
-   .cardDetailsContainer {
+  .cardDetailsContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
   
     padding: 20px 0;
-    outline: 1px solid red;
   }
   
   .cardDetailsWrapper {
@@ -22,8 +21,6 @@
     max-width: 1300px;
     margin: 0 auto;
     gap: 30px;
-  
-    outline: 1px solid green;
   }
   
   .imgContainer {}
@@ -43,8 +40,6 @@
   
     width: 100%;
     margin-left: 0;
-  
-    outline: 1px solid rgb(170, 255, 0);
   }
   
   .title {
@@ -129,8 +124,6 @@
     width: 100%;
     gap: 12px;
     margin-top: 20px;
-  
-    outline: 1px solid blue;
   }
   
   .variantDesktop {
@@ -138,7 +131,7 @@
   }
   
   /* =========================================
-     DESKTOP (≥768px)
+      DESKTOP (≥768px)
      ========================================= */
   
   @media (min-width: 768px) {
@@ -258,8 +251,6 @@
       flex-direction: column;
       width: 820px;
       gap: 14px;
-  
-      outline: 1px solid blue;
     }
   
     .variant {

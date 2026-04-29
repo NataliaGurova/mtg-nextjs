@@ -6,7 +6,6 @@
   justify-content: flex-end; /* Прижимаем всё к правому краю */
   gap: 12px;
   width: 100%;
-  outline: 1px solid red; /* Для отладки, удалить позже */
 }
 
 .qtyWrapper {
