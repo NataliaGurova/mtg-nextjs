@@ -9,6 +9,7 @@
   --font-inter: var(--font-montserrat, Montserrat), PT Serif, sans-serif;
   
   --color-light-grey: #eff2f8;
+  --color-dark-grey: #4b5563;
   --color-dark-green: rgb(29, 81, 5);
   --color-light-green: rgb(80, 161, 42);
   --color-main-text: #141517;
@@ -17,7 +18,7 @@
   --color-logo: #B50828;
   --color-avatar-bg: #F4F2EB;  
   --color-welcome-bg: #041e3a; 
-  --color-box-grey:#ccc;
+  --color-box-grey: #ccc;
   /* --color-inputs: #eff2f8; */
 
   /* Кастомная тень */
