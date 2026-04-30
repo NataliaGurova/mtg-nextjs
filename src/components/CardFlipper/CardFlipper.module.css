@@ -76,9 +76,11 @@
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.6);
   color: white;
-  z-index: 99;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  z-index: 99;
+  transform: translateZ(50px); /* 2. 🔹 МАГИЯ ДЛЯ IOS: Выталкиваем кнопку физически вперед в 3D-пространстве */
 }
