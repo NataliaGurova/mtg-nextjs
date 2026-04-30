@@ -81,6 +81,6 @@
   justify-content: center;
   cursor: pointer;
 
-  z-index: 99;
-  transform: translateZ(10px); /* 2. 🔹 МАГИЯ ДЛЯ IOS: Выталкиваем кнопку физически вперед в 3D-пространстве */
+  z-index: 50;
+  transform: translateZ(50px); /* 2. 🔹 МАГИЯ ДЛЯ IOS: Выталкиваем кнопку физически вперед в 3D-пространстве */
 }
