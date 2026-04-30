@@ -162,6 +162,7 @@ import { DbCard } from "@/types/types";
 import { useCartStore } from "@/store/cartStore";
 import { toast } from "sonner";
 import css from "./AddToCartSection.module.css";
+import { ReservationInfoModal } from "@/components/cart/ReservationInfoModal/ReservationInfoModal";
 
 type Props = {
   card: DbCard;
@@ -171,7 +172,9 @@ type Props = {
 
 const AddToCartSection = ({ card, disabled }: Props) => {
   const [isReserving, setIsReserving] = useState(false);
-  const [qty, setQty] = useState(1); 
+  const [qty, setQty] = useState(1);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const addToCart = useCartStore((store) => store.addToCart);
   const cartItems = useCartStore((store) => store.items);
@@ -182,6 +185,7 @@ const AddToCartSection = ({ card, disabled }: Props) => {
   const serverAvailable = card.availableQty ?? card.quantity;
   const maxAllowedInCart = Math.min(card.quantity, inCartQty + serverAvailable);
   const maxAvailableToAdd = maxAllowedInCart - inCartQty;
+
 
   useEffect(() => {
     if (qty > maxAvailableToAdd && maxAvailableToAdd > 0) {
@@ -198,15 +202,12 @@ const AddToCartSection = ({ card, disabled }: Props) => {
   const dec = () => {
     if (qty > 1) setQty(qty - 1);
   };
-
-  const handleAdd = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (isCompletelyOutOfStock) return;
-
+  
+  
+  // 🔹 2. Выносим вашу логику добавления в отдельную функцию
+  const processAddToCart = async () => {
     setIsReserving(true); 
-
+    
     try {
       const isSuccess = await addToCart({
         id: card._id.toString(),
@@ -221,7 +222,7 @@ const AddToCartSection = ({ card, disabled }: Props) => {
         language: card.lang,
         foil: card.foilType ?? null,
       });
-
+      
       if (!isSuccess) {
         toast.error("Could not reserve card");
       }
@@ -231,7 +232,30 @@ const AddToCartSection = ({ card, disabled }: Props) => {
       setIsReserving(false); 
     }
   };
-
+  
+  // 🔹 3. Обновляем handleAdd, чтобы он сначала проверял localStorage
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (isCompletelyOutOfStock) return;
+    
+    // Проверяем, стоит ли галочка "Больше не показывать"
+    // Используем window, чтобы избежать ошибок SSR в Next.js
+    const isHidden = typeof window !== "undefined" ? localStorage.getItem("hideReservationInfo") : null;
+    
+    if (!isHidden) {
+      // Если галочки нет — открываем окно и ПРЕРЫВАЕМ процесс
+      setIsModalOpen(true);
+      return;
+    }
+    
+    // Если галочка стоит — сразу запускаем вашу логику
+    processAddToCart();
+  };
+  
+  
+  
   return (
     <div className={css.container}>
       
@@ -243,7 +267,7 @@ const AddToCartSection = ({ card, disabled }: Props) => {
             onClick={dec}
             disabled={qty <= 1} 
             aria-label="Decrease quantity"
-          >
+            >
             <Minus size={16} />
           </button>
           
@@ -267,7 +291,7 @@ const AddToCartSection = ({ card, disabled }: Props) => {
         onClick={handleAdd}
         disabled={isCompletelyOutOfStock || isReserving} 
         className={css.submitBtn}
-      >
+        >
         {isReserving ? (
           <Loader2 className="animate-spin" size={18} />
         ) : isCompletelyOutOfStock ? (
@@ -280,8 +304,59 @@ const AddToCartSection = ({ card, disabled }: Props) => {
         )}
       </Button>
 
+
+      {/* <>
+    <div className={css.container}>
+    <Button onClick={handleAdd}>Add to Cart</Button>
+    </div> */}
+
+    <ReservationInfoModal 
+      isOpen={isModalOpen} 
+      onClose={() => {
+        setIsModalOpen(false);
+        processAddToCart(); // Добавляем в корзину ПОСЛЕ закрытия модалки
+      }} 
+      />
+  {/* </> */}
+
+      
     </div>
   );
 };
 
 export default AddToCartSection;
+
+  // const handleAdd = async (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+
+  //   if (isCompletelyOutOfStock) return;
+
+  //   setIsReserving(true); 
+
+  //   try {
+  //     const isSuccess = await addToCart({
+  //       id: card._id.toString(),
+  //       scryfallId: card.scryfall_id,
+  //       name: card.name,
+  //       set_name: card.set_name,
+  //       image: card.faces?.[0]?.images?.normal || "", 
+  //       price: card.prices,
+  //       quantity: qty, 
+  //       stock: maxAllowedInCart,
+  //       condition: card.condition,
+  //       language: card.lang,
+  //       foil: card.foilType ?? null,
+  //     });
+
+  //     if (!isSuccess) {
+  //       toast.error("Could not reserve card");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Something went wrong: " + (error as Error).message);
+  //   } finally {
+  //     setIsReserving(false); 
+  //   }
+  // };
+  
+  
