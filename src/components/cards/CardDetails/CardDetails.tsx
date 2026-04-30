@@ -225,7 +225,7 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
                   height={453}
                   isFoil={mainCard.isFoil}
                   flipButtonPosition={{
-                    top: 410,
+                    top: 404,
                     right: 137,
                     width: 50,
                     height: 50,
@@ -258,7 +258,7 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
 
         {/* DETAILS */}
         <div className={css.cardDetails}>
-          
+
           {/* NAME */}
           <h2 className={css.title}>
             {nameParts[0]}
