@@ -1,21 +1,42 @@
 
+/* Базовые стили для ВСЕХ карточек (размеры и позиционирование) */
 .itemCard {
   display: flex;
   flex-direction: column;
   align-items: center;
 
   width: 260px;
-  height: 496px;
+  height: 498px;
   padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* 🔹 ВАРИАНТ 1: Обычный (для каталога) */
+.variantDefault {
   border-radius: 4px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Анімація для об'ємного ефекту */
-
+  background-color: transparent; 
 }
 
-.itemCard:hover {
-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.variantDefault:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* 🔹 ВАРИАНТ 2: Стекло (для Wishlist) */
+.variantGlass {
+  border-radius: 12px;
+  /* background: rgba(255, 255, 255, 0.65); */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.variantGlass:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
 
 
 .text {
@@ -51,13 +72,6 @@ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 
 
 
-/* ============ */
-/* Ефект при наведенні */
-.itemProjects:hover {
-  transform: scale(1.05); /* Збільшення розміру */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Об'ємний тіньовий ефект */
-  background-color: rgba(43, 65, 112, 0.8); /* Трохи менш прозорий фон при наведенні */
-}
 
 /* ========= */
 .bottomSection {
@@ -80,6 +94,14 @@ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+/* .cartWishlistWrapper {
+  display: flex;
+  width: 210px;
+  justify-content: space-end;
+  align-items: center;
+} */
+
 
 .cart {
   display: flex;

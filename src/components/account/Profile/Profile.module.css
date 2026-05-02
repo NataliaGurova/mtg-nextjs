@@ -1,119 +1,152 @@
-/* ProfileInfo.module.css */
+/* Profile.module.css */
 
-.container {
-  width: 100%;
-  max-width: 500px; /* Чуть шире формы логина, для профиля это смотрится лучше */
-  color: rgba(40, 39, 39, 0.7);
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.title {
-  letter-spacing: -0.6px;
-  font-size: 28px;
-  font-weight: 600;
-  color: rgba(40, 39, 39, 0.7);
-  margin: 0; /* Убираем стандартные отступы */
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Расстояние между полями Имя и Email */
-  width: 100%;
-}
-
-.label {
-  display: flex;
-  flex-direction: column;
-}
-
-.labelText {
-  font-size: 14px;
-  color: #6b7280; /* Серый цвет для подписей */
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-}
-
-.inputContainer {
-  position: relative;
-  width: 100%;
-}
-
-.input {
-  width: 100%;
-  height: 40px;
-  border: 1px solid rgba(26, 26, 26, 0.7);
-  border-radius: 4px;
-  background-color: transparent;
-  padding: 10px;
-  padding-right: 40px; /* Место для карандаша */
-  font-size: 15px;
-  color: #1a1a1a;
-  transition: all 0.2s ease;
-}
-
-/* Стили для заблокированного инпута (режим чтения) */
-.input:disabled {
-  background-color: rgba(240, 240, 240, 0.8);
-  color: rgba(40, 39, 39, 0.7);
-  border-color: rgba(26, 26, 26, 0.3);
-  cursor: default; /* Обычная мышка, не текст */
-}
-
-.input:not(:disabled):focus {
-  outline: none;
-  border-color: rgb(29, 81, 5); /* Ваш фирменный зеленый */
-  background-color: rgba(218, 223, 220, 0.2);
-}
-
-.editBtn {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #9ca3af;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.editBtn:hover {
-  color: #1a1a1a;
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-/* Кнопка сохранения (появляется только при редактировании) */
-.saveBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 40px;
-  border: none;
-  border-radius: 4px;
-  color: rgb(247, 250, 253);
-  background-color: rgb(29, 81, 5); /* Зеленый цвет */
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-top: 10px;
-}
-
-.saveBtn:hover {
-  background-color: rgb(25, 70, 4);
-}
+/* =========================================
+   БАЗОВЫЕ СТИЛИ (MOBILE FIRST - для смартфонов)
+   ========================================= */
+   .container {
+    width: auto; /* Важно: не 100%, иначе margin вытолкнет блок за пределы экрана */
+    margin: 0 16px 40px 16px; /* Маленькие отступы для мобилок */
+    max-width: 500px; 
+    color: rgba(40, 39, 39, 0.7);
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    letter-spacing: -0.6px;
+    font-size: 22px; /* Чуть меньше для телефона */
+    font-weight: 700;
+    color: #041e3a;
+    margin: 0; 
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Расстояние между полями чуть плотнее на мобилке */
+    width: 100%;
+  }
+  
+  .label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .labelText {
+    font-size: 14px;
+    color: #6b7280; 
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  
+  .inputContainer {
+    position: relative;
+    width: 100%;
+  }
+  
+  .input {
+    width: 100%;
+    height: 44px; /* 🔥 Увеличили с 40 до 44px (стандарт Apple/Google для кнопок на тачскрине) */
+    border: 1px solid rgba(26, 26, 26, 0.7);
+    border-radius: 4px;
+    background-color: transparent;
+    padding: 10px;
+    padding-right: 44px; /* Место для карандаша */
+    font-size: 16px; /* На iPhone если шрифт меньше 16px, сафари будет зумить экран при клике! */
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+  }
+  
+  /* Стили для заблокированного инпута (режим чтения) */
+  .input:disabled {
+    background-color: rgba(240, 240, 240, 0.8);
+    color: rgba(40, 39, 39, 0.7);
+    border-color: rgba(26, 26, 26, 0.3);
+    cursor: default; 
+  }
+  
+  .input:not(:disabled):focus {
+    outline: none;
+    border-color: rgb(29, 81, 5); 
+    background-color: rgba(218, 223, 220, 0.2);
+  }
+  
+  .editBtn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px; /* Увеличил зону клика для пальца */
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .editBtn:hover {
+    color: #1a1a1a;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Кнопка сохранения (появляется только при редактировании) */
+  .saveBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px; /* Подгоняем под высоту инпутов */
+    border: none;
+    border-radius: 4px;
+    color: rgb(247, 250, 253);
+    background-color: rgb(29, 81, 5); 
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 8px;
+  }
+  
+  .saveBtn:hover {
+    background-color: rgb(25, 70, 4);
+  }
+  
+  /* =========================================
+     TABLET (От 768px и шире)
+     ========================================= */
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 40px 40px 40px;
+    }
+    .header {
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .title {
+      font-size: 24px; /* Возвращаем десктопный размер заголовка */
+    }
+    .form {
+      gap: 20px; /* Возвращаем десктопные отступы между полями */
+    }
+  }
+  
+  /* =========================================
+     DESKTOP (От 1024px и шире)
+     ========================================= */
+  @media (min-width: 1024px) {
+    .container {
+      margin: 0 100px 40px 100px; /* Ваши оригинальные большие отступы */
+    }
+  }

@@ -10,7 +10,8 @@
   border-radius: 4px;
   background-color: #fff;
   width: 100%;
-  align-items: flex-end; /* На мобилке прижимает элементы вправо */
+  /* align-items: flex-end; */
+  /* outline: 1px solid red;  */
 }
 
 .stockInfo {
@@ -20,6 +21,7 @@
   width: 100%;
   height: 33px;
   margin-bottom: 12px;
+  /* outline: 1px solid blue; */
 }
 
 /* Уменьшаем шрифты для телефона */
@@ -62,6 +64,14 @@
   color: #333;  
 }
 
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
 /* =========================================
     ПЛАНШЕТЫ И ДЕСКТОПЫ (От 768px и выше)
    ========================================= */
@@ -69,12 +79,15 @@
 @media (min-width: 768px) {
   .priceBox {
     flex-direction: row;
-    align-items: center; /* 🔹 ВАЖНО: Перебиваем flex-end с мобилки, чтобы элементы встали ровно по центру вертикали */
+    align-items: center;
+    justify-content: space-between;
   }
   
   .stockInfo {
-    margin-bottom: 0px; 
-    margin-right: 20px; /* Базовый отступ для планшета */
+    margin-bottom: 0px;
+    max-width: 440px; 
+    margin: 0 auto; /* Центрируем блок по горизонтали */
+    /* margin-right: 20px;  */
   }
   
   .priceBox > p, 
@@ -96,6 +109,13 @@
     font-size: 14px;
     padding: 2px 10px;
   }
+
+  /* .actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+  } */
 }
 
 /* =========================================
@@ -113,6 +133,7 @@
   /* Сюда пишем только то, что отличается от планшета */
   .stockInfo {
     /* margin-right: 70px;  */
-    margin-right: 80px; 
+    margin-right: 80px;
+    width: 370px; 
   }
 }

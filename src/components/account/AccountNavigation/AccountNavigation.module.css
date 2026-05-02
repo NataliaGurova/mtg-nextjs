@@ -1,0 +1,137 @@
+
+/* =========================================
+  БАЗОВЫЕ СТИЛИ (MOBILE FIRST - для смартфонов)
+   ========================================= */
+  .headerProfile {
+    display: flex;
+    flex-direction: column;
+    margin: 0 16px 24px 16px; /* Маленькие отступы для экранов телефонов */
+    /* Для идеального попадания в стиль нужен шрифт с засечками */
+    font-family: var(--font-georgia);
+    font-weight: 500; 
+  }
+  
+  .welcomeRow {
+    display: flex;
+    flex-direction: column; /* Имя и кнопка друг под другом на узких экранах */
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  
+  .title {
+    font-size: 24px; /* Уменьшаем размер шрифта для телефона */
+    font-weight: 400; 
+    color: #041e3a; 
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  
+  .logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px; /* Чуть меньше для телефона */
+    color: #111827;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #111827;
+    padding: 0 0 2px 0;
+    cursor: pointer;
+    opacity: 0.6;
+    font-family: inherit;
+    transition: opacity 0.2s;
+  }
+  
+  .logoutBtn:hover {
+    opacity: 1;
+  }
+  
+  /* --- МЕНЮ НАВИГАЦИИ --- */
+  .navMenu {
+    display: flex;
+    gap: 16px;
+    border-bottom: 1px solid transparent; 
+    
+    /* МАГИЯ ДЛЯ МОБИЛОК: Делаем вкладки скроллируемыми по горизонтали */
+    overflow-x: auto;
+    white-space: nowrap; /* Запрещаем перенос на новую строку */
+    padding-bottom: 4px;
+    
+    /* Прячем полосу прокрутки для эстетики, но скролл пальцем работать будет */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .navMenu::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  .navItem {
+    font-size: 14px; /* Меньший шрифт вкладок */
+    color: #9ca3af; 
+    background: none;
+    border: none;
+    padding: 0 0 4px 0;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+  }
+  
+  .navItem:hover {
+    color: #4b5563;
+  }
+  
+  .navItemActive {
+    color: #041e3a; 
+    border-bottom: 1px solid #041e3a; 
+  }
+  
+  
+  /* =========================================
+    TABLET (От 768px и шире)
+     ========================================= */
+  @media (min-width: 768px) {
+    .headerProfile {
+      margin: 0 40px 32px 40px; /* Увеличиваем отступы по бокам */
+    }
+  
+    .welcomeRow {
+      flex-direction: row; /* Ставим заголовок и кнопку в один ряд */
+      align-items: center; /* Или flex-end, чтобы выровнять по низу шрифта */
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+  
+    .title {
+      font-size: 32px; /* Возвращаем крупный заголовок */
+    }
+  
+    .navMenu {
+      gap: 24px;
+      overflow-x: visible; /* Отключаем горизонтальный скролл на планшетах */
+      flex-wrap: wrap; /* Разрешаем перенос, если вкладок будет слишком много */
+    }
+  
+    .navItem {
+      font-size: 16px; /* Обычный размер шрифта */
+    }
+    
+    .logoutBtn {
+      font-size: 15px;
+    }
+  }
+  
+  /* =========================================
+     DESKTOP (От 1024px и шире)
+     ========================================= */
+  @media (min-width: 1024px) {
+    .headerProfile {
+      margin: 0 100px 40px 100px; /* Ваши оригинальные большие отступы для ПК */
+    }
+    
+    .title {
+      font-size: 36px;
+    }
+  }

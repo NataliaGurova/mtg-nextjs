@@ -8,12 +8,12 @@
   /* Если в layout.tsx вы используете переменную шрифта, здесь пишем var(--font-montserrat) */
   --font-inter: var(--font-montserrat, Montserrat), PT Serif, sans-serif;
   
-  --color-light-grey: #eff2f8;
-  --color-dark-grey: #4b5563;
-  --color-dark-green: rgb(29, 81, 5);
-  --color-light-green: rgb(80, 161, 42);
+  --color-light-grey: #eff2f8; /* rgb(239, 242, 248) */
+  --color-dark-grey: #4b5563;  
+  --color-dark-green: rgb(29, 81, 5);  /*  #1d5105 */
+  --color-light-green: rgb(80, 161, 42);  /*  #50a12a */
   --color-main-text: #141517;
-  --color-light-text: rgba(40, 39, 39, 0.7);
+  --color-light-text: rgba(40, 39, 39, 0.7); 
   --color-nav-yellow: #fcd21a;
   --color-logo: #B50828;
   --color-avatar-bg: #F4F2EB;  

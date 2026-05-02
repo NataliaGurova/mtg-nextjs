@@ -1,0 +1,62 @@
+/* src/components/Wishlist/Wishlist.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 16px 40px 16px;
+}
+
+.title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700;  /* font-bold */
+  margin-bottom: 1.5rem; /* mb-6 */
+  color: #041e3a; /* text-[#041e3a] */
+}
+
+/* --- Стили для пустой корзины --- */
+.emptyState {
+  text-align: center;
+  padding: 5rem 1rem; /* py-20 */
+  background-color: #f9fafb; /* bg-gray-50 */
+  border-radius: 0.75rem; /* rounded-xl */
+  border: 1px dashed #d1d5db; /* border-dashed border-gray-300 */
+  color: #6b7280; /* text-gray-500 */
+}
+
+.emptyText {
+  font-size: 1.125rem; /* text-lg */
+}
+
+.emptySubtext {
+  font-size: 0.875rem; /* text-sm */
+  margin-top: 0.5rem; /* mt-2 */
+}
+
+/* --- Сетка карточек --- */
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem; /* gap-6 */
+  /* Адаптивная сетка: 2 колонки на мобилках, 3 на планшетах, 4 на десктопе */
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin: 0 40px 40px 40px;
+  }
+  .grid {
+    /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 100px 40px 100px;
+  }
+  .grid {
+    gap: 3rem;
+    /* grid-template-columns: repeat(4, minmax(0, 1fr)); */
+  }
+}

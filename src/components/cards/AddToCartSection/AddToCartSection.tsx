@@ -1,6 +1,4 @@
 
-// components/AddToCartSection/AddToCartSection.tsx
-      
 // "use client";
 
 // import { useState, useEffect } from "react";
@@ -9,10 +7,12 @@
 // import { DbCard } from "@/types/types";
 // import { useCartStore } from "@/store/cartStore";
 // import { toast } from "sonner";
+// import css from "./AddToCartSection.module.css";
+// import { ReservationInfoModal } from "@/components/cart/ReservationInfoModal/ReservationInfoModal";
 
 // type Props = {
 //   card: DbCard;
-//   stock?: number; // Сделал опциональным, т.к. теперь мы опираемся напрямую на card.quantity
+//   stock?: number;
 //   disabled?: boolean;
 // };
 
@@ -20,59 +20,40 @@
 //   const [isReserving, setIsReserving] = useState(false);
 //   const [qty, setQty] = useState(1);
   
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 //   const addToCart = useCartStore((store) => store.addToCart);
-//   // 🔹 1. Достаем все товары из корзины
 //   const cartItems = useCartStore((store) => store.items);
 
-//   // 🔹 2. Ищем, сколько ТАКИХ карт уже лежит в корзине
 //   const itemInCart = cartItems.find((i) => i.id === card._id.toString());
 //   const inCartQty = itemInCart?.quantity || 0;
 
-//   // // 🔹 3. Вычисляем ЖЕСТКИЙ ЛИМИТ: (Всего в базе) минус (Уже в корзине)
-//   // const maxAvailableToAdd = card.quantity - inCartQty;
-
-//   // // 🔹 4. Защита: если счетчик qty больше, чем осталось доступно, сбрасываем его
-//   // useEffect(() => {
-//   //   if (qty > maxAvailableToAdd && maxAvailableToAdd > 0) {
-//   //     setQty(maxAvailableToAdd);
-//   //   }
-//   // }, [maxAvailableToAdd, qty]);
-
-//   // // Флаг полной блокировки (если закончились в базе ИЛИ мы уже всё положили в корзину)
-//   // const isCompletelyOutOfStock = disabled || maxAvailableToAdd <= 0;
-
-//   // 🔹 3. ИСПРАВЛЕННАЯ МАТЕМАТИКА ОСТАТКОВ
 //   const serverAvailable = card.availableQty ?? card.quantity;
 //   const maxAllowedInCart = Math.min(card.quantity, inCartQty + serverAvailable);
 //   const maxAvailableToAdd = maxAllowedInCart - inCartQty;
 
-//   // 🔹 4. Защита: если счетчик qty больше, чем осталось доступно, сбрасываем его
+
 //   useEffect(() => {
 //     if (qty > maxAvailableToAdd && maxAvailableToAdd > 0) {
 //       setQty(maxAvailableToAdd);
 //     }
 //   }, [maxAvailableToAdd, qty]);
 
-//   // Флаг полной блокировки
 //   const isCompletelyOutOfStock = disabled || maxAvailableToAdd <= 0;
 
 //   const inc = () => {
-//     // Теперь + не дает выбрать больше, чем реально можно добавить
 //     if (qty < maxAvailableToAdd) setQty(qty + 1);
 //   };
 
 //   const dec = () => {
 //     if (qty > 1) setQty(qty - 1);
 //   };
-
-//   const handleAdd = async (e: React.MouseEvent) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-
-//     if (isCompletelyOutOfStock) return;
-
+  
+  
+//   // 🔹 2. Выносим вашу логику добавления в отдельную функцию
+//   const processAddToCart = async () => {
 //     setIsReserving(true);
-
+    
 //     try {
 //       const isSuccess = await addToCart({
 //         id: card._id.toString(),
@@ -82,16 +63,13 @@
 //         image: card.faces?.[0]?.images?.normal || "",
 //         price: card.prices,
 //         quantity: qty,
-//         stock: maxAllowedInCart, // 👈 ПЕРЕДАЕМ ПРАВИЛЬНЫЙ ЛИМИТ
+//         stock: maxAllowedInCart,
 //         condition: card.condition,
 //         language: card.lang,
 //         foil: card.foilType ?? null,
 //       });
-
+      
 //       if (!isSuccess) {
-//       //   toast.success(`Added ${qty} to cart & reserved!`);
-//       //   setQty(1);
-//       // } else {
 //         toast.error("Could not reserve card");
 //       }
 //     } catch (error) {
@@ -100,41 +78,66 @@
 //       setIsReserving(false);
 //     }
 //   };
-
+  
+//   // 🔹 3. Обновляем handleAdd, чтобы он сначала проверял localStorage
+//   const handleAdd = (e: React.MouseEvent) => {
+//     e.preventDefault();
+//     e.stopPropagation();
+    
+//     if (isCompletelyOutOfStock) return;
+    
+//     // Проверяем, стоит ли галочка "Больше не показывать"
+//     // Используем window, чтобы избежать ошибок SSR в Next.js
+//     const isHidden = typeof window !== "undefined" ? localStorage.getItem("hideReservationInfo") : null;
+    
+//     if (!isHidden) {
+//       // Если галочки нет — открываем окно и ПРЕРЫВАЕМ процесс
+//       setIsModalOpen(true);
+//       return;
+//     }
+    
+//     // Если галочка стоит — сразу запускаем вашу логику
+//     processAddToCart();
+//   };
+  
+  
+  
 //   return (
-//     <div className="flex items-center gap-4">
-//       {/* 🔹 Если добавить больше ничего нельзя, прячем счетчик вообще */}
+//     <div className={css.container}>
+      
 //       {!isCompletelyOutOfStock && (
-//         <div className="flex items-center border rounded-[4px]">
+//         <div className={css.qtyWrapper}>
 //           <button
 //             type="button"
-//             className="px-3 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+//             className={css.qtyBtn}
 //             onClick={dec}
 //             disabled={qty <= 1}
-//           >
+//             aria-label="Decrease quantity"
+//             >
 //             <Minus size={16} />
 //           </button>
           
-//           <span className="px-4 w-[46px] select-none text-center">{qty}</span>
+//           <span className={css.qtyNumber}>{qty}</span>
           
 //           <button
 //             type="button"
-//             className="px-3 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+//             className={css.qtyBtn}
 //             onClick={inc}
-//             // 🔹 Блокируем плюс, если достигли жесткого лимита
 //             disabled={qty >= maxAvailableToAdd}
+//             aria-label="Increase quantity"
 //           >
 //             <Plus size={16} />
 //           </button>
 //         </div>
 //       )}
 
+//       {/* Передаем стили в компонент Button. margin-left: auto всё выровняет! */}
 //       <Button
 //         variant="more"
 //         onClick={handleAdd}
 //         disabled={isCompletelyOutOfStock || isReserving}
-//         className={isCompletelyOutOfStock ? "opacity-50 cursor-not-allowed w-[220px] ml-36" : "w-[220px]"}
-//       >
+//         className={css.submitBtn}
+//         >
 //         {isReserving ? (
 //           <Loader2 className="animate-spin" size={18} />
 //         ) : isCompletelyOutOfStock ? (
@@ -146,11 +149,29 @@
 //           </>
 //         )}
 //       </Button>
+
+
+//       {/* <>
+//     <div className={css.container}>
+//     <Button onClick={handleAdd}>Add to Cart</Button>
+//     </div> */}
+
+//     <ReservationInfoModal
+//       isOpen={isModalOpen}
+//       onClose={() => {
+//         setIsModalOpen(false);
+//         processAddToCart(); // Добавляем в корзину ПОСЛЕ закрытия модалки
+//       }}
+//       />
+//   {/* </> */}
+
+      
 //     </div>
 //   );
 // };
 
 // export default AddToCartSection;
+
 
 
 "use client";
@@ -168,12 +189,21 @@ type Props = {
   card: DbCard;
   stock?: number; 
   disabled?: boolean;
+  // 🔹 НОВЫЕ ПРОПСЫ ДЛЯ УНИВЕРСАЛЬНОСТИ
+  showQuantity?: boolean; 
+  buttonVariant?: "more" | "loadMore" | "default" | "outline"; // Добавьте сюда ваши варианты кнопок
+  buttonClassName?: string;
 };
 
-const AddToCartSection = ({ card, disabled }: Props) => {
+const AddToCartSection = ({ 
+  card, 
+  disabled, 
+  showQuantity = true, // По умолчанию счетчик показывается
+  buttonVariant = "more", 
+  buttonClassName 
+}: Props) => {
   const [isReserving, setIsReserving] = useState(false);
   const [qty, setQty] = useState(1);
-  
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const addToCart = useCartStore((store) => store.addToCart);
@@ -185,7 +215,6 @@ const AddToCartSection = ({ card, disabled }: Props) => {
   const serverAvailable = card.availableQty ?? card.quantity;
   const maxAllowedInCart = Math.min(card.quantity, inCartQty + serverAvailable);
   const maxAvailableToAdd = maxAllowedInCart - inCartQty;
-
 
   useEffect(() => {
     if (qty > maxAvailableToAdd && maxAvailableToAdd > 0) {
@@ -203,8 +232,6 @@ const AddToCartSection = ({ card, disabled }: Props) => {
     if (qty > 1) setQty(qty - 1);
   };
   
-  
-  // 🔹 2. Выносим вашу логику добавления в отдельную функцию
   const processAddToCart = async () => {
     setIsReserving(true); 
     
@@ -216,6 +243,7 @@ const AddToCartSection = ({ card, disabled }: Props) => {
         set_name: card.set_name,
         image: card.faces?.[0]?.images?.normal || "", 
         price: card.prices,
+        // Если счетчик скрыт, qty всегда будет равно 1, что нам и нужно!
         quantity: qty, 
         stock: maxAllowedInCart,
         condition: card.condition,
@@ -233,33 +261,29 @@ const AddToCartSection = ({ card, disabled }: Props) => {
     }
   };
   
-  // 🔹 3. Обновляем handleAdd, чтобы он сначала проверял localStorage
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
     if (isCompletelyOutOfStock) return;
     
-    // Проверяем, стоит ли галочка "Больше не показывать"
-    // Используем window, чтобы избежать ошибок SSR в Next.js
     const isHidden = typeof window !== "undefined" ? localStorage.getItem("hideReservationInfo") : null;
     
     if (!isHidden) {
-      // Если галочки нет — открываем окно и ПРЕРЫВАЕМ процесс
       setIsModalOpen(true);
       return;
     }
     
-    // Если галочка стоит — сразу запускаем вашу логику
     processAddToCart();
   };
   
-  
-  
   return (
-    <div className={css.container}>
+    // Если мы скрываем счетчик, нам не нужен flex-контейнер с отступами, 
+    // кнопка просто займет свое место
+    <div className={showQuantity ? css.container : "w-full flex justify-center"}>
       
-      {!isCompletelyOutOfStock && (
+      {/* 🔹 Рендерим счетчик ТОЛЬКО если showQuantity === true */}
+      {showQuantity && !isCompletelyOutOfStock && (
         <div className={css.qtyWrapper}>
           <button 
             type="button" 
@@ -285,13 +309,13 @@ const AddToCartSection = ({ card, disabled }: Props) => {
         </div>
       )}
 
-      {/* Передаем стили в компонент Button. margin-left: auto всё выровняет! */}
+      {/* 🔹 Подставляем кастомные классы и варианты, если они переданы */}
       <Button
-        variant="more"
+        variant={buttonVariant}
         onClick={handleAdd}
         disabled={isCompletelyOutOfStock || isReserving} 
-        className={css.submitBtn}
-        >
+        className={buttonClassName || css.submitBtn}
+      >
         {isReserving ? (
           <Loader2 className="animate-spin" size={18} />
         ) : isCompletelyOutOfStock ? (
@@ -304,22 +328,19 @@ const AddToCartSection = ({ card, disabled }: Props) => {
         )}
       </Button>
 
+      {/* 🔹 Наша кнопка Wishlist (абсолютно спозиционирована) */}
+              {/* <WishlistButton 
+                        cardId={card._id.toString()} 
+                        variant="responsive" 
+                      /> */}
 
-      {/* <>
-    <div className={css.container}>
-    <Button onClick={handleAdd}>Add to Cart</Button>
-    </div> */}
-
-    <ReservationInfoModal 
-      isOpen={isModalOpen} 
-      onClose={() => {
-        setIsModalOpen(false);
-        processAddToCart(); // Добавляем в корзину ПОСЛЕ закрытия модалки
-      }} 
+      <ReservationInfoModal 
+        isOpen={isModalOpen} 
+        onClose={() => {
+          setIsModalOpen(false);
+          processAddToCart();
+        }} 
       />
-  {/* </> */}
-
-      
     </div>
   );
 };

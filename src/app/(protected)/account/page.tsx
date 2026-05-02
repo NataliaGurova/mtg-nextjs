@@ -62,31 +62,42 @@
 
 // export default AccountPage;
 
+// // src/app/(protected)/account/page.tsx
+// import { getServerSession } from "next-auth";
+// import { authConfig } from "@/auth";
+// import { redirect } from "next/navigation";
+// import AccountClient from "@/components/account/AccountClient/AccountClient";
+// import FixedBackgroundHome from "@/components/home/FixedBackgroundHome";
+// import Container from "@/components/Container/Container";
+// // import AccountClient from "@/components/account/AccountClient";
 
-import { getServerSession } from "next-auth";
-import { authConfig } from "@/auth";
+// export default async function AccountPage() {
+//   const session = await getServerSession(authConfig);
+
+//   // Если зашел неавторизованный — кидаем на логин
+//   if (!session) {
+//     redirect("/login");
+//   }
+
+//   return (
+//     <>
+//       <FixedBackgroundHome />
+//       <main className="relative z-10 min-h-screen bg-[#eff2f8]/50">
+//         <Container className="py-10">
+//           {redirect("/account/profile")}
+//         {/* <AccountClient user={session.user} /> */}
+//         </Container>
+//         </main>
+//     </>
+//   );
+// }
+
+
+// src/app/(protected)/account/page.tsx
 import { redirect } from "next/navigation";
-import AccountClient from "@/components/account/AccountClient/AccountClient";
-import FixedBackgroundHome from "@/components/home/FixedBackgroundHome";
-import Container from "@/components/Container/Container";
-// import AccountClient from "@/components/account/AccountClient";
 
-export default async function AccountPage() {
-  const session = await getServerSession(authConfig);
-
-  // Если зашел неавторизованный — кидаем на логин
-  if (!session) {
-    redirect("/login");
-  }
-
-  return (
-    <>
-      <FixedBackgroundHome />
-      <main className="relative z-10 min-h-screen bg-[#eff2f8]/50">
-      <Container className="py-10">
-        <AccountClient user={session.user} />
-        </Container>
-        </main>
-    </>
-  );
+export default function AccountPage() {
+  // Просто перенаправляем пользователя на первую вкладку
+  redirect("/account/profile");
 }
+

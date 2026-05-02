@@ -8,6 +8,7 @@ import css from "./CardStockItem.module.css";
 import AddToCartSection from "../AddToCartSection/AddToCartSection";
 // 🔹 Импортируем ваш стор
 import { useCartStore } from "@/store/cartStore";
+import WishlistButton from "@/components/WishlistButton/WishlistButton";
 
 type Props = {
   card: DbCard | CartItem;
@@ -57,14 +58,33 @@ const CardStockItem = ({ card }: Props) => {
         <strong className={css.price}>{price} ₴</strong>
         </div>
 
-      {isDbCard && (
+        {isDbCard && (
+        /* 🔹 Оборачиваем корзину и сердечко в flex-контейнер */
+        <div className="flex items-center gap-2">
+          
+          <AddToCartSection
+            card={card}
+            stock={totalStock}
+            // 🔹 4. Передаем флаг в кнопку, чтобы она заблокировалась
+            disabled={isOutOfStock} 
+          />
+
+          {/* 🔹 Наше умное сердечко становится ровно справа */}
+          <WishlistButton 
+            cardId={card._id.toString()} 
+            variant="responsive" 
+          />
+          
+        </div>
+      )}
+      {/* {isDbCard && (
         <AddToCartSection
           card={card}
           stock={totalStock}
           // 🔹 4. Передаем флаг в кнопку, чтобы она заблокировалась
           disabled={isOutOfStock} 
         />
-      )}
+      )} */}
     </div>
   );
 };

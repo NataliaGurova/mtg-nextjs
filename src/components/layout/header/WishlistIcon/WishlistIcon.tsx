@@ -36,26 +36,73 @@
 
 // export default FavoriteBtn;
 
+// "use client";
+
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+// import { Heart } from "lucide-react";
+// import clsx from "clsx";
+// import css from "./WishlistIcon.module.css";
+
+// const WishlistIcon = () => {
+//   const pathname = usePathname();
+//   const isActive = pathname === "/favorite";
+
+//   return (
+//     <Link
+//       href="/favorite"
+//       className={clsx(css.wrapper, isActive ? css.active : css.default)}
+//       title="Wishlist"
+//     >
+//       <Heart className={css.icon} />
+//       <span className={css.badge}>12</span>
+//     </Link>
+//   );
+// };
+
+// export default WishlistIcon;
+
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Heart } from "lucide-react";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
+import { useWishlistStore } from "@/store/wishlistStore";
+import { getWishlistIds } from "@/app/actions/wishlist";
 import css from "./WishlistIcon.module.css";
 
 const WishlistIcon = () => {
   const pathname = usePathname();
-  const isActive = pathname === "/favorite";
+  const { status } = useSession(); 
+  
+  // 1. Меняем URL на актуальный
+  const isActive = pathname === "/account/wishlist"; 
+  
+  // 2. Достаем динамическое количество товаров из стора
+  const items = useWishlistStore((state) => state.items);
+  const setItems = useWishlistStore((state) => state.setItems);
+  const count = items.length;
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      getWishlistIds().then(setItems);
+    } else if (status === "unauthenticated") {
+      setItems([]);
+    }
+  }, [status, setItems]);
 
   return (
     <Link
-      href="/favorite"
+      href="/account/wishlist" // Меняем ссылку здесь
       className={clsx(css.wrapper, isActive ? css.active : css.default)}
       title="Wishlist"
     >
       <Heart className={css.icon} />
-      <span className={css.badge}>12</span>
+      {/* 3. Показываем бейджик, только если есть товары, и выводим реальную цифру count */}
+      {count > 0 && <span className={css.badge}>{count}</span>}
     </Link>
   );
 };

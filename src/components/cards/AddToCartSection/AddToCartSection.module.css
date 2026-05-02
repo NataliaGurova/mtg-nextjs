@@ -1,72 +1,81 @@
 /* AddToCartSection.module.css */
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Прижимаем всё к правому краю */
-  gap: 12px;
-  width: 100%;
-}
-
-.qtyWrapper {
-  display: flex;
-  align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  height: 33px; /* Задаем четкую высоту, чтобы совпадала с кнопкой */
-}
-
-.qtyBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 12px;
-  height: 100%;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-  transition: opacity 0.2s;
-}
-
-.qtyBtn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  /* pointer-events: none; */
-}
-
-.qtyNumber {
-  width: 36px;
-  text-align: center;
-  font-weight: 500;
-  user-select: none; /* Чтобы цифра не выделялась при быстром клике */
-}
-
-/* Стили для самой кнопки Add to Cart */
-.submitBtn {
-  /* На мобилке кнопка займет всё оставшееся место рядом со счетчиком */
-  flex: 1; 
-  max-width: 220px; /* Но на ПК она не станет больше 220px */
-  /* height: 33px; */
-  
-  /* МАГИЯ: Если счетчика слева нет (Out of Stock), этот отступ 
-     автоматически прижмет кнопку к правому краю без жестких пикселей */
-  margin-left: auto; 
-}
-
 /* =========================================
-   MOBILE FIRST (Для очень маленьких экранов)
+   БАЗОВЫЕ СТИЛИ (MOBILE FIRST - для смартфонов)
    ========================================= */
-@media (max-width: 380px) {
-  .container {
-    gap: 8px; /* Уменьшаем расстояние между счетчиком и кнопкой */
+   .container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    gap: 8px; /* На мобилках расстояние меньше */
+    width: 100%;
+    /* outline: 1px solid red; */ /* Раскомментируйте для отладки */
+  }
+  
+  .qtyWrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    height: 33px; /* Задаем четкую высоту, чтобы совпадала с кнопкой */
   }
   
   .qtyBtn {
-    padding: 0 8px; /* Делаем кнопки + и - чуть уже */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px; /* На мобилках кнопки чуть уже */
+    height: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    transition: opacity 0.2s;
+  }
+  
+  .qtyBtn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
   }
   
   .qtyNumber {
-    width: 28px;
+    width: 28px; /* На мобилках цифра занимает меньше места */
+    text-align: center;
+    font-weight: 500;
+    user-select: none; /* Чтобы цифра не выделялась при быстром клике */
   }
-}
+  
+  /* Стили для самой кнопки Add to Cart */
+  .submitBtn {
+    flex: 1; /* На мобилке кнопка займет всё оставшееся место рядом со счетчиком */
+    max-width: 220px; /* Но она не станет больше 220px */
+    margin-left: auto; /* МАГИЯ: прижимает кнопку к правому краю, если счетчика нет */
+  }
+  
+  /* =========================================
+     TABLET & DESKTOP (От 768px и шире)
+     ========================================= */
+  @media (min-width: 768px) {
+    .container {
+      gap: 12px; /* На ПК и планшетах возвращаем нормальное расстояние */
+      
+      /* Если вам нужна жесткая ширина 400px именно на десктопе, раскомментируйте строку ниже. 
+         Но обычно лучше оставить 100%, чтобы контейнер подстраивался под родителя. */
+      width: 400px; 
+    }
+    
+    .qtyBtn {
+      padding: 0 12px; /* Делаем кнопки + и - шире для удобного клика мышкой */
+    }
+    
+    .qtyNumber {
+      width: 36px; /* Больше места для цифры */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+
+      width: 360px; /* Жесткая ширина для планшетов и десктопов */
+    }
+  }

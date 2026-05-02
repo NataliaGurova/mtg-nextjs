@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { X, Clock, CheckCircle2, ShoppingBag } from "lucide-react";
+import { useState } from "react";
+import { Clock, ShoppingBag } from "lucide-react";
+// import { X, Clock, CheckCircle2, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CART_RESERVATION_MS } from "@/lib/constants/constants";
 import css from "./ReservationInfoModal.module.css";
