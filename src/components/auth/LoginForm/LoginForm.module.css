@@ -41,7 +41,8 @@
   border-radius: 4px;
   background-color: transparent;
   padding: 10px 10px;
-  font-size: 14px;
+  /* font-size: 14px; */
+  font-size: 16px;
   padding-right: 40px; /* Отступ для глазика */
 }
 
