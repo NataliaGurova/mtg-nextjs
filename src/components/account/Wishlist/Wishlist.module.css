@@ -35,10 +35,10 @@
 /* --- Сетка карточек --- */
 .grid {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 1.5rem; /* gap-6 */
   /* Адаптивная сетка: 2 колонки на мобилках, 3 на планшетах, 4 на десктопе */
-  flex-wrap: wrap;
 }
 
 @media (min-width: 768px) {
