@@ -58,11 +58,21 @@
 
 @media (min-width: 1024px) {
   .container {
-    max-width: 1200px;
-    margin: 0 100px 40px 100px;
+    /* max-width: 1200px; */
+    /* margin: 0 100px 40px 100px; */
   }
   .grid {
-    gap: 3rem;
+    /* gap: 3rem; */
+    gap: 3rem 0;
     /* grid-template-columns: repeat(4, minmax(0, 1fr)); */
   }
 }
+
+@media (min-width: 1440px) {
+  .container {
+    /* max-width: 1200px; */
+    margin: 0 100px 40px 100px; /* Ваши оригинальные большие отступы для ПК */
+  }
+  
+}
+

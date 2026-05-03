@@ -13,7 +13,6 @@
   
   .welcomeRow {
     display: flex;
-    /* flex-direction: column; */
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
@@ -107,10 +106,8 @@
   
     .welcomeRow {
       flex-direction: row; 
-      /* align-items: center; */
       gap: 0;
       margin-bottom: 32px;
-      /* margin-right: 3.75rem; */
     
       justify-content: flex-start;
     }
@@ -144,10 +141,20 @@
      ========================================= */
   @media (min-width: 1024px) {
     .headerProfile {
-      margin: 0 100px 40px 100px; /* Ваши оригинальные большие отступы для ПК */
+      /* margin: 0 100px 40px 100px; */
     }
     
     .title {
       font-size: 36px;
     }
+  }
+
+  /* =========================================
+     DESKTOP (От 1440px и шире)
+     ========================================= */
+  @media (min-width: 1440px) {
+    .headerProfile {
+      margin: 0 100px 40px 100px; /* Ваши оригинальные большие отступы для ПК */
+    }
+    
   }
