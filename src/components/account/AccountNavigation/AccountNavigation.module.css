@@ -13,18 +13,26 @@
   
   .welcomeRow {
     display: flex;
-    flex-direction: column; /* Имя и кнопка друг под другом на узких экранах */
+    /* flex-direction: column; */
     align-items: flex-start;
+    justify-content: space-between;
     gap: 12px;
     margin-bottom: 24px;
   }
   
   .title {
-    font-size: 24px; /* Уменьшаем размер шрифта для телефона */
-    font-weight: 400; 
+    display: block;
+    /* font-size: 24px;  */
+    font-size: 28px;
+    font-weight: 500; 
     color: #041e3a; 
     letter-spacing: 0.02em;
     line-height: 1.2;
+  }
+
+  .userName {
+    display: block;
+    color: #041e3a;
   }
   
   .logoutBtn {
@@ -98,16 +106,24 @@
     }
   
     .welcomeRow {
-      flex-direction: row; /* Ставим заголовок и кнопку в один ряд */
-      align-items: center; /* Или flex-end, чтобы выровнять по низу шрифта */
-      gap: 16px;
+      flex-direction: row; 
+      /* align-items: center; */
+      gap: 0;
       margin-bottom: 32px;
+      /* margin-right: 3.75rem; */
+    
+      justify-content: flex-start;
     }
-  
+    
     .title {
-      font-size: 32px; /* Возвращаем крупный заголовок */
+      font-size: 32px; 
+      margin-right: 3rem; 
     }
-  
+
+    .userName {
+      display: inline;
+    }
+
     .navMenu {
       gap: 24px;
       overflow-x: visible; /* Отключаем горизонтальный скролл на планшетах */

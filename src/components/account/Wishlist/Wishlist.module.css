@@ -7,7 +7,7 @@
 }
 
 .title {
-  font-size: 1.5rem; /* text-2xl */
+  font-size: 22px; 
   font-weight: 700;  /* font-bold */
   margin-bottom: 1.5rem; /* mb-6 */
   color: #041e3a; /* text-[#041e3a] */
@@ -36,7 +36,7 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem; /* gap-6 */
   /* Адаптивная сетка: 2 колонки на мобилках, 3 на планшетах, 4 на десктопе */
 }
@@ -45,7 +45,13 @@
   .container {
     margin: 0 40px 40px 40px;
   }
+
+  .title {
+    font-size: 1.5rem; /* 24px */ 
+  }
+
   .grid {
+    justify-content: space-between;
     /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
   }
 }

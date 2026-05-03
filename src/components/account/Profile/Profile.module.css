@@ -10,19 +10,20 @@
     color: rgba(40, 39, 39, 0.7);
   }
   
-  .header {
+  /* .header {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
-  }
+  } */
   
   .title {
-    letter-spacing: -0.6px;
-    font-size: 22px; /* Чуть меньше для телефона */
+    /* letter-spacing: -0.6px; */
+    font-size: 24px; /* Чуть меньше для телефона */
     font-weight: 700;
     color: #041e3a;
-    margin: 0; 
+    margin-bottom: 1rem;
+    /* margin: 0;  */
   }
   
   .form {
@@ -130,12 +131,12 @@
     .container {
       margin: 0 40px 40px 40px;
     }
-    .header {
+    /* .header {
       gap: 12px;
       margin-bottom: 24px;
-    }
+    } */
     .title {
-      font-size: 24px; /* Возвращаем десктопный размер заголовка */
+      font-size: 24px; 
     }
     .form {
       gap: 20px; /* Возвращаем десктопные отступы между полями */

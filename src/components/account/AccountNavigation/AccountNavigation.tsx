@@ -36,7 +36,8 @@ const AccountNavigation = ({ user }: AccountNavigationProps) => {
     <div className={css.headerProfile}>
       <div className={css.welcomeRow}>
         <h1 className={css.title}>
-          Welcome to Citadel, {user.firstName || user.name || "Guest"}
+          {/* Welcome to Citadel, {user.firstName || user.name || "Guest"} */}
+          Вітаю у Citadel, <span className={css.userName}>{user.firstName || user.name || "Guest"}</span>
         </h1>
         <button onClick={() => signOut({ callbackUrl: "/" })} className={css.logoutBtn}>
           Logout
