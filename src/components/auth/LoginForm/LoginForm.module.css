@@ -41,7 +41,7 @@
   border-radius: 4px;
   background-color: transparent;
   padding: 10px 10px;
-  /* font-size: 14px; */
+
   font-size: 16px;
   padding-right: 40px; /* Отступ для глазика */
 }
@@ -124,4 +124,11 @@
 .link:hover, .link.active {
   color: #fcd21a;
   border-bottom: 1px solid #fcd21a;
+}
+
+
+@media (min-width: 767px) {
+  .input {
+    font-size: 14px;
+  }
 }

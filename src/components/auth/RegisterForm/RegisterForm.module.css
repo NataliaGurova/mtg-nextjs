@@ -138,3 +138,9 @@
   border-bottom: 1px solid #fcd21a;
 }
 
+@media (min-width: 767px) {
+  .input {
+    font-size: 14px;
+  }
+}
+

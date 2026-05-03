@@ -104,6 +104,8 @@
     background-color: transparent;
     border-bottom: 1px solid var(--main-text, #000);
     outline: none;
+
+    font-size: 14px;
   }
 
   .clearButton {
