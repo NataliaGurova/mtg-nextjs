@@ -104,6 +104,11 @@ const buttonVariants = cva(
           "px-[10px] py-[6px] rounded-[4px] bg-black text-[#F4F2EB] " +
           "uppercase tracking-wide font-semibold " +
           "hover:bg-gray-800 active:scale-[0.98]",
+      
+
+      /** 👇 НОВАЯ ВАРИАЦИЯ ДЛЯ ТЕКСТОВОЙ КНОПКИ БЕЗ ФОНА */
+        textUppercase:
+          "bg-transparent border-none uppercase font-bold tracking-wider hover:opacity-70",
       },
 
       size: {
