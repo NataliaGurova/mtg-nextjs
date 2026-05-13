@@ -152,6 +152,10 @@ const BannerAvatar = () => {
             priority
           />
 
+          <p className={css.text}>
+        WATER. EARTH. FIRE. AIR... <span className={css.magic}>MAGIC.</span>
+      </p>
+
           <Link
             href={{
               pathname: "/singles",

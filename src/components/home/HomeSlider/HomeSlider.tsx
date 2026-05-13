@@ -56,9 +56,11 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import BannerWelcome from "./BannerWelcome/BannerWelcome";
 import BannerAvatar from "./BannerAvatar/BannerAvatar";
+import BannerSecrets from "./BannerSecrets/BannerSecrets";
 
 const SLIDES = [
   { id: "welcome", Component: BannerWelcome },
+  { id: "secrets", Component: BannerSecrets },
   { id: "avatar", Component: BannerAvatar },
 ];
 
