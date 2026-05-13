@@ -152,6 +152,7 @@ import Image from "next/image";
 import { ChevronDown, ChevronUp, Search } from "lucide-react"; // 🔹 Добавил иконку Search
 import { useSearchParams } from "next/navigation";
 import styles from "./CardSet.module.css";
+import SetIcon from "@/components/SetIcon/SetIcon";
 
 type SetSummary = {
   set: string;
@@ -275,11 +276,11 @@ const CardSet = ({ selectedSets, onToggleSet }: CardSetProps) => {
                         </span>
 
                         {s.iconSvgUrl ? (
-                          <Image
-                            src={s.iconSvgUrl}
-                            alt={s.set_name}
-                            width={20}
-                            height={20}
+                          <SetIcon
+                            setCode={s.set}
+                            setName={s.set_name}
+                            iconSvgUrl={s.iconSvgUrl}
+                            size={20}
                           />
                         ) : (
                           <span className="w-[20px] text-[11px] font-bold uppercase text-center">

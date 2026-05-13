@@ -176,6 +176,7 @@ import css from "./CardDetails.module.css";
 import SetIcon from "@/components/SetIcon/SetIcon";
 import CardFlipper from "@/components/CardFlipper/CardFlipper";
 import CardStockItem from "@/components/cards/CardStockItem/CardStockItem";
+import { getScryfallSetIcon } from "@/lib/scryfall/scryfall";
 
 interface CardDetailsProps {
   cards: DbCard[];
@@ -201,10 +202,15 @@ const ALLOWED_FORMATS = [
 
 type AllowedFormat = typeof ALLOWED_FORMATS[number];
 
-const CardDetails = ({ cards }: CardDetailsProps) => {
+const CardDetails = async ({ cards }: CardDetailsProps) => {
   const mainCard = cards[0];
 
   const nameParts = mainCard.name.split(" // ");
+
+  // 🔹 3. Вызываем функцию чисто и коротко
+  const setIconUrl = await getScryfallSetIcon(mainCard.set);
+
+  console.log("Данные сета:", mainCard.set)
 
   return (
     <div className={css.cardDetailsContainer}>
@@ -275,6 +281,8 @@ const CardDetails = ({ cards }: CardDetailsProps) => {
             <SetIcon
               setCode={mainCard.set}
               setName={mainCard.set_name}
+              iconSvgUrl={setIconUrl}
+              applyThemeColor={true}
             />
             <h3 className={css.set}>
               {mainCard.set_name} # {mainCard.collector_number}
