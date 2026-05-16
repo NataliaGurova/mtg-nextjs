@@ -1,17 +1,19 @@
-"use client";
+// надо Suspense!!!
 
-import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+// "use client";
 
-const GoogleButton = () => {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/profile";
+// import { signIn } from "next-auth/react";
+// import { useSearchParams } from "next/navigation";
 
-  return (
-    <button onClick={() => signIn("google", { callbackUrl })}>
-      Sign in with Google
-    </button>
-  );
-};
+// const GoogleButton = () => {
+//   const searchParams = useSearchParams();
+//   const callbackUrl = searchParams.get("callbackUrl") || "/profile";
 
-export { GoogleButton };
+//   return (
+//     <button onClick={() => signIn("google", { callbackUrl })}>
+//       Sign in with Google
+//     </button>
+//   );
+// };
+
+// export { GoogleButton };
