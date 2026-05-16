@@ -17,13 +17,13 @@ interface SinglesPageProps {
     q?: string;
     finish?: string;
     sets?: string;
-    // type?: string;
     colors?: string;
+    // type?: string;
     // rarity?: string;
   }>;
 }
 
-const LIMIT = 24;
+const LIMIT = 8;
 
 const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
   const params = await searchParams; // ⚡ Нужно await

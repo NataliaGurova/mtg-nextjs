@@ -283,6 +283,7 @@ const CardDetails = async ({ cards }: CardDetailsProps) => {
               setName={mainCard.set_name}
               iconSvgUrl={setIconUrl}
               applyThemeColor={true}
+              size={26}
             />
             <h3 className={css.set}>
               {mainCard.set_name} # {mainCard.collector_number}
