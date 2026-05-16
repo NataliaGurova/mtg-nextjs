@@ -23,7 +23,7 @@ interface SinglesPageProps {
   }>;
 }
 
-const LIMIT = 8;
+const LIMIT = 24;
 
 const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
   const params = await searchParams; // ⚡ Нужно await
