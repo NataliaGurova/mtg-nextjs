@@ -123,9 +123,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AlignRight, X } from "lucide-react";
 import clsx from "clsx";
-import { navLinks } from "@/constants/data";
+// import { navLinks } from "@/lib/constants/data";
 import UserMenu from "../UserMenu/UserMenu";
 import css from "./MobileMenu.module.css";
+import { navLinks } from "@/lib/constants/data";
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
