@@ -3,7 +3,7 @@
 import Logo from "../../Logo/Logo";
 import CartIcon from "./CartIcon/CartIcon";
 
-import { navLinks } from "@/constants/data";
+import { navLinks } from "@/lib/constants/data";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from 'next/navigation';
