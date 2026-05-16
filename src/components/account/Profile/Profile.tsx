@@ -30,7 +30,7 @@ const Profile = ({ user }: { user: AccountUser }) => {
       {/* ЗАГОЛОВОК */}
       {/* <div className={css.header}> */}
         {/* <Settings size={28} className="text-[#041e3a]" /> */}
-        <h2 className={css.title}>Personal Information</h2>
+        <h2 className={css.title}>Особисті дані</h2>
       {/* </div> */}
 
       <div className={css.form}>
@@ -38,8 +38,9 @@ const Profile = ({ user }: { user: AccountUser }) => {
         {/* ПОЛЕ: ИМЯ */}
         <label className={css.label}>
           <span className={css.labelText}>
-            <User size={16} /> 
-            First Name
+            <User size={16} />
+            Ім&apos;я
+            {/* Ім'я */}
           </span>
           <div className={css.inputContainer}>
             <input
@@ -66,7 +67,7 @@ const Profile = ({ user }: { user: AccountUser }) => {
         <label className={css.label}>
           <span className={css.labelText}>
             <User size={16} /> 
-            Last Name
+            Прізвище
           </span>
           <div className={css.inputContainer}>
             <input
@@ -93,7 +94,7 @@ const Profile = ({ user }: { user: AccountUser }) => {
         <label className={css.label}>
           <span className={css.labelText}>
             <Mail size={16} /> 
-            Email Address
+            Email 
           </span>
           <div className={css.inputContainer}>
             <input
