@@ -282,7 +282,8 @@ const CardDetails = async ({ cards }: CardDetailsProps) => {
               setCode={mainCard.set}
               setName={mainCard.set_name}
               iconSvgUrl={setIconUrl}
-              applyThemeColor={true}
+              theme = "green"
+              // applyThemeColor={true}
               size={26}
             />
             <h3 className={css.set}>

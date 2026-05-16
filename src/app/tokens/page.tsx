@@ -1,3 +1,4 @@
+import Container from "@/components/Container/Container";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,9 +7,11 @@ export const metadata: Metadata = {
 
 const TokensPage = () => {
   return (
+    <Container className="py-5 md:py-10">
     <div>
       Tokens
     </div>
+    </Container>
   )
 }
 

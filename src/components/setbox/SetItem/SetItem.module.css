@@ -1,0 +1,117 @@
+/* Главная обертка карточки */
+.wrapper {
+  display: flex;
+  width: 350px;
+  height: 320px;
+  flex-direction: column;
+  align-items: center;
+  max-width: 350px;
+  margin-bottom: 40px;
+}
+
+/* --- ВЕРХНЯЯ ЧАСТЬ: Сундук --- */
+.chestContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.iconWrapper {
+  position: absolute;
+  height: 37px;
+  width: 37px;
+  justify-content: center;
+  align-items: center;
+  top: 106px;
+  left: 82px;
+  display: flex;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.textWrapper {
+  position: absolute;
+  top: 119px;
+  left: 168px;
+  height: 20px;
+  width: 54px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.setText {
+  font-family: var(--font-georgia);
+  font-weight: 700;
+  font-size: 1.25rem; /* text-xl */
+  margin: 0;
+  line-height: 1; /* leading-none */
+  color: #111827; /* text-gray-900 */
+}
+
+/* --- НИЖНЯЯ ЧАСТЬ: Текст и Цена --- */
+.infoContainer {
+  /* margin-top: 1rem; */
+  display: flex;
+  height: 120px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  /* gap: 0.25rem; */
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937; /* text-gray-800 */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Стилизация золотого бейджика Foil */
+/* .foilBadge {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to right, #f59e0b, #d97706); 
+} */
+
+.foilPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 240px;
+  margin-top: auto;
+  /* margin: 0 auto; */
+}
+.foil {
+  width: 75px; 
+  width: 92px;
+  height: 25px; 
+  font-size: 16px;
+  /* font-size: 12px; */
+
+  text-align: center;
+  font-weight: bold;
+  background-color: #fff;
+  background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
+  border-radius: 4px;
+  /* padding: 2px 5px; */
+  color: #333;  
+}
+
+.price {
+  margin-left: auto;
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-extrabold */
+  color: #1d5105; /* Ваш фирменный цвет */
+  /* margin: 0.25rem 0 0 0; */
+}

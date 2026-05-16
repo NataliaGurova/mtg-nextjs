@@ -1,0 +1,58 @@
+
+
+[
+  {
+    "set": "fic",
+    "set_name": "Final Fantasy Commander",
+    "isFoil": true,
+    "prices": 23000
+  },
+  {
+    "set": "blb",
+    "set_name": "Bloomburrow",
+    "isFoil": false,
+    "prices": 14500
+  },
+  {
+    "set": "mh3",
+    "set_name": "Modern Horizons 3",
+    "isFoil": true,
+    "prices": 35000
+  },
+  {
+    "set": "otj",
+    "set_name": "Outlaws of Thunder Junction",
+    "isFoil": false,
+    "prices": 12500
+  },
+  {
+    "set": "mkm",
+    "set_name": "Murders at Karlov Manor",
+    "isFoil": true,
+    "prices": 18000
+  },
+  {
+    "set": "lci",
+    "set_name": "The Lost Caverns of Ixalan",
+    "isFoil": false,
+    "prices": 15000
+  },
+  {
+    "set": "woe",
+    "set_name": "Wilds of Eldraine",
+    "isFoil": true,
+    "prices": 21000
+  },
+  {
+    "set": "ltr",
+    "set_name": "The Lord of the Rings: Tales of Middle-earth",
+    "isFoil": true,
+    "prices": 45000
+  },
+  {
+    "set": "neo",
+    "set_name": "Kamigawa: Neon Dynasty",
+    "isFoil": false,
+    "prices": 16000
+  }
+]
