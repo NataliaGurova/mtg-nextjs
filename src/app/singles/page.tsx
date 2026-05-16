@@ -6,6 +6,8 @@ import Container from "@/components/Container/Container";
 import { DbCard } from "@/types/types";
 import { Metadata } from "next";
 
+import { Suspense } from "react";
+
 export const metadata: Metadata = {
   title: "Singles",
 };
@@ -70,7 +72,11 @@ const SinglesPage = async ({ searchParams }: SinglesPageProps) => {
     <Container className="py-5 md:py-10">
       {/* <div className="flex items-start gap-6"> */}
       <div className="flex flex-col md:flex-row items-start gap-6">
-        <FiltersSidebar />
+
+        <Suspense fallback={null}>
+          <FiltersSidebar />
+        </Suspense>
+        
         <section className="flex-1 w-full">
           <CardsList
             items={items}
