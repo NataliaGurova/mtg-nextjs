@@ -279,7 +279,7 @@ const CardSet = ({ selectedSets, onToggleSet }: CardSetProps) => {
                           <SetIcon
                             setCode={s.set}
                             setName={s.set_name}
-                            iconSvgUrl={s.iconSvgUrl}
+                            // iconSvgUrl={s.iconSvgUrl}
                             size={20}
                           />
                         ) : (
