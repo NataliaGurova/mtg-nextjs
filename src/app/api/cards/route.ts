@@ -11,7 +11,7 @@ import { DbCard, Face } from "@/types/types";
 export const dynamic = 'force-dynamic';
 
 const DEFAULT_LIMIT = 20;
-const MAX_LIMIT = 50;
+const MAX_LIMIT = 100;
 
 const escapeRegex = (s: string) =>
   s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
