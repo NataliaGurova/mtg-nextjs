@@ -16,7 +16,9 @@
   --color-light-text: rgba(40, 39, 39, 0.7); 
   --color-nav-yellow: #fcd21a;
   --color-logo: #B50828;
-  --color-avatar-bg: #F4F2EB;  
+  --color-avatar-bg: #F4F2EB;
+  --color-secrets-bg: #302011;
+
   --color-welcome-bg: #041e3a; 
   --color-box-grey: #ccc;
   /* --color-inputs: #eff2f8; */
