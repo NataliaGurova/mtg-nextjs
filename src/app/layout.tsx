@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="uk">
       {/* 🔹 1. Вернули flex-классы для футера */}
       <body className={`${montserrat.variable} font-sans antialiased flex flex-col min-h-screen`}>
         <Providers>

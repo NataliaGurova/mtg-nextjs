@@ -32,6 +32,8 @@ import { signIn } from "next-auth/react";
 // // Вытягиваем тип из схемы
 // type RegisterFormValues = z.infer<typeof registerSchema>;
 
+
+
 // Вспомогательная функция для заглавной буквы
 const capitalize = (value: string) => {
   if (!value) return value;
@@ -74,44 +76,9 @@ const RegisterForm = () => {
       }
     };
 
-  // 🔹 2. Функция отправки данных на сервер
-  // const onSubmit = async (data: RegisterFormData) => {
-  //   try {
-  //     // Отправляем POST запрос на наш API
-  //     const res = await fetch("/api/auth/register", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         firstName: data.firstName,
-  //         lastName: data.lastName,
-  //         email: data.email,
-  //         password: data.password, // repeatPassword на сервер не шлем
-  //       }),
-  //     });
-
-  //     const result = await res.json();
-
-  //     if (!res.ok) {
-  //       // Если сервер вернул ошибку (например, email занят), показываем тост
-  //       toast.error(result.message || "Ошибка при регистрации");
-  //       return;
-  //     }
-
-  //     // Если всё успешно
-  //     toast.success("Аккаунт успешно создан! Теперь вы можете войти.");
-      
-  //     // Перенаправляем на страницу логина
-  //     // router.push("/login"); 
-  //     router.push("/account"); 
-
-  //   } catch (error) {
-  //     console.error("Registration error:", error);
-  //     toast.error("Произошла непредвиденная ошибка");
-  //   }
-  // };
-  const onSubmit = async (data: RegisterFormData) => {
-    try {
-      // 1. Сначала создаем аккаунт в базе
+    const onSubmit = async (data: RegisterFormData) => {
+      try {
+      // 1. Создаем аккаунт в базе (этот запрос также инициирует отправку письма)
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -130,8 +97,21 @@ const RegisterForm = () => {
         return;
       }
 
-      toast.success("Аккаунт создан! Выполняем вход...");
+        toast.success("Аккаунт создан! Выполняем вход...");
+      //   // 2. Показываем уведомление об успешной регистрации и необходимости проверки почты
+      // toast.success("Регистрация успешна! Проверьте вашу почту для активации аккаунта.");
 
+  //       // 3. Убрали автоматический signIn. Перенаправляем на страницу логина
+  //     router.push("/login");
+
+  //   } catch (error) {
+  //     console.error("Registration error:", error);
+  //     toast.error("Произошла непредвиденная ошибка");
+  //   }
+        // };
+        // return (
+        //   <div className={css.container}> .........
+        
       // 2. Сразу же логиним пользователя (без перезагрузки страницы)
       const signInResult = await signIn("credentials", {
         email: data.email,
@@ -145,7 +125,7 @@ const RegisterForm = () => {
         router.push("/login");
         return;
       }
-
+      
       // 3. Если всё прошло отлично, кидаем пользователя в аккаунт!
       router.push("/account"); // 👈 Укажите здесь правильный путь к странице профиля
       router.refresh(); // Принудительно обновляем кэш Next.js, чтобы Navbar увидел, что мы залогинены
@@ -155,7 +135,7 @@ const RegisterForm = () => {
       toast.error("Произошла непредвиденная ошибка");
     }
   };
-
+  
   return (
     <div className={css.container}>
       <h1 className={css.title}>Register a New account</h1>
@@ -164,7 +144,7 @@ const RegisterForm = () => {
         className={css.form}
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
-      >
+        >
         {/* FIRST NAME */}
         <label className={css.label}>
           <Controller
@@ -177,8 +157,8 @@ const RegisterForm = () => {
                 className={css.input}
                 onChange={(e) => field.onChange(capitalize(e.target.value))}
                 onKeyDown={focusNext("lastName")}
-              />
-            )}
+                />
+              )}
           />
         </label>
         <div className={css.error}>
@@ -192,11 +172,11 @@ const RegisterForm = () => {
             control={control}
             render={({ field }) => (
               <input
-                {...field}
-                placeholder="Last name"
-                className={css.input}
-                onChange={(e) => field.onChange(capitalize(e.target.value))}
-                onKeyDown={focusNext("email")}
+              {...field}
+              placeholder="Last name"
+              className={css.input}
+              onChange={(e) => field.onChange(capitalize(e.target.value))}
+              onKeyDown={focusNext("email")}
               />
             )}
           />
@@ -212,10 +192,10 @@ const RegisterForm = () => {
             control={control}
             render={({ field }) => (
               <input
-                {...field}
-                placeholder="Email"
-                className={css.input}
-                onKeyDown={focusNext("password")}
+              {...field}
+              placeholder="Email"
+              className={css.input}
+              onKeyDown={focusNext("password")}
               />
             )}
           />
@@ -237,15 +217,15 @@ const RegisterForm = () => {
                   className={css.input}
                   type={showPassword ? "text" : "password"}
                   onKeyDown={focusNext("repeatPassword")}
+                  />
+                )}
                 />
-              )}
-            />
             <button
               type="button"
               onClick={toggleVisibility}
               className={css.toggleButton}
               aria-label="Toggle Password Visibility"
-            >
+              >
               {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
             </button>
           </div>
@@ -267,15 +247,15 @@ const RegisterForm = () => {
                   className={css.input}
                   type={showPassword ? "text" : "password"}
                   onKeyDown={focusNext("submit")}
-                />
-              )}
+                  />
+                )}
             />
             <button
               type="button"
               onClick={toggleVisibility}
               className={css.toggleButton}
               aria-label="Toggle Password Visibility"
-            >
+              >
               {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
             </button>
           </div>
@@ -291,7 +271,7 @@ const RegisterForm = () => {
           type="submit"
           value="Register"
           disabled={!isValid}
-        />
+          />
       </form>
 
       <div className={css.linkSign}>
@@ -299,7 +279,7 @@ const RegisterForm = () => {
         <Link
           href="/login"
           className={clsx(css.link, pathname === "/login" && css.active)}
-        >
+          >
           Login
         </Link>
       </div>
@@ -308,3 +288,39 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
+
+// 🔹 2. Функция отправки данных на сервер
+// const onSubmit = async (data: RegisterFormData) => {
+//   try {
+//     // Отправляем POST запрос на наш API
+//     const res = await fetch("/api/auth/register", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         firstName: data.firstName,
+//         lastName: data.lastName,
+//         email: data.email,
+//         password: data.password, // repeatPassword на сервер не шлем
+//       }),
+//     });
+
+//     const result = await res.json();
+
+//     if (!res.ok) {
+//       // Если сервер вернул ошибку (например, email занят), показываем тост
+//       toast.error(result.message || "Ошибка при регистрации");
+//       return;
+//     }
+
+//     // Если всё успешно
+//     toast.success("Аккаунт успешно создан! Теперь вы можете войти.");
+    
+//     // Перенаправляем на страницу логина
+//     // router.push("/login"); 
+//     router.push("/account"); 
+
+//   } catch (error) {
+//     console.error("Registration error:", error);
+//     toast.error("Произошла непредвиденная ошибка");
+//   }
+// };

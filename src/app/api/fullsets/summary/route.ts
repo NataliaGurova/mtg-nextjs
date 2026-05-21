@@ -82,12 +82,12 @@
 
 //     return NextResponse.json({ items }, { status: 200 });
 //   } catch (err) {
-//     console.error("❌ /api/sets/summary error:", err);
+//     console.error("❌ /api/fullsets/summary error:", err);
 //     return NextResponse.json({ items: [] }, { status: 500 });
 //   }
 // }
 
-// app/api/sets/summary/route.ts
+// app/api/fullsets/summary/route.ts
 
 import { connectDB } from "@/db/db";
 import Card from "@/db/models/Card";
@@ -216,7 +216,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json({ items }, { status: 200 });
   } catch (err) {
-    console.error("❌ /api/sets/summary error:", err);
+    console.error("❌ /api/fullsets/summary error:", err);
     return NextResponse.json({ items: [] }, { status: 500 });
   }
 }

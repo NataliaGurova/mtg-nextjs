@@ -1,58 +1,101 @@
-
-
 [
   {
-    "set": "fic",
-    "set_name": "Final Fantasy Commander",
+    "set": "who",
+    "set_name": "Doctor Who",
     "isFoil": true,
-    "prices": 23000
+    "prices": 23000,
+    "releaseDate": "2023-10-13",
+    "mainCard": "The Doctor",
+    "mainSetSize": 359,
+    "description": "Легендарные герои, магия и призываемые существа из культовой вселенной Final Fantasy сходятся в грандиозных битвах формата Командир.",
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/5uqzoaHDMPNevXnRGlkEo8/a029d39e88118c94c0cde1a252269372/KcPo530Nm_11600x1080.jpg?q=70&w=1920&fm=webp" 
   },
   {
     "set": "blb",
     "set_name": "Bloomburrow",
     "isFoil": false,
-    "prices": 14500
+    "prices": 14500,
+    "releaseDate": "2024-08-02",
+    "mainCard": "Mabel, Heir to Cragflame",
+    "mainSetSize": 284,
+    "description": "Уютный, но опасный мир без людей, где храбрые мыши, жабы и белки защищают свою долину от гигантских зверей-элементалей.",
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/4If0bVcGTVw1FmdmcPLX0l/b270559331bd98f10afe9afff3e9c1dc/B73H34Ddder_1920x1080.jpg?q=80&w=1920&h=1050&fit=crop&f=center&fm=webp"
   },
   {
     "set": "mh3",
     "set_name": "Modern Horizons 3",
     "isFoil": true,
-    "prices": 35000
+    "prices": 35000,
+    "releaseDate": "2024-06-14",
+    "mainCard": "Ulamog, the Defiler",
+    "mainSetSize": 320,
+    "description": "Эволюция формата Modern. Возвращение механики энергии, могущественных союзных феч-лендов и устрашающих титанов Эльдрази.",
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/64rOcFMnXcGyqznfelNSRo/f87827374c19cb04a39466880cecdb6a/V3reEk1tT7ee3e_1920x700.jpg?q=80&w=1920&h=700&fit=crop&f=center&fm=webp"
   },
   {
     "set": "otj",
     "set_name": "Outlaws of Thunder Junction",
     "isFoil": false,
-    "prices": 12500
+    "prices": 12500,
+    "releaseDate": "2024-04-19",
+    "mainCard": "Oko, the Ringleader",
+    "mainSetSize": 286,
+    "description": "Дикий Запад мультивселенной. Худшие злодеи и преступники из разных миров объединяются ради величайшего ограбления века.",
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/6okfpxt3wG7cqYSvCAXui1/044656749018e82af2bcdda3dc13e524/ajgek214njst-1023x600.jpg?q=70&w=767&fm=webp"
   },
   {
     "set": "mkm",
     "set_name": "Murders at Karlov Manor",
     "isFoil": true,
-    "prices": 18000
+    "prices": 18000,
+    "releaseDate": "2024-02-09",
+    "mainCard": "Alquist Proft, Master Sleuth",
+    "mainSetSize": 296,
+    "description": "Классический детектив в декорациях Равники. Собирайте улики, надевайте плащ следователя и найдите виновного до того, как он нанесет новый удар.",
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/5IpzwfzisqktbGso4ADudz/b82affc918ac3f6ccc6e2b0bccc125ec/SuzzZi1lLfhTt7T_1600x1080.jpg?q=70&w=1920&fm=webp"
   },
   {
     "set": "lci",
     "set_name": "The Lost Caverns of Ixalan",
     "isFoil": false,
-    "prices": 15000
+    "prices": 15000,
+    "releaseDate": "2023-11-17",
+    "mainCard": "Ghalta, Stampede Tyrant",
+    "mainSetSize": 291,
+    "description": "Спуск в неизведанные глубины. Откройте для себя скрытую цивилизацию, древних богов и яростных динозавров в самом сердце Иксалана.",
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Ghalta,+Stampede+Tyrant&format=image&version=art_crop"
   },
   {
     "set": "woe",
     "set_name": "Wilds of Eldraine",
     "isFoil": true,
-    "prices": 21000
+    "prices": 21000,
+    "releaseDate": "2023-09-08",
+    "mainCard": "Rowan, Scion of War",
+    "mainSetSize": 276,
+    "description": "Мрачные сказки оживают. Погрузитесь в зачарованные леса Элдраина и столкнитесь с ведьмами после разрушительного вторжения фирексийцев.",
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/2Eq0mcvZ8Pw9H57HaVRZrq/6af5fd80dcea300cb818e1b014c98dc1/v4anjdKFGB_1600x1080-80.jpg?q=70&w=1920&fm=webp"
   },
   {
     "set": "ltr",
     "set_name": "The Lord of the Rings: Tales of Middle-earth",
     "isFoil": true,
-    "prices": 45000
+    "prices": 45000,
+    "releaseDate": "2023-06-23",
+    "mainCard": "The One Ring",
+    "mainSetSize": 289,
+    "description": "Эпическое путешествие по Средиземью. Присоединяйтесь к Братству Кольца или обрушьте на мир мощь темного владыки Саурона.",
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/6PZskMfnk1zm6Yii9kjNOx/8821274807e7e141d3bb0d19d4f6682d/fbsi49znfk03_1600x1080.jpg?q=70&w=1920&fm=webp"
   },
   {
     "set": "neo",
     "set_name": "Kamigawa: Neon Dynasty",
     "isFoil": false,
-    "prices": 16000
+    "prices": 16000,
+    "releaseDate": "2022-02-18",
+    "mainCard": "Boseiju, Who Endures",
+    "mainSetSize": 302,
+    "description": "Киберпанк встречает древние традиции. Залитые неоном улицы, кибер-ниндзя, духи-ками и технологии будущего в возрожденной Камигаве.",
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/7qrlYjGhRqnkhvWa5F0kzK/3345e908f23417470444b7244f830fd0/NomjY322Ct_1920x700.jpg?q=80&w=1920&h=700&fit=crop&f=center&fm=webp"
   }
 ]

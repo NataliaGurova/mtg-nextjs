@@ -6,9 +6,6 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-// import { getServerSession } from "next-auth";
-// import { authConfig } from "@/auth";
-// import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Register | Citadel",
@@ -17,12 +14,6 @@ export const metadata = {
 
 
 const RegisterPage = async () => {
-
-  // const session = await getServerSession(authConfig);
-
-  // if (session) {
-  //   redirect("/account");
-  // }
 
   // 1. Проверяем, авторизован ли пользователь
   const session = await getServerSession(authConfig);
@@ -38,10 +29,8 @@ const RegisterPage = async () => {
     <Container className=" flex-1 flex items-center justify-center py-10">
       <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 lg:gap-20 w-full max-w-[1300px] mx-auto">
 
-    {/* Форма */}
-    {/* <div className="flex-1"> */}
+    {/* Форма */}   
       <RegisterForm />
-    {/* </div> */}
 
     {/* Картинка */}
     <div className="hidden md:block w-[800px] overflow-hidden rounded-[4px]">

@@ -55,7 +55,7 @@ const CardStockItem = ({ card }: Props) => {
         <span> ({availableQty})</span>
       </div>
 
-        <strong className={css.price}>{price} ₴</strong>
+        <p className={css.price}>{price} ₴</p>
         </div>
 
         {isDbCard && (

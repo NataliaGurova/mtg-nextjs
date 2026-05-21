@@ -75,13 +75,30 @@ const SetItem = ({ setCode, setName, isFoil, price }: SetItemProps) => {
       
       {/* --- ВЕРХНЯЯ ЧАСТЬ: Сундук с табличкой --- */}
       <div className={css.chestContainer}>
-        <Image
-          src="/mtg/Chest_tr.png"
+        {/* <Image
+          src="/mtg/Chest_foil.png"
+          alt={`${setName} chest`}
+          width={320}
+          height={200}
+          priority
+        /> */}
+        {isFoil ? (
+            <Image
+          src="/mtg/Chest_foil1.png"
+          alt={`${setName} chest`}
+          width={320}
+          height={200}
+          priority
+        />):
+          (
+            <Image
+          src="/mtg/Chest_nonfoil1.png"
           alt={`${setName} chest`}
           width={320}
           height={200}
           priority
         />
+          )}
         
         {/* Иконка */}
         <div className={css.iconWrapper}>

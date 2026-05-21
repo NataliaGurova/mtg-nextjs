@@ -1,0 +1,193 @@
+// import Image from "next/image";
+// import css from "./SetDetail.module.css";
+// import SetIcon from "@/components/SetIcon/SetIcon";
+
+
+// interface SetDetailProps {
+//   setCode: string;
+//   setName: string;
+//   description?: string;
+//   price: number;
+//   isFoil: boolean;
+//   imageUrl?: string;
+// }
+
+// const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl }: SetDetailProps) => {
+//   const formattedPrice = price.toLocaleString("uk-UA");
+//   const hasCustomArt = !!imageUrl;
+
+//    // Данные из Scryfall
+// //   const scryfallData = await fetchScryfallSet(set);
+
+// //   const formattedPrice = item.prices.toLocaleString("uk-UA");
+// //   const setbinderUrl = `https://setbinder.com/sets/${item.set}`;
+
+// //   // Форматируем дату релиза
+// //   const releaseDate = scryfallData?.released_at
+// //     ? new Date(scryfallData.released_at).toLocaleDateString("uk-UA", {
+// //         day: "numeric",
+// //         month: "long",
+// //         year: "numeric",
+// //       })
+// //     : null;
+
+// //   const setTypeLabel = scryfallData?.set_type
+// //     ? (SET_TYPE_LABELS[scryfallData.set_type] ?? scryfallData.set_type)
+// //     : null;
+
+//   return (
+//     <div className={css.pageContainer}>
+      
+//       {/* ЛЕВАЯ КОЛОНКА: Изображение */}
+//       <section className={css.imageSection}>
+//         {hasCustomArt ? (
+//           <img
+//             src={imageUrl}
+//             alt={`${setName} art`}
+//             className={css.artImage}
+//           />
+//         ) : (
+//           <div className={css.chestFallback}>
+//             <Image
+//               src="/mtg/Chest_tr.png"
+//               alt={`${setName} chest`}
+//               width={500}
+//               height={300}
+//               priority
+//             />
+//           </div>
+//         )}
+//       </section>
+
+//       {/* ПРАВАЯ КОЛОНКА: Информация о сете */}
+//       <section className={css.infoSection}>
+        
+//         <div className={css.header}>
+//           <div className={css.titleWrapper}>
+//             <SetIcon setCode={setCode} theme="bronze" size={48} />
+//             <h1 className={css.title}>{setName}</h1>
+//           </div>
+//         </div>
+
+//         {description && (
+//           <p className={css.description}>
+//             {description}
+//           </p>
+//         )}
+
+//         <div className={css.priceCard}>
+//           <div className={css.priceRow}>
+//             <p className={css.price}>{formattedPrice} ₴</p>
+//             {isFoil && <span className={css.foilBadge}>Foil</span>}
+//           </div>
+          
+//           <button className={css.buyButton}>
+//             Добавить в корзину
+//           </button>
+//         </div>
+
+//       </section>
+      
+//     </div>
+//   );
+// };
+
+// export default SetDetail;
+
+
+import Image from "next/image";
+import css from "./SetDetail.module.css";
+import SetIcon from "@/components/SetIcon/SetIcon"; 
+
+interface SetDetailProps {
+  setCode: string;
+  setName: string;
+  description?: string;
+  price: number;
+  isFoil: boolean;
+  imageUrl?: string;
+  releaseDate?: string; // 🔹 Новое поле
+  mainSetSize?: number;   // 🔹 Новое поле
+  scryfallRaw?: Record<string, unknown> | null;
+}
+
+const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, releaseDate, mainSetSize }: SetDetailProps) => {
+  const formattedPrice = price.toLocaleString("uk-UA");
+  const hasCustomArt = !!imageUrl;
+
+  return (
+    <div className={css.pageContainer}>
+      
+      {/* ЛЕВАЯ КОЛОНКА */}
+      <section className={css.imageSection}>
+        {hasCustomArt ? (
+          <Image
+            src={imageUrl}
+            alt={`${setName} art`}
+            className={css.artImage}
+            width={536}
+            height={335}
+          />
+        ) : (
+          <div className={css.chestFallback}>
+            <Image
+              src="/mtg/Chest_tr.png"
+              alt={`${setName} chest`}
+              width={500}
+              height={300}
+              priority
+            />
+          </div>
+        )}
+      </section>
+
+      {/* ПРАВАЯ КОЛОНКА */}
+      <section className={css.infoSection}>
+        
+        <div className={css.header}>
+          <div className={css.titleWrapper}>
+            <SetIcon setCode={setCode} theme="bronze" size={48} />
+            <h1 className={css.title}>{setName}</h1>
+          </div>
+        </div>
+
+        {description && (
+          <p className={css.description}>
+            {description}
+          </p>
+        )}
+
+        {/* 🔹 БЛОК ДАННЫХ СО SCRYFALL 🔹 */}
+        {(releaseDate || mainSetSize) && (
+          <div className={css.statsBox}>
+            {releaseDate && (
+              <div className={css.statRow}>
+                <span className={css.statLabel}>Дата релиза:</span>
+                <span className={css.statValue}>{releaseDate}</span>
+              </div>
+            )}
+            {mainSetSize && (
+              <div className={css.statRow}>
+                <span className={css.statLabel}>Базовых карт:</span>
+                <span className={css.statValue}>{mainSetSize} шт.</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* БЛОК ЦЕНЫ И ПОКУПКИ */}
+        <div className={css.priceCard}>
+          <div className={css.priceRow}>
+            <p className={css.price}>{formattedPrice} ₴</p>
+            {isFoil && <span className={css.foilBadge}>Foil</span>}
+          </div>
+          <button className={css.buyButton}>Добавить в корзину</button>
+        </div>
+
+      </section>
+      
+    </div>
+  );
+};
+
+export default SetDetail;

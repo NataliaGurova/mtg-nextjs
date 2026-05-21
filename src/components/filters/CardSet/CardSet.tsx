@@ -35,7 +35,7 @@
 //       setLoading(true);
       
 //       // 🔹 Добавляем параметр `q` к запросу на сервер, если он есть
-//       const url = q ? `/api/sets/summary?q=${encodeURIComponent(q)}` : "/api/sets/summary";
+//       const url = q ? `/api/fullsets/summary?q=${encodeURIComponent(q)}` : "/api/fullsets/summary";
       
 //       try {
 //         const res = await fetch(url);
@@ -148,7 +148,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { ChevronDown, ChevronUp, Search } from "lucide-react"; // 🔹 Добавил иконку Search
 import { useSearchParams } from "next/navigation";
 import styles from "./CardSet.module.css";
@@ -181,7 +180,7 @@ const CardSet = ({ selectedSets, onToggleSet }: CardSetProps) => {
     const run = async () => {
       setLoading(true);
       
-      const url = q ? `/api/sets/summary?q=${encodeURIComponent(q)}` : "/api/sets/summary";
+      const url = q ? `/api/fullsets/summary?q=${encodeURIComponent(q)}` : "/api/fullsets/summary";
       
       try {
         const res = await fetch(url);
@@ -279,7 +278,7 @@ const CardSet = ({ selectedSets, onToggleSet }: CardSetProps) => {
                           <SetIcon
                             setCode={s.set}
                             setName={s.set_name}
-                            // iconSvgUrl={s.iconSvgUrl}
+                            iconSvgUrl={s.iconSvgUrl}
                             size={20}
                           />
                         ) : (

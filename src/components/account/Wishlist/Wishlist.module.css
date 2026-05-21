@@ -18,9 +18,10 @@
   text-align: center;
   padding: 5rem 1rem; /* py-20 */
   background-color: #f9fafb; /* bg-gray-50 */
-  border-radius: 0.75rem; /* rounded-xl */
+  opacity: 50%; /* opacity-50 */
+  border-radius: 0.5rem; /* 4px */
   border: 1px dashed #d1d5db; /* border-dashed border-gray-300 */
-  color: #6b7280; /* text-gray-500 */
+  color: #041e3a; /* text-gray-500 */
 }
 
 .emptyText {

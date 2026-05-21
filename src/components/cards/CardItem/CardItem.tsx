@@ -153,6 +153,7 @@ import CardFlipper from "@/components/CardFlipper/CardFlipper";
 import AddToCartSection from "../AddToCartSection/AddToCartSection"; // Проверьте правильность пути
 import WishlistButton from "@/components/WishlistButton/WishlistButton";
 
+
 // interface CardItemProps {
 //   card: DbCard;
 // }
@@ -185,11 +186,6 @@ const CardItem = ({ card, variant = "default" }: CardItemProps) => {
           />
         )}
         
-        {/* 🔹 Наша кнопка Wishlist (абсолютно спозиционирована)
-        <WishlistButton 
-          cardId={card._id.toString()} 
-          className="absolute top-2 right-2 z-10" 
-        /> */}
       </div>
 
       <h3 className={css.text} title={card.name}>
@@ -201,7 +197,7 @@ const CardItem = ({ card, variant = "default" }: CardItemProps) => {
 
         <div className={css.info}>
           <p>{card.condition}/{card.lang}</p>
-          <p>{card.prices} ₴</p>
+          <p className={css.price}>{card.prices} ₴</p>
         </div>
 
         {/* 🔹 Блок с кнопками (Корзина + Избранное) */}
@@ -218,63 +214,12 @@ const CardItem = ({ card, variant = "default" }: CardItemProps) => {
             cardId={card._id.toString()} 
             variant="transparent" // Используем серый фон, чтобы кнопка выделялась, или "responsive"
           />
+
         </div>
-        {/* <div className={css.cart}>
-          
-          <AddToCartSection 
-            card={card}
-            showQuantity={false} // Скрываем счетчик +/-
-            buttonVariant="loadMore" // Ваш вариант кнопки для CardItem
-            // buttonClassName="w-[220px]" 
-          />
-          <WishlistButton
-            cardId={card._id.toString()}
-            className="ml-2 z-10"
-            />
-            </div> */}
           
       </div>
     </div>
   );
 };
-
-  // return (
-  //   <div className={css.itemCard}>
-  //     {frontImage && (
-  //       <CardFlipper
-  //         frontImage={frontImage}
-  //         backImage={backImage}
-  //         width={220}
-  //         height={310}
-  //         isFoil={card.isFoil}
-  //         flipButtonPosition={{ top: 274, right: 90 }}
-  //       />
-  //     )}
-
-  //     <h3 className={css.text} title={card.name}>
-  //       {card.name}
-  //     </h3>
-
-  //     <div className={css.bottomSection}>
-  //       {card.isFoil && <p className={css.foilType}>{card.foilType}</p>}
-
-  //       <div className={css.info}>
-  //         <p>{card.condition}</p>
-  //         <p>{card.prices} ₴</p>
-  //       </div>
-
-  //       <div className={css.cart}>
-  //         {/* 🔹 Вся логика корзины, лимитов и модалки теперь здесь! */}
-  //         <AddToCartSection 
-  //           card={card}
-  //           showQuantity={false} // Скрываем счетчик +/-
-  //           buttonVariant="loadMore" // Ваш вариант кнопки для CardItem
-  //           buttonClassName="w-[220px]" // Ваша ширина
-  //         />
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-// };
 
 export default CardItem;
