@@ -98,6 +98,8 @@
 import Image from "next/image";
 import css from "./SetDetail.module.css";
 import SetIcon from "@/components/SetIcon/SetIcon"; 
+import { Button } from "@/components/ui/button";
+import { ShoppingBag } from "lucide-react";
 
 interface SetDetailProps {
   setCode: string;
@@ -181,7 +183,10 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
             <p className={css.price}>{formattedPrice} ₴</p>
             {isFoil && <span className={css.foilBadge}>Foil</span>}
           </div>
-          <button className={css.buyButton}>Добавить в корзину</button>
+          <Button variant="loadMore" className={css.buyButton}>
+            Додати у кошик
+            <ShoppingBag className="ml-2" size={18} />
+          </Button>
         </div>
 
       </section>
