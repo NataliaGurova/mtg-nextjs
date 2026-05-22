@@ -7,6 +7,12 @@
   gap: 2rem;
 }
 
+.buyButton {
+  flex: 1;
+  max-width: 220px;
+  margin-left: auto;
+}
+
 /* На экранах шире 768px делаем 2 колонки */
 @media (min-width: 768px) {
   .pageContainer {
@@ -19,7 +25,7 @@
 /* Левая колонка: Картинка */
 .imageSection {
   width: 100%;
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   background-color: #f3f4f6;
@@ -61,44 +67,16 @@
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #111827;
+  /* font-size: 2.5rem; */
+  font-size: 2rem;
+  font-weight: 700;
+  /* color: #111827; */
+  color: #141517;
   margin: 0;
   line-height: 1.1;
 }
 
-.description {
-  font-size: 1.125rem;
-  color: #4b5563;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.priceCard {
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.priceRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.price {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #1d5105;
-  margin: 0;
-}
-
-.foilBadge {
+/* .foilBadge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -110,10 +88,81 @@
   border: 1px solid rgba(29,81,5,0.3);
   border-radius: 6px;
   color: #1d5105;
+} */
+
+
+.foil {
+  margin-top: 20px;
+  width: 92px;
+  height: 25px; 
+  font-size: 16px;
+
+  text-align: center;
+
+  font-weight: bold;
+  background-color: #fff;
+  background: linear-gradient(45deg, rgba(29,81,5,0.5) 0%, rgba(236,238,108,0.5) 59%, rgba(0,220,255,0.3) 100%);
+  border-radius: 4px;
+  /* padding: 2px 5px; */
+  color: #333;  
 }
 
+
+.description {
+  font-size: 1.125rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.albumLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #cda871; /* Або ваш основний бронзовий/акцентний колір */
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 16px;
+  transition: color 0.2s ease;
+}
+
+.albumLink:hover {
+  color: #e5c088; /* Світліший відтінок при наведенні */
+  text-decoration: underline;
+}
+
+.priceCard {
+  /* background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px; */
+  /* padding: 1.5rem; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  /* font-size: 2.5rem;
+  font-weight: 800;
+  color: #1d5105; */
+  /* font-size: 1.125rem; */
+  font-size: 21px;
+  font-weight: 700;
+  color: #1d5105;
+  margin: 0 auto;
+}
+
+/* .buyButton {
+  width: 220px;
+} */
+
 /* Кнопка покупки */
-.buyButton {
+/* .buyButton {
   width: 100%;
   padding: 1rem;
   font-size: 1.125rem;
@@ -124,8 +173,8 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-}
+} */
 
-.buyButton:hover {
+/* .buyButton:hover {
   background-color: #143803;
-}
+} */

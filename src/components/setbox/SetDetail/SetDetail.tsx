@@ -99,7 +99,7 @@ import Image from "next/image";
 import css from "./SetDetail.module.css";
 import SetIcon from "@/components/SetIcon/SetIcon"; 
 import { Button } from "@/components/ui/button";
-import { ShoppingBag } from "lucide-react";
+import { ExternalLink, ShoppingBag } from "lucide-react";
 
 interface SetDetailProps {
   setCode: string;
@@ -116,6 +116,9 @@ interface SetDetailProps {
 const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, releaseDate, mainSetSize }: SetDetailProps) => {
   const formattedPrice = price.toLocaleString("uk-UA");
   const hasCustomArt = !!imageUrl;
+
+  // 🔹 Формуємо динамічне посилання на альбом
+  const albumUrl = `https://setbinder.com/sets/${setCode.toLowerCase()}`;
 
   return (
     <div className={css.pageContainer}>
@@ -151,6 +154,7 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
             <SetIcon setCode={setCode} theme="bronze" size={48} />
             <h1 className={css.title}>{setName}</h1>
           </div>
+          {isFoil && <span className={css.foil}>Foil</span>}
         </div>
 
         {description && (
@@ -159,18 +163,29 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
           </p>
         )}
 
+        {/* 🔹 ПОСИЛАННЯ НА АЛЬБОМ 🔹 */}
+        <a 
+          href={albumUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={css.albumLink}
+        >
+          Переглянути альбом на Setbinder
+          <ExternalLink size={16} />
+        </a>
+
         {/* 🔹 БЛОК ДАННЫХ СО SCRYFALL 🔹 */}
         {(releaseDate || mainSetSize) && (
           <div className={css.statsBox}>
             {releaseDate && (
               <div className={css.statRow}>
-                <span className={css.statLabel}>Дата релиза:</span>
+                <span className={css.statLabel}>Дата релізу: </span>
                 <span className={css.statValue}>{releaseDate}</span>
               </div>
             )}
             {mainSetSize && (
               <div className={css.statRow}>
-                <span className={css.statLabel}>Базовых карт:</span>
+                <span className={css.statLabel}>Базових карт: </span>
                 <span className={css.statValue}>{mainSetSize} шт.</span>
               </div>
             )}
@@ -181,9 +196,8 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
         <div className={css.priceCard}>
           <div className={css.priceRow}>
             <p className={css.price}>{formattedPrice} ₴</p>
-            {isFoil && <span className={css.foilBadge}>Foil</span>}
           </div>
-          <Button variant="loadMore" className={css.buyButton}>
+          <Button variant="more" className={css.buyButton}>
             Додати у кошик
             <ShoppingBag className="ml-2" size={18} />
           </Button>
