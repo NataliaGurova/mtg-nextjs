@@ -34,3 +34,54 @@
   border: 1px dashed #1d5105; */
   /* border: 1px solid #1d5105; */
 }
+
+
+.pageContainer {
+  
+  /* background-color: #1a1a20; 
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  transition: background-image 0.3s ease; */
+}
+
+/* 🔹 Стили для левой страницы (Корешок СЛЕВА) */
+.leftSide {
+  /* Путь к изображению в папке public/ */
+  background-image: url('/mtg/spine-left.png');
+  background-repeat: no-repeat;
+  background-position: right center; /* Прижимаем корешок к левому краю */
+  background-size: auto 100%; /* Высота на 100%, ширина пропорционально */
+  border-right: 2px solid #050505;
+  border: none;
+  outline: none;
+}
+
+/* 🔹 Стили для правой страницы (Край СПРАВА) */
+.rightSide {
+  background-image: url('/mtg/spine-right.png');
+  background-repeat: no-repeat;
+  background-position: left center; /* Прижимаем декоративный край к правому краю */
+  background-size: auto 100%;
+  border: none;
+  outline: none;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+  height: 100%;
+  width: 100%;
+}
+
+/* Стили для пустого слота (держать сетку) */
+.emptySlot {
+  /* width: 100%;
+  max-width: 210px;
+  aspect-ratio: 63 / 88;
+  border-radius: 16px;
+  background-color: rgba(24, 24, 34, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.1); */
+}

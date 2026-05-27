@@ -100,7 +100,7 @@ const BinderBook = ({ allCards }: BinderBookProps) => {
     <div className={css.albumContainer}>
       <BinderSpine />
 
-     
+
       <HTMLFlipBook
         width={800}
         height={710}
@@ -126,8 +126,11 @@ const BinderBook = ({ allCards }: BinderBookProps) => {
         showPageCorners={true}
         disableFlipByClick={false}
       >
-        {chunkedCards.map((pageCards, index) => (
+        {/* {chunkedCards.map((pageCards, index) => (
           <Binder key={`page-${index}`} cards={pageCards} />
+        ))} */}
+        {chunkedCards.map((pageCards, pageIndex) => (
+          <Binder key={`page-${pageIndex}`} cards={pageCards} pageIndex={pageIndex} />
         ))}
       </HTMLFlipBook>
     </div>

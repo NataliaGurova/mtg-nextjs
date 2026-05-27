@@ -45,7 +45,7 @@
 
 .headerInfo {
   text-align: center;
-  flex: 1;
+  /* flex: 1; */
 }
 
 .albumTitle {

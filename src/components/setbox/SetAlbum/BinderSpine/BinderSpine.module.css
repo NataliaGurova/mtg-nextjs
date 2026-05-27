@@ -3,13 +3,13 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
+  /* width: 50px; */
+  width: 2px;
   height: 100%;
-  /* height: 650px; */
-  z-index: 10; /* Поверх перелистывающихся страниц */
-  pointer-events: none; 
-
-  outline: 1px solid green;
+  z-index: 1; 
+  pointer-events: none;
+  border-left: 1px solid #27251f; 
+  border-right: 1px solid #27251f;
 }
 
 .spineMaterial {
@@ -22,6 +22,14 @@
     #2a2a35 50%,
     #181820 80%,
     #0a0a0c 100%
+  );
+  background: linear-gradient(
+    to right,
+    #0a0a0c 0%,
+    #312720 20%,
+    #35332a 50%,
+    #201f18 80%,
+    #0c0b0a 100%
   );
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8),
               0 0 20px rgba(0, 0, 0, 0.6);
