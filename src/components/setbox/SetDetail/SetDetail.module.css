@@ -115,11 +115,13 @@
   margin: 0;
 }
 
-.albumLink {
+
+
+/* .albumLink {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #cda871; /* Або ваш основний бронзовий/акцентний колір */
+  color: #cda871; 
   font-weight: 500;
   text-decoration: none;
   margin-bottom: 16px;
@@ -127,15 +129,36 @@
 }
 
 .albumLink:hover {
-  color: #e5c088; /* Світліший відтінок при наведенні */
+  color: #e5c088;
+  text-decoration: underline;
+} */
+
+.linksBlock {
+  display: flex;
+  flex-direction: column; /* Ссылки будут одна под другой */
+  gap: 10px;              /* Расстояние между ссылками */
+  margin-bottom: 20px;    /* Отступ до следующего блока со статистикой */
+}
+
+.externalLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #cda871; /* Ваш акцентный/бронзовый цвет */
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  width: max-content;
+}
+
+.externalLink:hover {
+  color: #e5c088; /* Более светлый тон при наведении */
   text-decoration: underline;
 }
 
+
+
 .priceCard {
-  /* background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px; */
-  /* padding: 1.5rem; */
   display: flex;
   justify-content: space-between;
 }
@@ -147,10 +170,6 @@
 }
 
 .price {
-  /* font-size: 2.5rem;
-  font-weight: 800;
-  color: #1d5105; */
-  /* font-size: 1.125rem; */
   font-size: 21px;
   font-weight: 700;
   color: #1d5105;

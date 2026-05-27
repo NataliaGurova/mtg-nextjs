@@ -22,6 +22,11 @@ const Header = () => {
   const pathname = usePathname();
   const setCartOpen = useCartStore((state) => state.setCartOpen);
 
+  // 🔹 Если мы находимся на странице альбома — ничего не рендерим (скрываем хедер)
+  if (pathname?.includes("/album")) {
+    return null;
+  }
+
   return (
 
     <header className="sticky top-0 z-50">

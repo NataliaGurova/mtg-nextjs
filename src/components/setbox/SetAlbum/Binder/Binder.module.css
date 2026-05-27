@@ -1,0 +1,36 @@
+
+.pageContent {
+  /* width: 100%;
+  height: 100%; */
+  /* padding: 32px 24px; */
+  /* padding: 32px 40px; */
+  /* box-sizing: border-box; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+}
+
+.cardGrid {
+  width: 100%;
+  height: 100%;
+
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+  justify-items: center;
+  align-items: center;
+
+  padding: 32px 40px;
+}
+
+.emptySlot {
+  /* width: 100%; */
+  /* max-width: 210px;
+  aspect-ratio: 63 / 88; */
+  /* border-radius: 16px;
+  background-color: rgba(24, 24, 34, 0.2);
+  border: 1px dashed #1d5105; */
+  /* border: 1px solid #1d5105; */
+}

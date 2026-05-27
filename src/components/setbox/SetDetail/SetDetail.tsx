@@ -99,7 +99,7 @@ import Image from "next/image";
 import css from "./SetDetail.module.css";
 import SetIcon from "@/components/SetIcon/SetIcon"; 
 import { Button } from "@/components/ui/button";
-import { ExternalLink, ShoppingBag } from "lucide-react";
+import { ExternalLink, ImageIcon, ShoppingBag } from "lucide-react";
 
 interface SetDetailProps {
   setCode: string;
@@ -118,7 +118,9 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
   const hasCustomArt = !!imageUrl;
 
   // 🔹 Формуємо динамічне посилання на альбом
-  const albumUrl = `https://setbinder.com/sets/${setCode.toLowerCase()}`;
+  const internalAlbumUrl = `/fullsets/${setCode.toLowerCase()}/album?size=${mainSetSize}&name=${encodeURIComponent(setName)}`;
+  // const albumUrl = `https://setbinder.com/sets/${setCode.toLowerCase()}`;
+  // const gathererUrl = `https://gatherer.wizards.com/sets/${setCode.toUpperCase()}`;
 
   return (
     <div className={css.pageContainer}>
@@ -164,7 +166,7 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
         )}
 
         {/* 🔹 ПОСИЛАННЯ НА АЛЬБОМ 🔹 */}
-        <a 
+        {/* <a 
           href={albumUrl} 
           target="_blank" 
           rel="noopener noreferrer" 
@@ -172,7 +174,41 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
         >
           Переглянути альбом на Setbinder
           <ExternalLink size={16} />
-        </a>
+        </a> */}
+
+        {/* 🔹 БЛОК ССЫЛОК (Setbinder & Gatherer) 🔹 */}
+        {/* <div className={css.linksBlock}>
+          <a 
+            href={albumUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={css.externalLink}
+          >
+            Переглянути альбом на Setbinder
+            <ExternalLink size={16} />
+          </a>
+          <a 
+            href={gathererUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={css.externalLink}
+          >
+            Дивитися на Gatherer (Wizards)
+            <ExternalLink size={16} />
+          </a>
+        </div> */}
+
+        {/* Наша собственная страница альбома */}
+<a 
+  href={internalAlbumUrl} 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  className={css.externalLink}
+>
+  <ImageIcon size={16} />
+  Переглянути альбом фулсету
+  <ExternalLink size={14} className={css.externalIcon} />
+</a>
 
         {/* 🔹 БЛОК ДАННЫХ СО SCRYFALL 🔹 */}
         {(releaseDate || mainSetSize) && (

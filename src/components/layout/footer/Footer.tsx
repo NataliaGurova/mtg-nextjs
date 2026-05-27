@@ -1,7 +1,18 @@
+"use client";
+
 import Container from "@/components/Container/Container";
+import { usePathname } from "next/navigation";
 
 
 const Footer = () => {
+
+  const pathname = usePathname();
+
+  // 🔹 Скрываем футер на странице альбома
+  if (pathname?.includes("/album")) {
+    return null;
+  }
+
   return (
     <footer className="relative">
       {/* Линия сверху футера */}

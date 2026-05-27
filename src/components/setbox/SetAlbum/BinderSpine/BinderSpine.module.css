@@ -1,0 +1,72 @@
+.spineContainer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 100%;
+  /* height: 650px; */
+  z-index: 10; /* Поверх перелистывающихся страниц */
+  pointer-events: none; 
+
+  outline: 1px solid green;
+}
+
+.spineMaterial {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #0a0a0c 0%,
+    #181820 20%,
+    #2a2a35 50%,
+    #181820 80%,
+    #0a0a0c 100%
+  );
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8),
+              0 0 20px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.ringWrapper {
+  position: relative;
+  width: 70px; /* Кольца шире самого корешка */
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ring {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  /* Серебристый металл, глянцевые отражения и объем */
+  background: linear-gradient(
+    to bottom,
+    #e0e0e0 0%,
+    #ffffff 20%,
+    #888888 50%,
+    #444444 80%,
+    #a0a0a0 100%
+  );
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7),
+              inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  position: relative;
+}
+
+/* Имитация разреза кольца посередине */
+.ring::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 1px 0 1px rgba(255, 255, 255, 0.3);
+}
