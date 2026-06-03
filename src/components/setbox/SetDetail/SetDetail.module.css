@@ -141,20 +141,11 @@
 }
 
 .externalLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #cda871; /* Ваш акцентный/бронзовый цвет */
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  width: max-content;
+  display: none;
+
 }
 
-.externalLink:hover {
-  color: #e5c088; /* Более светлый тон при наведении */
-  text-decoration: underline;
-}
+
 
 
 
@@ -197,3 +188,23 @@
 /* .buyButton:hover {
   background-color: #143803;
 } */
+
+
+@media (min-width: 1280px) {
+  
+.externalLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #cda871; /* Ваш акцентный/бронзовый цвет */
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  width: max-content;
+}
+
+.externalLink:hover {
+  color: #e5c088; /* Более светлый тон при наведении */
+  text-decoration: underline;
+}
+}

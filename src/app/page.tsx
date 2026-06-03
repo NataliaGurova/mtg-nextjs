@@ -6,7 +6,7 @@ import FinalCTA from "@/components/home/FinalCTA";
 // import Loader from "@/components/Loader/Loader";
 import Container from "@/components/Container/Container";
 import FullsetPromo from "@/components/home/FullsetPromo/FullsetPromo";
-
+import RecentFinds from "@/components/home/RecentFinds/RecentFinds";
 
 const HomePage = () => {
   return (
@@ -18,24 +18,17 @@ const HomePage = () => {
       </section>
 
       {/* content below */}
-      <section className="relative z-10 flex-1 bg-light-grey/60">
+      <div className="relative z-10 flex-1 bg-light-grey/60">
         <Container className="py-12 md:py-24 flex flex-col gap-16 md:gap-24">
 
           <FullsetPromo />
-          
-          
-          <div className="w-full">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-main-text">
-              Наш Шлях (Roadmap)
-            </h2>
-            <Roadmap />
-          </div>
-          
+          <RecentFinds />
+
         </Container>
         <div className="mt-auto border-t border-border/50">
           <FinalCTA />
         </div>
-      </section>
+      </div>
 
     </main>
   );

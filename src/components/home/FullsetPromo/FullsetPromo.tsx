@@ -103,13 +103,15 @@ const FullsetPromo = () => {
       {/* Декоративный фоновый паттерн */}
       <div className={css.chestContainer}>
         <Image
-          src="/sets/chest-promo.png" /* 👈 Укажите путь к вашему фоновому паттерну */
+          src="/sets/chest-2.png" /* 👈 Укажите путь к вашему фоновому паттерну */
           alt="Background Pattern"
           // layout="fill"
           width={900}
-          height={600}
+          height={440}
+          // width={820}
+          // height={500}
           className={css.chestImage}
-          // priority
+          priority
         />
       </div>
 
@@ -120,24 +122,18 @@ const FullsetPromo = () => {
             <span>Ексклюзивна пропозиція</span>
           </div>
 
-          <div>
-          <h2 className={css.title}>
-            {/* Збери їх усі <br /> */}
-            Збери їх усі 
-            <span className={css.highlight}> MTG Fullsets</span>
-          </h2>
+          <div className={css.textContent}>
+            <h2 className={css.title}>
+              <span>Збери їх усі</span>
+              <span className={css.highlight}> MTG Fullsets</span>
+            </h2>
           
-
             <Button variant="banner" size="default" className={css.actionButton} asChild>
               <Link href="/fullsets">
                 Переглянути набори
               </Link>
             </Button>
-            </div>
-          <div className={css.actionWrap}>
-            {/* Используем вашу кнопку с вариантом "banner" */}
           </div>
-
       </div>
     </section>
   );

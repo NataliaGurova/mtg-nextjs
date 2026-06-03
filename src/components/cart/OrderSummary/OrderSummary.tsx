@@ -27,15 +27,15 @@ const OrderSummary = () => {
       <div className="px-6 py-5 flex flex-col gap-4">
 
         <div className="flex justify-between text-sm">
-          <span>Subtotal</span>
+          <span>Сума товарів</span>
           <span>{subtotal} ₴</span>
         </div>
 
         <div className="flex justify-between text-sm">
           <div>
-            <p>Standard Shipping</p>
+            <p>Стандартна доставка</p>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Free when your order is over 10 000 ₴
+              Безкоштовно при замовленні на суму понад 10 000 ₴
             </p>
           </div>
           <span>{SHIPPING} ₴</span>
@@ -43,7 +43,7 @@ const OrderSummary = () => {
 
         <div className="border-t pt-4 flex justify-between font-semibold">
           <div>
-            <p>Total</p>
+            <p>Разом</p>
 
           </div>
           <span>{total} ₴</span>

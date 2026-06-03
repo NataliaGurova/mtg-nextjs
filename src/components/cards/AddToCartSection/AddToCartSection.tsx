@@ -319,10 +319,10 @@ const AddToCartSection = ({
         {isReserving ? (
           <Loader2 className="animate-spin" size={18} />
         ) : isCompletelyOutOfStock ? (
-          "Out of Stock"
+          "Немає в наявності"
         ) : (
           <>
-            Add to Cart
+            Додати у кошик
             <ShoppingBag className="ml-2" size={18} />
           </>
         )}

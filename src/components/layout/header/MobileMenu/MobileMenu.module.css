@@ -97,6 +97,8 @@
 .linkActive {
   color: var(--color-nav-yellow);
   border-bottom-color: var(--color-nav-yellow);
+  /* color: #f59e0b;
+  border-bottom-color: #f59e0b; */
 }
 
 

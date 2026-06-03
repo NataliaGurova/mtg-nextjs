@@ -133,13 +133,13 @@ export const CartModal = () => {
       
       {/* HEADER */}
       <div className={styles.header}>
-        <h2 className={styles.title}>Cart ({items.length})</h2>
+        <h2 className={styles.title}>Кошик ({items.length})</h2>
       </div>
 
       {/* ITEMS */}
       <div className={`${styles.body} ${hasScroll ? styles.bodyScroll : ""}`}>
         {items.length === 0 ? (
-          <p className={styles.emptyText}>Your cart is empty</p>
+          <p className={styles.emptyText}>Кошик порожній</p>
         ) : (
           <div className={styles.itemsList}>
             {items.map((item) => (
@@ -174,7 +174,7 @@ export const CartModal = () => {
       <div className={styles.footer}>
         {items.length > 0 && (
           <div className={styles.totalRow}>
-            <span>Total</span>
+            <span>Разом</span>
             <span>{total} ₴</span>
           </div>
         )}
@@ -189,14 +189,14 @@ export const CartModal = () => {
             }}
             disabled={items.length === 0}
           >
-            Go to Cart
+            Переглянути кошик
           </Button>
           <Button 
             variant="outline" 
             className={styles.flexBtn} 
             onClick={closeCart}
           >
-            Continue ...
+            Продовжити ...
           </Button>
         </div>
       </div>

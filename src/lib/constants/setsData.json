@@ -41,7 +41,7 @@
     "mainCard": "Mirari",
     "mainSetSize": 350,
     "description": "Перший сет блока Odyssey. Сюжет обертається навколо таємничого артефакту Мірарі на континенті Отарія.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Mirari&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Minotaur+Explorer&format=image&version=art_crop"
   },
   {
     "set": "tor",
@@ -107,7 +107,7 @@
     "mainCard": "Garruk, Primal Hunter",
     "mainSetSize": 249,
     "description": "Базовий випуск 2012 року, який приніс у гру нові ключові слова на кшталт Hexproof.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Garruk,+Primal+Hunter&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Griffin+Rider&format=image&version=art_crop"
   },
   {
     "set": "inv",

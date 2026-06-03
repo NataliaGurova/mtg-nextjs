@@ -165,38 +165,6 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
           </p>
         )}
 
-        {/* 🔹 ПОСИЛАННЯ НА АЛЬБОМ 🔹 */}
-        {/* <a 
-          href={albumUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className={css.albumLink}
-        >
-          Переглянути альбом на Setbinder
-          <ExternalLink size={16} />
-        </a> */}
-
-        {/* 🔹 БЛОК ССЫЛОК (Setbinder & Gatherer) 🔹 */}
-        {/* <div className={css.linksBlock}>
-          <a 
-            href={albumUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className={css.externalLink}
-          >
-            Переглянути альбом на Setbinder
-            <ExternalLink size={16} />
-          </a>
-          <a 
-            href={gathererUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className={css.externalLink}
-          >
-            Дивитися на Gatherer (Wizards)
-            <ExternalLink size={16} />
-          </a>
-        </div> */}
 
         {/* Наша собственная страница альбома */}
 <a 
@@ -246,3 +214,39 @@ const SetDetail = ({ setCode, setName, description, price, isFoil, imageUrl, rel
 };
 
 export default SetDetail;
+
+
+
+
+{/* 🔹 ПОСИЛАННЯ НА АЛЬБОМ 🔹 */}
+{/* <a 
+  href={albumUrl} 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  className={css.albumLink}
+>
+  Переглянути альбом на Setbinder
+  <ExternalLink size={16} />
+</a> */}
+
+{/* 🔹 БЛОК ССЫЛОК (Setbinder & Gatherer) 🔹 */}
+{/* <div className={css.linksBlock}>
+  <a 
+    href={albumUrl} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className={css.externalLink}
+  >
+    Переглянути альбом на Setbinder
+    <ExternalLink size={16} />
+  </a>
+  <a 
+    href={gathererUrl} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className={css.externalLink}
+  >
+    Дивитися на Gatherer (Wizards)
+    <ExternalLink size={16} />
+  </a>
+</div> */}

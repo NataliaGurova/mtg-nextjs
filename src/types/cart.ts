@@ -13,6 +13,8 @@ export type CartItem = {
   language: string;
   foil: string | null;
 
+  type?: string;
+
   availableQty?: number;
 };
 
