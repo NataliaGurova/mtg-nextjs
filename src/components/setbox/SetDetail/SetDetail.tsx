@@ -67,7 +67,7 @@ const SetDetail = ({
           ) : (
             <div className={css.chestFallback}>
               <Image
-                src="/mtg/Chest_tr.png"
+                src="/sets/Chest_nonfoil11.png"
                 alt={`${set_name} chest`}
                 width={320} // Установили базовую ширину
                 height={200}

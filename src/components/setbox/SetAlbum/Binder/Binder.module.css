@@ -48,7 +48,7 @@
 /* 🔹 Стили для левой страницы (Корешок СЛЕВА) */
 .leftSide {
   /* Путь к изображению в папке public/ */
-  background-image: url('/mtg/spine-left.png');
+  background-image: url('/sets/spine-left.png');
   background-repeat: no-repeat;
   background-position: right center; /* Прижимаем корешок к левому краю */
   background-size: auto 100%; /* Высота на 100%, ширина пропорционально */
@@ -59,7 +59,7 @@
 
 /* 🔹 Стили для правой страницы (Край СПРАВА) */
 .rightSide {
-  background-image: url('/mtg/spine-right.png');
+  background-image: url('/sets/spine-right.png');
   background-repeat: no-repeat;
   background-position: left center; /* Прижимаем декоративный край к правому краю */
   background-size: auto 100%;

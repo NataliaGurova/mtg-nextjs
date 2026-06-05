@@ -141,7 +141,7 @@ const SetItem = ({ setCode, setName, isFoil, price }: SetItemProps) => {
       <div className={css.chestContainer}>
         {isFoil ? (
           <Image
-            src="/mtg/Chest_foil11.png"
+            src="/sets/Chest_foil11.png"
             alt={`${setName} chest foil`}
             width={320}
             height={200}
@@ -149,7 +149,7 @@ const SetItem = ({ setCode, setName, isFoil, price }: SetItemProps) => {
           />
         ) : (
           <Image
-            src="/mtg/Chest_nonfoil11.png"
+            src="/sets/Chest_nonfoil11.png"
             alt={`${setName} chest`}
             width={320}
             height={200}
