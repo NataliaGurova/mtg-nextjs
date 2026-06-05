@@ -8,7 +8,8 @@
     "mainCard": "Elspeth, Knight-Errant",
     "mainSetSize": 249,
     "description": "Перший сет блока Alara. Світ розколотий на п'ять уламків, кожен з яких позбавлений двох кольорів мани.",
-    "imageUrl": "/sets/shards-of-alara.jpg"
+    "imageUrl": "/sets/shards-of-alara.jpg",
+    "lang": "en"
   },
   {
     "set": "con",
@@ -19,7 +20,8 @@
     "mainCard": "Nicol Bolas, Planeswalker",
     "mainSetSize": 145,
     "description": "Другий сет блока Alara. Уламки починають зливатися воєдино з волі Нікола Боласа.",
-    "imageUrl": "/sets/conflux_1280x960px.jpg"
+    "imageUrl": "/sets/conflux_1280x960px.jpg",
+    "lang": "en"
   },
   {
     "set": "arb",
@@ -30,7 +32,8 @@
     "mainCard": "Bloodbraid Elf",
     "mainSetSize": 146,
     "description": "Третій сет блока Alara. Перший в історії випуск, що повністю складається з багатоколірних карт.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Bloodbraid+Elf&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Bloodbraid+Elf&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "ody",
@@ -41,7 +44,8 @@
     "mainCard": "Mirari",
     "mainSetSize": 350,
     "description": "Перший сет блока Odyssey. Сюжет обертається навколо таємничого артефакту Мірарі на континенті Отарія.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Minotaur+Explorer&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Minotaur+Explorer&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "tor",
@@ -52,7 +56,8 @@
     "mainCard": "Chainer, Dementia Master",
     "mainSetSize": 143,
     "description": "Другий сет блока Odyssey. Унікальний випуск із сильною перевагою в бік чорного кольору мани.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Chainer,+Dementia+Master&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Chainer,+Dementia+Master&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "jud",
@@ -63,7 +68,8 @@
     "mainCard": "Mirari's Wake",
     "mainSetSize": 143,
     "description": "Третій сет блока Odyssey. Балансує Torment, зміщуючи фокус на зелений та білий кольори.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Mirari's+Wake&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Mirari's+Wake&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "mmq",
@@ -74,7 +80,8 @@
     "mainCard": "Rishadan Port",
     "mainSetSize": 350,
     "description": "Перший сет блока Masques. Екіпаж Везерлайта прибуває в торговий світ Меркадію.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Rishadan+Port&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Rishadan+Port&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "nem",
@@ -85,7 +92,8 @@
     "mainCard": "Lin Sivvi, Defiant Hero",
     "mainSetSize": 143,
     "description": "Другий сет блока Masques. Повстанці Рата протистоять новому евінкару Кроваксу.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Lin+Sivvi,+Defiant+Hero&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Lin+Sivvi,+Defiant+Hero&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "pcy",
@@ -96,7 +104,8 @@
     "mainCard": "Avatar of Woe",
     "mainSetSize": 143,
     "description": "Третій сет блока Masques. Розповідає про війну Келдонського Полководця на Домінарії.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Avatar+of+Woe&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Avatar+of+Woe&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "m12",
@@ -107,7 +116,8 @@
     "mainCard": "Garruk, Primal Hunter",
     "mainSetSize": 249,
     "description": "Базовий випуск 2012 року, який приніс у гру нові ключові слова на кшталт Hexproof.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Griffin+Rider&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Griffin+Rider&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "inv",
@@ -118,7 +128,8 @@
     "mainCard": "Fact or Fiction",
     "mainSetSize": 350,
     "description": "Перший сет блока Invasion. Домінарія об'єднується проти вторгнення Фірексії.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Fact+or+Fiction&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Fact+or+Fiction&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "apc",
@@ -129,7 +140,8 @@
     "mainCard": "Vindicate",
     "mainSetSize": 143,
     "description": "Третій сет блока Invasion. Фінал війни та використання Зброї Спадщини.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Vindicate&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Vindicate&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "ulg",
@@ -140,7 +152,8 @@
     "mainCard": "Tinker",
     "mainSetSize": 143,
     "description": "Другий сет блока Urza. Перший випуск із фольгованими картами в бустерах.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Tinker&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Tinker&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "uds",
@@ -151,7 +164,8 @@
     "mainCard": "Masticore",
     "mainSetSize": 143,
     "description": "Третій сет блока Urza. Продовження артефактного божевілля та підготовки до вторгнення.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Masticore&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Masticore&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "grn",
@@ -162,7 +176,8 @@
     "mainCard": "Assassin's Trophy",
     "mainSetSize": 276,
     "description": "Повернення в Равніку перед вторгненням Нікола Боласа. Сет охоплює 5 з 10 гільдій.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Assassin's+Trophy&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Assassin's+Trophy&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "7ed",
@@ -173,7 +188,8 @@
     "mainCard": "Thorn Elemental",
     "mainSetSize": 350,
     "description": "Сьома базова редакція. Повністю нові арти для всіх карт випуску.",
-    "imageUrl": "https://api.scryfall.com/cards/named?exact=Thorn+Elemental&format=image&version=art_crop"
+    "imageUrl": "https://api.scryfall.com/cards/named?exact=Thorn+Elemental&format=image&version=art_crop",
+    "lang": "en"
   },
   {
     "set": "who",
@@ -184,6 +200,7 @@
     "mainCard": "The Doctor",
     "mainSetSize": 331,
     "description": "Легендарные герои, магия и призываемые существа из культовой вселенной Final Fantasy сходятся в грандиозных битвах формата Командир.",
-    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/5uqzoaHDMPNevXnRGlkEo8/a029d39e88118c94c0cde1a252269372/KcPo530Nm_11600x1080.jpg?q=70&w=1920&fm=webp" 
+    "imageUrl": "https://images.ctfassets.net/s5n2t79q9icq/5uqzoaHDMPNevXnRGlkEo8/a029d39e88118c94c0cde1a252269372/KcPo530Nm_11600x1080.jpg?q=70&w=1920&fm=webp",
+    "lang": "en" 
   }
 ]

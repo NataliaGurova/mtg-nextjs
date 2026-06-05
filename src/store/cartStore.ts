@@ -48,75 +48,163 @@ export const useCartStore = create<CartStore>()(
       setCartOpen: (open) => set({ isOpen: open }),
       closeCart: () => set({ isOpen: false }),
       
-      // 🔹 1. ЗАГРУЗКА ИЗ БД (вызывается при логине через CartSync)
+// 🔹 1. ЗАГРУЗКА ИЗ БД (вызывается при логине через CartSync)
+
       fetchFromServer: async () => {
         try {
           const res = await fetch("/api/cart");
-          
-          // Если пользователь не авторизован, сервер вернет 401. 
-          // В этом случае просто выходим, оставляя корзину пустой или из LocalStorage.
           if (!res.ok) return;
-      
+ 
           const data = await res.json();
-          
-          if (data.items && Array.isArray(data.items)) {
-            const mappedItems: CartItem[] = data.items
-              .map((dbItem: DbPopulatedCartItem) => {
-                const card = dbItem.cardId;
-                
-                // Проверка на случай, если карта была удалена из базы, 
-                // но ссылка в корзине осталась
-                if (!card) return null;
-      
-                // Логика извлечения картинки:
-                // У твоих карт (даже обычных) данные лежат в массиве faces.
-                const imageUrl = 
-                  card.faces?.[0]?.images?.normal || 
-                  card.faces?.[0]?.images?.small || 
-                  // card.images?.normal || 
-                  "";
-      
+          if (!data.items || !Array.isArray(data.items)) return;
+ 
+          const mappedItems: CartItem[] = data.items
+            .map((serverItem: {
+              type: "card" | "fullset";
+              cardId?: DbPopulatedCartItem["cardId"];
+              fullsetCode?: string;
+              quantity: number;
+            }) => {
+              // 🔹 Фулсет — відновлюємо з fullsetCode
+              if (serverItem.type === "fullset" && serverItem.fullsetCode) {
                 return {
-                  id: card._id,
-                  scryfallId: card.scryfall_id,
-                  name: card.name,
-                  set_name: card.set_name,
-                  image: imageUrl,
-                  price: card.prices || 0,
-                  quantity: dbItem.quantity,    // Кол-во, которое выбрал юзер
-                  stock: card.quantity || 0,    // Остаток на складе из модели Card
-                  condition: card.condition || "NM",
-                  language: card.lang || "en",
-                  foil: card.foilType === "nonfoil" ? null : card.foilType,
-                };
-              })
-              // Явно указываем типы для фильтра, чтобы убрать ошибку 'item' implicitly has an 'any' type
-              .filter((item: CartItem | null): item is CartItem => item !== null);
-      
-            set({ items: mappedItems });
-          }
+                  id: `fullset_${serverItem.fullsetCode}`,
+                  scryfallId: "",
+                  name: serverItem.fullsetCode.toUpperCase(), // тимчасово, замінить UI
+                  set_name: serverItem.fullsetCode.toUpperCase(),
+                  image: `/sets/${serverItem.fullsetCode}.jpg`,
+                  price: 0, // ціна підтягнеться при рендері зі стору сетів
+                  quantity: serverItem.quantity,
+                  stock: 1,
+                  condition: "NM",
+                  language: "en",
+                  foil: null,
+                  type: "fullset",
+                } satisfies CartItem;
+              }
+ 
+              // Звичайна карта
+              const card = serverItem.cardId;
+              if (!card) return null;
+ 
+              const imageUrl =
+                card.faces?.[0]?.images?.normal ||
+                card.faces?.[0]?.images?.small ||
+                "";
+ 
+              return {
+                id: card._id,
+                scryfallId: card.scryfall_id,
+                name: card.name,
+                set_name: card.set_name,
+                image: imageUrl,
+                price: card.prices || 0,
+                quantity: serverItem.quantity,
+                stock: card.quantity || 0,
+                condition: card.condition || "NM",
+                language: card.lang || "en",
+                foil: card.foilType === "nonfoil" ? null : card.foilType,
+              } satisfies CartItem;
+            })
+            .filter((item: CartItem | null): item is CartItem => item !== null);
+ 
+          set({ items: mappedItems });
         } catch (error) {
-          console.error("Критическая ошибка при синхронизации корзины с БД:", error);
+          console.error("Помилка синхронізації корзини:", error);
         }
       },
+ 
+
+      // fetchFromServer: async () => {
+      //   try {
+      //     const res = await fetch("/api/cart");
+          
+      //     // Если пользователь не авторизован, сервер вернет 401. 
+      //     // В этом случае просто выходим, оставляя корзину пустой или из LocalStorage.
+      //     if (!res.ok) return;
+      
+      //     const data = await res.json();
+          
+      //     if (data.items && Array.isArray(data.items)) {
+      //       const mappedItems: CartItem[] = data.items
+      //         .map((dbItem: DbPopulatedCartItem) => {
+      //           const card = dbItem.cardId;
+                
+      //           // Проверка на случай, если карта была удалена из базы, 
+      //           // но ссылка в корзине осталась
+      //           if (!card) return null;
+      
+      //           // Логика извлечения картинки:
+      //           // У твоих карт (даже обычных) данные лежат в массиве faces.
+      //           const imageUrl = 
+      //             card.faces?.[0]?.images?.normal || 
+      //             card.faces?.[0]?.images?.small || 
+      //             // card.images?.normal || 
+      //             "";
+      
+      //           return {
+      //             id: card._id,
+      //             scryfallId: card.scryfall_id,
+      //             name: card.name,
+      //             set_name: card.set_name,
+      //             image: imageUrl,
+      //             price: card.prices || 0,
+      //             quantity: dbItem.quantity,    // Кол-во, которое выбрал юзер
+      //             stock: card.quantity || 0,    // Остаток на складе из модели Card
+      //             condition: card.condition || "NM",
+      //             language: card.lang || "en",
+      //             foil: card.foilType === "nonfoil" ? null : card.foilType,
+      //           };
+      //         })
+      //         // Явно указываем типы для фильтра, чтобы убрать ошибку 'item' implicitly has an 'any' type
+      //         .filter((item: CartItem | null): item is CartItem => item !== null);
+      
+      //       set({ items: mappedItems });
+      //     }
+      //   } catch (error) {
+      //     console.error("Критическая ошибка при синхронизации корзины с БД:", error);
+      //   }
+      // },
       
       // 🔹 2. СОХРАНЕНИЕ В БД (вызывается после каждого изменения)
       syncWithServer: async () => {
         try {
-          const itemsToSync = get().items.map((i) => ({
-            cardId: i.id,
-            quantity: i.quantity,
-          }));
-          
+          // 🔹 Розділяємо items на карти і фулсети для правильного маппінгу
+          const itemsToSync = get().items.map((i) => {
+            if (i.type === "fullset") {
+              // "fullset_ala" → fullsetCode: "ala"
+              const fullsetCode = i.id.replace(/^fullset_/, "");
+              return { fullsetCode, quantity: i.quantity };
+            }
+            return { cardId: i.id, quantity: i.quantity };
+          });
+ 
           await fetch("/api/cart", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ items: itemsToSync }),
           });
         } catch (error) {
-          console.error("Ошибка синхронизации корзины:", error);
+          console.error("Помилка збереження корзини:", error);
         }
       },
+
+      // syncWithServer: async () => {
+      //   try {
+      //     const itemsToSync = get().items.map((i) => ({
+      //       cardId: i.id,
+      //       quantity: i.quantity,
+      //     }));
+          
+      //     await fetch("/api/cart", {
+      //       method: "POST",
+      //       headers: { "Content-Type": "application/json" },
+      //       body: JSON.stringify({ items: itemsToSync }),
+      //     });
+      //   } catch (error) {
+      //     console.error("Ошибка синхронизации корзины:", error);
+      //   }
+      // },
       
       // 🔹 3. ДОБАВЛЕНИЕ ТОВАРА
       addToCart: async (item) => {
@@ -129,20 +217,26 @@ export const useCartStore = create<CartStore>()(
         ? Math.min(existing.quantity + item.quantity, item.stock)
         : Math.min(item.quantity, item.stock);
         
+
+        console.log("addToCart item.type:", item.type, item.id);
+        
         // Пытаемся зарезервировать на сервере
-        const result = await reserveCard(item.id, item.quantity);
+        if (item.type !== "fullset") {
+          const result = await reserveCard(item.id, item.quantity);
+        // const result = await reserveCard(item.id, item.quantity);
         
         // Если сервер запретил (например, не авторизован)
         if (!result.success) {
           if (
-            result.error?.includes("войдите") || 
+            result.error?.includes("войдите") ||
             result.error?.includes("авторизован")
           ) {
             useAuthModalStore.getState().open(); // Показываем модалку логина
           } else {
-            console.error("Ошибка резервации:", result.error);
+            console.error("Помилка резервації:", result.error);
           }
           return false; // Блокируем добавление
+        }
         }
 
         const newItem = { ...item, quantity: qtyToAdd };
@@ -172,10 +266,16 @@ export const useCartStore = create<CartStore>()(
         if (get().items.length === 0) set({ expireAt: null });
         
         // Снимаем резерв
-        const result = await removeReservation(id);
-        if (!result.success) {
-          console.error("Ошибка при удалении резерва:", result.error);
+        if (item.type !== "fullset") {
+          const result = await removeReservation(id);
+          if (!result.success) {
+            console.error("Помилка при знятті резерву:", result.error);
+          }
         }
+        // const result = await removeReservation(id);
+        // if (!result.success) {
+        //   console.error("Ошибка при удалении резерва:", result.error);
+        // }
 
         // Обновляем базу
         get().syncWithServer();

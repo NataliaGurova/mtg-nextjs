@@ -100,7 +100,7 @@ export interface IUser {
   email: string;
   password: string;
   emailVerified: boolean;
-  wishlist: Types.ObjectId[] | string[];
+  wishlist: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -145,12 +145,10 @@ const UserSchema = new Schema<IUser>(
       default: false,
     },
 
-    wishlist: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Card",
-      },
-    ],
+    wishlist: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,

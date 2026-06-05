@@ -20,7 +20,7 @@ const OrderSummary = () => {
 
       <div className="px-6 py-4 border-b bg-muted/60">
         <h2 className="font-semibold text-sm uppercase tracking-wide">
-          Order Summary
+          Підсумок замовлення
         </h2>
       </div>
 
@@ -57,12 +57,12 @@ const OrderSummary = () => {
           // className="w-full h-11 tracking-wide"
           onClick={() => console.log("checkout")}
         >
-          Proceed to Checkout
+          Перейти до оформлення
         </Button>
 
         <div className="flex items-center gap-3 text-xs text-muted-foreground">
           <div className="flex-1 border-t" />
-          Or
+          Або
           <div className="flex-1 border-t" />
         </div>
 

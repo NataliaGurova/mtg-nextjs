@@ -47,20 +47,18 @@ const SetDetailPage = async ({
     notFound();
   }
 
-  // 2. Делаем серверный запрос к API Scryfall за техническими данными
+// 2. Делаем серверный запрос к API Scryfall за техническими данными
   let releaseDate = undefined;
-  let scryfallRaw: Record<string, unknown> | null = null;
 
   try {
     const response = await fetch(`https://api.scryfall.com/sets/${set.toLowerCase()}`, {
-      // Кэшируем данные, чтобы не дергать Scryfall при каждом заходе (Next.js фича)
-      next: { revalidate: 86400 } // Обновлять кэш раз в сутки
+      // Кэшируем данные, чтобы не дергать Scryfall при каждом заходе
+      next: { revalidate: 86400 } 
     });
 
     if (response.ok) {
       const scryfallData = await response.json();
       releaseDate = scryfallData.released_at;
-      scryfallRaw = scryfallData as Record<string, unknown>;
     }
   } catch (error) {
     console.error("Помилка при отриманні даних з Scryfall:", error);
@@ -70,15 +68,15 @@ const SetDetailPage = async ({
   return (
     <main>
       <SetDetail
-        setCode={setInfo.set}
-        setName={setInfo.set_name}
+        set={setInfo.set}               // Было setCode
+        set_name={setInfo.set_name}
         description={setInfo.description}
-        price={setInfo.prices}
+        prices={setInfo.prices}
         isFoil={setInfo.isFoil}
         imageUrl={setInfo.imageUrl}
         releaseDate={releaseDate}
         mainSetSize={setInfo.mainSetSize}
-        scryfallRaw={scryfallRaw}
+        lang={setInfo.lang}
       />
     </main>
   );

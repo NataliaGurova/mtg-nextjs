@@ -6,7 +6,7 @@ import { connectDB } from "@/db/db";
 import Cart from "@/db/models/Cart";
 import Card from "@/db/models/Card";
 
-// 🔹 1. ПОЛУЧЕНИЕ КОРЗИНЫ ИЗ БАЗЫ (GET)
+// 🔹 ─── GET /api/cart ─────────────────────────────────
 export async function GET() {
 
   console.log("Card model registered:", !!Card); // Это формальное использование
@@ -29,15 +29,15 @@ export async function GET() {
 
     return NextResponse.json({ items: cart.items }, { status: 200 });
   } catch (error) {
-    console.error("Ошибка при получении корзины:", error);
+    console.error("Помилка при отриманні корзини:", error);
     return NextResponse.json(
-      { message: "Внутренняя ошибка сервера" },
+      { message: "Внутрішня помилка сервера" },
       { status: 500 }
     );
   }
 }
 
-// 🔹 2. СИНХРОНИЗАЦИЯ КОРЗИНЫ С БАЗОЙ (POST)
+// 🔹  ─── POST /api/cart ───────────────────────────────
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authConfig);
@@ -50,19 +50,27 @@ export async function POST(req: Request) {
 
     if (!Array.isArray(items)) {
       return NextResponse.json(
-        { message: "Неверный формат данных" },
+        { message: "Невірний формат даних" },
         { status: 400 }
       );
     }
 
     await connectDB();
 
-    // Магия MongoDB: findOneAndUpdate с параметром upsert: true.
-    // Если корзина для этого юзера есть — она обновится.
-    // Если её еще нет (первая покупка) — она автоматически создастся!
+    // 🔹 Маппінг: розділяємо карти і фулсети
+    //    Карта:   { cardId: "abc123", quantity: 1 }
+    //    Фулсет: { fullsetCode: "ala", quantity: 1 }
+    const dbItems = items
+      .filter((i) => i.cardId || i.fullsetCode)
+      .map((i) => ({
+        cardId:      i.fullsetCode ? null : i.cardId,
+        fullsetCode: i.fullsetCode ?? null,
+        quantity:    i.quantity,
+      }));
+      
     const updatedCart = await Cart.findOneAndUpdate(
       { userId: session.user.id },
-      { $set: { items: items } },
+      { $set: { items: dbItems } },
       { new: true, upsert: true }
     ).populate("items.cardId");
 
@@ -71,9 +79,9 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Ошибка при обновлении корзины:", error);
+    console.error("Помилка при обновленні корзини:", error);
     return NextResponse.json(
-      { message: "Внутренняя ошибка сервера" },
+      { message: "Внутрішня помилка сервера" },
       { status: 500 }
     );
   }

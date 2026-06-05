@@ -77,14 +77,7 @@ const CardStockItem = ({ card }: Props) => {
           
         </div>
       )}
-      {/* {isDbCard && (
-        <AddToCartSection
-          card={card}
-          stock={totalStock}
-          // 🔹 4. Передаем флаг в кнопку, чтобы она заблокировалась
-          disabled={isOutOfStock} 
-        />
-      )} */}
+    
     </div>
   );
 };

@@ -212,7 +212,7 @@ const CardItem = ({ card, variant = "default" }: CardItemProps) => {
           
           <WishlistButton 
             cardId={card._id.toString()} 
-            variant="transparent" // Используем серый фон, чтобы кнопка выделялась, или "responsive"
+            variant="transparent"
           />
 
         </div>

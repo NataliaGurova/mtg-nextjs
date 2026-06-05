@@ -28,6 +28,11 @@ const CartItemSchema = new Schema(
       ref: "Card", // Ссылка на вашу модель карточки MTG
       required: true,
     },
+    // Фулсет — код сету з JSON каталогу ("ala", "m21" тощо)
+    fullsetCode: {
+      type: String,
+      default: null,
+    },
     quantity: {
       type: Number,
       required: true,
