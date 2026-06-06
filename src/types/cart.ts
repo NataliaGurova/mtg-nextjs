@@ -2,35 +2,32 @@
 
 export type CartItem = {
   id: string;
-  scryfallId: string   // ← добавляем
+  scryfallId: string;
   name: string;
   set_name: string;
   image: string;
   price: number;
   quantity: number;
   stock: number;
-  condition: string;
   language: string;
   foil: string | null;
-
+  condition?: string; 
   type?: string;
-
   availableQty?: number;
 };
 
-// Описываем структуру ответа из базы данных (после populate)
 export interface DbPopulatedCartItem {
-  quantity: number; // Кол-во в корзине
+  quantity: number;
   cardId: {
     _id: string;
-    scryfall_id: string; // В базе через подчёркивание
+    scryfall_id: string;
     name: string;
     set_name: string;
-    prices: number;      // В базе 'prices'
-    quantity: number;    // В базе это 'stock'
-    lang: string;        // В базе 'lang'
+    prices: number;
+    quantity: number;
+    lang: string;
     condition: string;
-    foilType: string;    // В базе "foil" или "nonfoil"
+    foilType: string;
     faces: Array<{
       images?: {
         normal?: string;

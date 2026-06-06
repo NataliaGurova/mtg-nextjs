@@ -61,22 +61,19 @@ export const useCartStore = create<CartStore>()(
               // 🔹 Фулсет — збагачуємо даними з JSON каталогу
               if (serverItem.type === "fullset" && serverItem.fullsetCode) {
                 const code = serverItem.fullsetCode.toLowerCase();
-                const setInfo = setsData.find(
-                  (s) => s.set.toLowerCase() === code
-                );
+                const setInfo = setsData.find((s) => s.set.toLowerCase() === code);
 
                 return {
                   id: `fullset_${code}`,
                   scryfallId: "",
-                  name: setInfo?.set_name ?? code.toUpperCase(),
+                  name:     setInfo?.set_name ?? code.toUpperCase(),
                   set_name: setInfo?.set_name ?? code.toUpperCase(),
-                  image: setInfo?.imageUrl || "/mtg/Chest_tr.png",
-                  price: setInfo?.prices ?? 0,
+                  image:    setInfo?.imageUrl || "/sets/Chest_nonfoil11.png",
+                  price:    setInfo?.prices ?? 0,
                   quantity: serverItem.quantity,
                   stock: 1,
-                  condition: "NM",
                   language: setInfo?.lang ?? "en",
-                  foil: setInfo?.isFoil ? "foil" : null,
+                  foil:     setInfo?.isFoil ? "foil" : null,
                   type: "fullset",
                 } satisfies CartItem;
               }
@@ -115,10 +112,8 @@ export const useCartStore = create<CartStore>()(
       // ─── 2. ЗБЕРЕЖЕННЯ В БД ────────────────────────────────────────────
       syncWithServer: async () => {
         try {
-          // 🔹 Розділяємо items на карти і фулсети для правильного маппінгу
           const itemsToSync = get().items.map((i) => {
             if (i.type === "fullset") {
-              // "fullset_ala" → fullsetCode: "ala"
               const fullsetCode = i.id.replace(/^fullset_/, "");
               return { fullsetCode, quantity: i.quantity };
             }
@@ -145,7 +140,7 @@ export const useCartStore = create<CartStore>()(
           ? Math.min(existing.quantity + item.quantity, item.stock)
           : Math.min(item.quantity, item.stock);
 
-        // 🔹 Фулсети не резервуємо — немає MongoDB _id, резерв не потрібен
+        // 🔹 Фулсети не резервуємо — немає MongoDB _id
         if (item.type !== "fullset") {
           const result = await reserveCard(item.id, item.quantity);
 
@@ -162,12 +157,29 @@ export const useCartStore = create<CartStore>()(
           }
         }
 
-        const newItem = { ...item, quantity: qtyToAdd };
+        // 🔹 Фулсет — збагачуємо з JSON щоб одразу показувалось правильне фото
+        let enrichedItem: CartItem = { ...item, quantity: qtyToAdd };
+        if (item.type === "fullset") {
+          const code = item.id.replace(/^fullset_/, "");
+          const setInfo = setsData.find((s) => s.set.toLowerCase() === code);
+          if (setInfo) {
+            enrichedItem = {
+              ...enrichedItem,
+              name:     setInfo.set_name,
+              set_name: setInfo.set_name,
+              image:    setInfo.imageUrl || "/sets/Chest_nonfoil11.png",
+              price:    setInfo.prices,
+              language: setInfo.lang ?? item.language,
+              foil:     setInfo.isFoil ? "foil" : null,
+            };
+          }
+        }
+
         const itemsWithout = get().items.filter((i) => i.id !== item.id);
 
         set({
-          items: [newItem, ...itemsWithout],
-          lastAdded: newItem,
+          items: [enrichedItem, ...itemsWithout],
+          lastAdded: enrichedItem,
           isOpen: true,
           expireAt: get().expireAt ?? Date.now() + CART_RESERVATION_MS,
         });
@@ -226,119 +238,3 @@ export const useCartStore = create<CartStore>()(
   )
 );
 
-
-// store/cartStore.ts
-
-// import { CartItem } from "@/types/cart";
-// import { create } from "zustand";
-// import { persist } from "zustand/middleware";
-// import { useAuthModalStore } from "./authModalStore";
-// // 🔹 Импортируем наши Server Actions вместо axios
-// import { reserveCard, removeReservation } from "@/app/actions/cart";
-
-// import { CART_RESERVATION_MS } from "@/lib/constants/constants";
-
-// type CartStore = {
-//   items: CartItem[];
-//   isOpen: boolean;
-//   lastAdded: CartItem | null;
-//   expireAt: number | null;
-
-//   setCartOpen: (open: boolean) => void;
-//   closeCart: () => void;
-//   addToCart: (item: CartItem) => Promise<boolean | void>;
-//   // addToCart: (item: CartItem, onAuthRequired?: () => void) => Promise<void>;
-//   removeFromCart: (id: string) => Promise<void>;
-//   updateQuantity: (item: CartItem, quantity: number) => void;
-//   clearCart: () => void;
-//   isExpired: () => boolean;
-// };
-
-// export const useCartStore = create<CartStore>()(
-//   persist(
-//     (set, get) => ({
-//       items: [],
-//       isOpen: false,
-//       lastAdded: null,
-//       expireAt: null,
-
-//       isExpired: () => {
-//         const { expireAt } = get();
-//         return expireAt !== null && Date.now() > expireAt;
-//       },
-
-//       setCartOpen: (open) => set({ isOpen: open }),
-//       closeCart: () => set({ isOpen: false }),
-
-//       addToCart: async (item) => {
-//         const existing = get().items.find((i) => i.id === item.id);
-//         if (existing && existing.quantity >= item.stock) return false;
-
-//         const qtyToAdd = existing
-//           ? Math.min(existing.quantity + item.quantity, item.stock)
-//           : Math.min(item.quantity, item.stock);
-
-//         const newItem = { ...item, quantity: qtyToAdd };
-//         const itemsWithout = get().items.filter((i) => i.id !== item.id);
-
-//         // 🔹 1. Делаем запрос в БД через Server Action только здесь!
-//         const result = await reserveCard(item.id, item.quantity);
-
-//         if (!result.success) {
-//           if (
-//             result.error?.includes("войдите") ||
-//             result.error?.includes("авторизован")
-//           ) {
-//             useAuthModalStore.getState().open();
-//           } else {
-//             console.error("Ошибка резервации:", result.error);
-//           }
-//           return false; // ❌ Возвращаем false при ошибке
-//         }
-
-//         // 🔹 2. Обновляем Zustand (UI)
-//         set({
-//           items: [newItem, ...itemsWithout],
-//           lastAdded: newItem,
-//           isOpen: true,
-//           // 🔹 Используем общую константу здесь
-//           expireAt: get().expireAt ?? Date.now() + CART_RESERVATION_MS,
-//           // expireAt: get().expireAt ?? Date.now() + 60 * 60 * 1000,
-//         });
-        
-//         return true; // ✅ Возвращаем true, если всё успешно
-//       },
-
-
-//       removeFromCart: async (id: string) => {
-//         const item = get().items.find((i) => i.id === id);
-//         if (!item) return;
-
-//         // 🔹 1. Оптимистичное обновление UI (сразу прячем товар из корзины)
-//         set((state) => ({ items: state.items.filter((i) => i.id !== id) }));
-//         if (get().items.length === 0) set({ expireAt: null });
-
-//         // 🔹 2. Снимаем резерв в базе данных через Server Action
-//         const result = await removeReservation(id);
-        
-//         if (!result.success) {
-//           console.error("Ошибка при удалении резерва:", result.error);
-//         }
-//       },
-
-//       updateQuantity: (item, quantity) => {
-//         // Локальное обновление количества
-//         set((state) => ({
-//           items: state.items.map((i) =>
-//             i.id === item.id
-//               ? { ...i, quantity: Math.max(1, Math.min(quantity, i.stock)) }
-//               : i
-//           ),
-//         }));
-//       },
-
-//       clearCart: () => set({ items: [], expireAt: null }),
-//     }),
-//     { name: "mtg-cart-storage" }
-//   )
-// );
