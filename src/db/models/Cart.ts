@@ -23,10 +23,11 @@ import mongoose, { Schema, models } from "mongoose";
 
 const CartItemSchema = new Schema(
   {
+    type: { type: String, enum: ["card", "fullset"], default: "card" },
     cardId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Card", // Ссылка на вашу модель карточки MTG
-      required: true,
+      // required: true,
     },
     // Фулсет — код сету з JSON каталогу ("ala", "m21" тощо)
     fullsetCode: {

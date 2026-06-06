@@ -57,15 +57,16 @@ export async function POST(req: Request) {
 
     await connectDB();
 
-    // 🔹 Маппінг: розділяємо карти і фулсети
-    //    Карта:   { cardId: "abc123", quantity: 1 }
-    //    Фулсет: { fullsetCode: "ala", quantity: 1 }
+    // 🔹 ПРАВИЛЬНЫЙ МАППИНГ ДЛЯ БАЗЫ ДАННЫХ
     const dbItems = items
       .filter((i) => i.cardId || i.fullsetCode)
       .map((i) => ({
-        cardId:      i.fullsetCode ? null : i.cardId,
+        // Явно задаем type, чтобы Mongoose не ставил "card" по умолчанию
+        type: i.fullsetCode ? "fullset" : "card",
+        
+        cardId: i.fullsetCode ? null : i.cardId,
         fullsetCode: i.fullsetCode ?? null,
-        quantity:    i.quantity,
+        quantity: i.quantity,
       }));
       
     const updatedCart = await Cart.findOneAndUpdate(
@@ -86,3 +87,6 @@ export async function POST(req: Request) {
     );
   }
 }
+
+
+

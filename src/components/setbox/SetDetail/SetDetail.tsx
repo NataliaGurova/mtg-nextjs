@@ -33,6 +33,15 @@ const SetDetail = ({
   const formattedPrice = prices.toLocaleString("uk-UA");
   const hasCustomArt = !!imageUrl;
 
+  // Превращаем "2023-10-13" в "13 жовтня 2023 р."
+  const formattedReleaseDate = releaseDate 
+    ? new Date(releaseDate).toLocaleDateString("uk-UA", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }) 
+    : null;
+
   const internalAlbumUrl = `/fullsets/${set.toLowerCase()}/album?size=${mainSetSize}&name=${encodeURIComponent(set_name)}`;
 
   const cartItem = {
@@ -40,7 +49,8 @@ const SetDetail = ({
     scryfallId: "",
     name: set_name,
     set_name: set_name,
-    image: imageUrl || "/mtg/Chest_tr.png",
+    // releaseDate: releaseDate,
+    image: imageUrl || "/sets/Chest_nonfoil11.png",
     price: prices,
     quantity: 1,
     stock: 1,
@@ -103,21 +113,21 @@ const SetDetail = ({
           </a>
 
           {(releaseDate || mainSetSize) && (
-            <div className={css.statsBox}>
-              {releaseDate && (
-                <div className={css.statRow}>
-                  <span className={css.statLabel}>Дата релізу: </span>
-                  <span className={css.statValue}>{releaseDate}</span>
-                </div>
-              )}
-              {mainSetSize && (
-                <div className={css.statRow}>
-                  <span className={css.statLabel}>Базових карт: </span>
-                  <span className={css.statValue}>{mainSetSize} шт.</span>
-                </div>
-              )}
-            </div>
-          )}
+          <div className={css.statsBox}>
+            {releaseDate && (
+              <div className={css.statRow}>
+                <span className={css.statLabel}>Дата релізу: </span>
+                <span className={css.statValue}>{formattedReleaseDate}</span> {/* 👈 Меняем здесь */}
+              </div>
+            )}
+            {mainSetSize && (
+              <div className={css.statRow}>
+                <span className={css.statLabel}>Базових карт: </span>
+                <span className={css.statValue}>{mainSetSize} шт.</span>
+              </div>
+            )}
+          </div>
+        )}
 
           {/* Блок цены теперь ВНУТРИ правой колонки! */}
           <div className={css.priceCard}>

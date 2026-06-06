@@ -1,32 +1,27 @@
-
-//store/cartStore.ts
-
+// src/store/cartStore.ts
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { CartItem, DbPopulatedCartItem } from "@/types/cart";
 import { useAuthModalStore } from "./authModalStore";
 import { reserveCard, removeReservation } from "@/app/actions/cart";
 import { CART_RESERVATION_MS } from "@/lib/constants/constants";
+import setsData from "@/lib/constants/setsData.json";
 
 interface CartStore {
-  // Базовые состояния
   items: CartItem[];
   isOpen: boolean;
   lastAdded: CartItem | null;
   expireAt: number | null;
-  
-  // UI методы
+
   setCartOpen: (open: boolean) => void;
   closeCart: () => void;
   isExpired: () => boolean;
-  
-  // Методы управления товарами
+
   addToCart: (item: CartItem) => Promise<boolean>;
   removeFromCart: (id: string) => Promise<void>;
   updateQuantity: (item: CartItem, quantity: number) => void;
   clearCart: () => void;
-  
-  // 🔹 Методы синхронизации с Базой Данных
+
   syncWithServer: () => Promise<void>;
   fetchFromServer: () => Promise<void>;
 }
@@ -38,8 +33,7 @@ export const useCartStore = create<CartStore>()(
       isOpen: false,
       lastAdded: null,
       expireAt: null,
-      
-      // Проверка истечения таймера резерва
+
       isExpired: () => {
         const { expireAt } = get();
         return expireAt !== null && Date.now() > expireAt;
@@ -47,17 +41,16 @@ export const useCartStore = create<CartStore>()(
 
       setCartOpen: (open) => set({ isOpen: open }),
       closeCart: () => set({ isOpen: false }),
-      
-// 🔹 1. ЗАГРУЗКА ИЗ БД (вызывается при логине через CartSync)
 
+      // ─── 1. ЗАВАНТАЖЕННЯ З БД ──────────────────────────────────────────
       fetchFromServer: async () => {
         try {
           const res = await fetch("/api/cart");
           if (!res.ok) return;
- 
+
           const data = await res.json();
           if (!data.items || !Array.isArray(data.items)) return;
- 
+
           const mappedItems: CartItem[] = data.items
             .map((serverItem: {
               type: "card" | "fullset";
@@ -65,33 +58,38 @@ export const useCartStore = create<CartStore>()(
               fullsetCode?: string;
               quantity: number;
             }) => {
-              // 🔹 Фулсет — відновлюємо з fullsetCode
+              // 🔹 Фулсет — збагачуємо даними з JSON каталогу
               if (serverItem.type === "fullset" && serverItem.fullsetCode) {
+                const code = serverItem.fullsetCode.toLowerCase();
+                const setInfo = setsData.find(
+                  (s) => s.set.toLowerCase() === code
+                );
+
                 return {
-                  id: `fullset_${serverItem.fullsetCode}`,
+                  id: `fullset_${code}`,
                   scryfallId: "",
-                  name: serverItem.fullsetCode.toUpperCase(), // тимчасово, замінить UI
-                  set_name: serverItem.fullsetCode.toUpperCase(),
-                  image: `/sets/${serverItem.fullsetCode}.jpg`,
-                  price: 0, // ціна підтягнеться при рендері зі стору сетів
+                  name: setInfo?.set_name ?? code.toUpperCase(),
+                  set_name: setInfo?.set_name ?? code.toUpperCase(),
+                  image: setInfo?.imageUrl || "/mtg/Chest_tr.png",
+                  price: setInfo?.prices ?? 0,
                   quantity: serverItem.quantity,
                   stock: 1,
                   condition: "NM",
-                  language: "en",
-                  foil: null,
+                  language: setInfo?.lang ?? "en",
+                  foil: setInfo?.isFoil ? "foil" : null,
                   type: "fullset",
                 } satisfies CartItem;
               }
- 
+
               // Звичайна карта
               const card = serverItem.cardId;
               if (!card) return null;
- 
+
               const imageUrl =
                 card.faces?.[0]?.images?.normal ||
                 card.faces?.[0]?.images?.small ||
                 "";
- 
+
               return {
                 id: card._id,
                 scryfallId: card.scryfall_id,
@@ -107,66 +105,14 @@ export const useCartStore = create<CartStore>()(
               } satisfies CartItem;
             })
             .filter((item: CartItem | null): item is CartItem => item !== null);
- 
+
           set({ items: mappedItems });
         } catch (error) {
           console.error("Помилка синхронізації корзини:", error);
         }
       },
- 
 
-      // fetchFromServer: async () => {
-      //   try {
-      //     const res = await fetch("/api/cart");
-          
-      //     // Если пользователь не авторизован, сервер вернет 401. 
-      //     // В этом случае просто выходим, оставляя корзину пустой или из LocalStorage.
-      //     if (!res.ok) return;
-      
-      //     const data = await res.json();
-          
-      //     if (data.items && Array.isArray(data.items)) {
-      //       const mappedItems: CartItem[] = data.items
-      //         .map((dbItem: DbPopulatedCartItem) => {
-      //           const card = dbItem.cardId;
-                
-      //           // Проверка на случай, если карта была удалена из базы, 
-      //           // но ссылка в корзине осталась
-      //           if (!card) return null;
-      
-      //           // Логика извлечения картинки:
-      //           // У твоих карт (даже обычных) данные лежат в массиве faces.
-      //           const imageUrl = 
-      //             card.faces?.[0]?.images?.normal || 
-      //             card.faces?.[0]?.images?.small || 
-      //             // card.images?.normal || 
-      //             "";
-      
-      //           return {
-      //             id: card._id,
-      //             scryfallId: card.scryfall_id,
-      //             name: card.name,
-      //             set_name: card.set_name,
-      //             image: imageUrl,
-      //             price: card.prices || 0,
-      //             quantity: dbItem.quantity,    // Кол-во, которое выбрал юзер
-      //             stock: card.quantity || 0,    // Остаток на складе из модели Card
-      //             condition: card.condition || "NM",
-      //             language: card.lang || "en",
-      //             foil: card.foilType === "nonfoil" ? null : card.foilType,
-      //           };
-      //         })
-      //         // Явно указываем типы для фильтра, чтобы убрать ошибку 'item' implicitly has an 'any' type
-      //         .filter((item: CartItem | null): item is CartItem => item !== null);
-      
-      //       set({ items: mappedItems });
-      //     }
-      //   } catch (error) {
-      //     console.error("Критическая ошибка при синхронизации корзины с БД:", error);
-      //   }
-      // },
-      
-      // 🔹 2. СОХРАНЕНИЕ В БД (вызывается после каждого изменения)
+      // ─── 2. ЗБЕРЕЖЕННЯ В БД ────────────────────────────────────────────
       syncWithServer: async () => {
         try {
           // 🔹 Розділяємо items на карти і фулсети для правильного маппінгу
@@ -178,7 +124,7 @@ export const useCartStore = create<CartStore>()(
             }
             return { cardId: i.id, quantity: i.quantity };
           });
- 
+
           await fetch("/api/cart", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -189,125 +135,92 @@ export const useCartStore = create<CartStore>()(
         }
       },
 
-      // syncWithServer: async () => {
-      //   try {
-      //     const itemsToSync = get().items.map((i) => ({
-      //       cardId: i.id,
-      //       quantity: i.quantity,
-      //     }));
-          
-      //     await fetch("/api/cart", {
-      //       method: "POST",
-      //       headers: { "Content-Type": "application/json" },
-      //       body: JSON.stringify({ items: itemsToSync }),
-      //     });
-      //   } catch (error) {
-      //     console.error("Ошибка синхронизации корзины:", error);
-      //   }
-      // },
-      
-      // 🔹 3. ДОБАВЛЕНИЕ ТОВАРА
+      // ─── 3. ДОДАВАННЯ ТОВАРУ ───────────────────────────────────────────
       addToCart: async (item) => {
         const existing = get().items.find((i) => i.id === item.id);
-        
-        // Проверка лимитов (stock)
-        if (existing && existing.quantity >= item.stock) return false;
-        
-        const qtyToAdd = existing
-        ? Math.min(existing.quantity + item.quantity, item.stock)
-        : Math.min(item.quantity, item.stock);
-        
 
-        console.log("addToCart item.type:", item.type, item.id);
-        
-        // Пытаемся зарезервировать на сервере
+        if (existing && existing.quantity >= item.stock) return false;
+
+        const qtyToAdd = existing
+          ? Math.min(existing.quantity + item.quantity, item.stock)
+          : Math.min(item.quantity, item.stock);
+
+        // 🔹 Фулсети не резервуємо — немає MongoDB _id, резерв не потрібен
         if (item.type !== "fullset") {
           const result = await reserveCard(item.id, item.quantity);
-        // const result = await reserveCard(item.id, item.quantity);
-        
-        // Если сервер запретил (например, не авторизован)
-        if (!result.success) {
-          if (
-            result.error?.includes("войдите") ||
-            result.error?.includes("авторизован")
-          ) {
-            useAuthModalStore.getState().open(); // Показываем модалку логина
-          } else {
-            console.error("Помилка резервації:", result.error);
+
+          if (!result.success) {
+            if (
+              result.error?.includes("войдите") ||
+              result.error?.includes("авторизован")
+            ) {
+              useAuthModalStore.getState().open();
+            } else {
+              console.error("Помилка резервації:", result.error);
+            }
+            return false;
           }
-          return false; // Блокируем добавление
-        }
         }
 
         const newItem = { ...item, quantity: qtyToAdd };
         const itemsWithout = get().items.filter((i) => i.id !== item.id);
-        
-        // Обновляем UI
+
         set({
           items: [newItem, ...itemsWithout],
           lastAdded: newItem,
           isOpen: true,
           expireAt: get().expireAt ?? Date.now() + CART_RESERVATION_MS,
         });
-        
-        // Тихо отправляем новый массив в базу
+
         get().syncWithServer();
-        
+
         return true;
       },
-      
-      // 🔹 4. УДАЛЕНИЕ ТОВАРА
+
+      // ─── 4. ВИДАЛЕННЯ ТОВАРУ ───────────────────────────────────────────
       removeFromCart: async (id: string) => {
         const item = get().items.find((i) => i.id === id);
         if (!item) return;
-        
-        // Оптимистично убираем из UI
+
         set((state) => ({ items: state.items.filter((i) => i.id !== id) }));
         if (get().items.length === 0) set({ expireAt: null });
-        
-        // Снимаем резерв
+
+        // 🔹 Фулсети не знімають резерв — його не було
         if (item.type !== "fullset") {
           const result = await removeReservation(id);
           if (!result.success) {
             console.error("Помилка при знятті резерву:", result.error);
           }
         }
-        // const result = await removeReservation(id);
-        // if (!result.success) {
-        //   console.error("Ошибка при удалении резерва:", result.error);
-        // }
 
-        // Обновляем базу
         get().syncWithServer();
       },
-      
-      // 🔹 5. ИЗМЕНЕНИЕ КОЛИЧЕСТВА
+
+      // ─── 5. ЗМІНА КІЛЬКОСТІ ────────────────────────────────────────────
       updateQuantity: (item, quantity) => {
         set((state) => ({
           items: state.items.map((i) =>
             i.id === item.id
-          ? { ...i, quantity: Math.max(1, Math.min(quantity, i.stock)) }
-          : i
-        ),
-      }));
-      
-      get().syncWithServer();
-    },
-    
-    // 🔹 6. ОЧИСТКА КОРЗИНЫ (при ручном удалении всех товаров юзером)
-    clearCart: () => {
-      set({ items: [], expireAt: null });
-      get().syncWithServer();
-    },
-  }),
-  
-  // Настройки persist (сохранение в LocalStorage для скорости)
-  { 
-    name: "mtg-cart-storage",
-    // Опционально: можно не сохранять isOpen и lastAdded в кэш
-    partialize: (state) => ({ 
-      items: state.items, 
-        expireAt: state.expireAt 
+              ? { ...i, quantity: Math.max(1, Math.min(quantity, i.stock)) }
+              : i
+          ),
+        }));
+
+        get().syncWithServer();
+      },
+
+      // ─── 6. ОЧИСТКА КОРЗИНИ ────────────────────────────────────────────
+      clearCart: () => {
+        set({ items: [], expireAt: null });
+        get().syncWithServer();
+      },
+    }),
+
+    {
+      name: "mtg-cart-storage",
+      partialize: (state) => ({
+        items: state.items,
+        expireAt: state.expireAt,
       }),
     }
   )
