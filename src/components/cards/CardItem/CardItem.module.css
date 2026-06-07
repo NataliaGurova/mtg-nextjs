@@ -8,7 +8,7 @@
   width: 260px;
   height: 498px;
   padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 /* 🔹 ВАРИАНТ 1: Обычный (для каталога) */

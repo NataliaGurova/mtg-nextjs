@@ -91,56 +91,93 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: #f4f2eb; /* Ваш світлий колір тексту */
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.5rem;
+  /* margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem; */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .fullsetGrid {
-  display: grid;
-  /* Робимо сітку: мінімум 300px на картку, якщо є місце — стають в ряд */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .fullsetCard {
-  display: flex;
+  /* display: flex;
   align-items: center;
   gap: 1rem;
-  background: rgba(255, 255, 255, 0.03); /* Легкий прозорий фон */
+  background: rgba(255, 255, 255, 0.03); 
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 12px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  width: 260px;
+  height: 310px;
+
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .fullsetCard:hover {
-  background: rgba(255, 255, 255, 0.06);
+  /* background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px); /* Ефект підняття при наведенні */
+  transform: translateY(-2px); */
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* 🔹 КРИТИЧНО ВАЖЛИВО ДЛЯ NEXT.JS IMAGE */
 .fullsetImageWrap {
-  position: relative; /* Не дає картинці вирватися назовні */
-  width: 150px;        /* Фіксована ширина мініатюри */
-  height: 100px;       /* Фіксована висота */
+  /* position: relative; 
+  width: 150px;      
+  height: 100px;       
   flex-shrink: 0;
   border-radius: 8px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.2); /* Фон-заглушка */
+  background: rgba(0, 0, 0, 0.2); */
+
+  position: relative;
+  width: 220px;           /* Растягиваем на всю ширину карточки */
+  aspect-ratio: 4 / 3;   /* Все картинки будут одинаковых пропорций! */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;   /* Отступ снизу до текста */
+  background: rgba(0, 0, 0, 0.2);
+
+  /* width: 220px;
+  min-width: 220px;
+  
+  border-radius: 8px;
+  overflow: hidden; */
 }
 
 .fullsetImage {
+  
   object-fit: cover;
 }
 
 .fullsetInfo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  flex-grow: 1;
+  gap: 5px;
+  margin: 0;
+  /* flex-grow: 1; */
 }
 
 .fullsetHeader {
@@ -169,7 +206,7 @@
 .fullsetPrice {
   font-size: 0.95rem;
   /* color: #a0a0a0; */
-  margin: 0;
+  margin-left: auto;
 }
 
 .fullsetDetails {
@@ -181,6 +218,9 @@
 .fullsetActions {
   display: flex;
   align-items: center;
-  gap: 2px;
+}
+
+.buyButton {
+width: 180px;
 }
 

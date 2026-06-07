@@ -140,6 +140,10 @@
 
 // export default Wishlist;
 
+
+
+
+
 // src/components/account/Wishlist/Wishlist.tsx
 import { DbCard } from "@/types/types";
 import CardItem from "@/components/cards/CardItem/CardItem";
@@ -157,6 +161,7 @@ interface FullsetInfo {
   prices: number;
   imageUrl?: string;
   description?: string;
+  lang?: string;
 }
 
 interface Props {
@@ -180,74 +185,70 @@ const Wishlist = ({ savedCards, savedFullsets }: Props) => {
         </div>
       ) : (
         <>
-          {/* 🔹 ФУЛСЕТИ */}
+          {/* ФУЛСЕТИ */}
           {savedFullsets.length > 0 && (
             <div className={css.section}>
               <h3 className={css.sectionTitle}>Фулсети</h3>
               <div className={css.fullsetGrid}>
                 {savedFullsets.map((s) => {
-                  // 1. СТВОРЮЄМО ОБ'ЄКТ КОРЗИНИ ДЛЯ КОЖНОГО ФУЛСЕТУ
                   const cartItem = {
                     id: `fullset_${s.set.toLowerCase()}`,
                     scryfallId: "",
                     name: s.set_name,
                     set_name: s.set_name,
-                    image: s.imageUrl || "/mtg/Chest_tr.png",
+                    // 🔹 правильний fallback + без condition
+                    image: s.imageUrl || "/sets/Chest_nonfoil11.png",
                     price: s.prices,
                     quantity: 1,
                     stock: 1,
-                    condition: "NM",
-                    language: "en",
+                    language: s.lang ?? "en",
                     foil: s.isFoil ? "foil" : null,
                     type: "fullset" as const,
                   };
 
                   return (
-                    // 2. ЗМІНЮЄМО <Link> НА <div>, щоб не ламати HTML вкладеними кнопками
                     <div key={s.set} className={css.fullsetCard}>
-                      
+
                       <Link href={`/fullsets/${s.set.toLowerCase()}`}>
                         <div className={css.fullsetImageWrap}>
                           <Image
-                            src={s.imageUrl || "/mtg/Chest_tr.png"}
+                            src={s.imageUrl || "/sets/Chest_nonfoil11.png"}
                             alt={s.set_name}
                             fill
                             className={css.fullsetImage}
+                            unoptimized={!!s.imageUrl?.startsWith("https://")}
                           />
                         </div>
                       </Link>
 
                       <div className={css.fullsetInfo}>
-                        <Link href={`/fullsets/${s.set.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+                        <Link href={`/fullsets/${s.set.toLowerCase()}`} style={{ textDecoration: "none" }}>
                           <div className={css.fullsetHeader}>
                             <SetIcon setCode={s.set} theme="bronze" size={20} />
-                            <span className={css.fullsetName}>{s.set_name}#{s.set.toUpperCase()}</span>
-                            {/* {s.isFoil && (
-                              <span className={css.foilBadge}>Foil</span>
-                            )} */}
+                            {/* 🔹 прибрано зайвий # і код */}
+                            <span className={css.fullsetName}>{s.set_name} • {s.set.toUpperCase()}</span>
                           </div>
                         </Link>
 
                         <div className={css.fullsetDetails}>
-                          {s.isFoil && (
-                              <span className={css.foilBadge}>Foil</span>
-                            )}
+                          {s.isFoil && <span className={css.foilBadge}>Foil</span>}
                           <p className={css.fullsetPrice}>
                             {s.prices.toLocaleString("uk-UA")} ₴
                           </p>
                         </div>
 
-                        {/* 3. ДОДАЄМО КНОПКИ КУПІВЛІ ТА ВИДАЛЕННЯ */}
                         <div className={css.fullsetActions}>
                           <AddToCartSection
                             mode="fullset"
                             fullsetItem={cartItem}
                             showQuantity={false}
                             buttonVariant="loadMore"
+                            buttonClassName={css.buyButton}
                           />
                           <WishlistButton
                             cardId={cartItem.id}
                             variant="transparent"
+                            className="ml-2"
                           />
                         </div>
                       </div>
