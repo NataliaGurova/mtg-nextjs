@@ -35,53 +35,22 @@
 
 /* --- Сетка карточек --- */
 .grid {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem; /* gap-6 */
-  /* Адаптивная сетка: 2 колонки на мобилках, 3 на планшетах, 4 на десктопе */
-}
+  gap: 1.5rem; */
 
-@media (min-width: 768px) {
-  .container {
-    margin: 0 40px 40px 40px;
-  }
-
-  .title {
-    font-size: 1.5rem; /* 24px */ 
-  }
-
-  .grid {
-    justify-content: space-between;
-    /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    /* max-width: 1200px; */
-    /* margin: 0 100px 40px 100px; */
-  }
-  .grid {
-    /* gap: 3rem; */
-    gap: 3rem 0;
-    /* grid-template-columns: repeat(4, minmax(0, 1fr)); */
-  }
-}
-
-@media (min-width: 1440px) {
-  .container {
-    /* max-width: 1200px; */
-    margin: 0 100px 40px 100px; /* Ваши оригинальные большие отступы для ПК */
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 260px);
+  gap: 1.5rem;
+  justify-content: center;
 }
 
 
 
 /* =========================================
-   СТИЛІ ДЛЯ БЛОКУ ФУЛСЕТІВ (Wishlist)
-   ========================================= */
+СТИЛІ ДЛЯ БЛОКУ ФУЛСЕТІВ (Wishlist)
+========================================= */
 
 .section {
   margin-bottom: 2.5rem;
@@ -93,17 +62,25 @@
   color: #f4f2eb; /* Ваш світлий колір тексту */
   /* margin-bottom: 1.25rem;
   padding-bottom: 0.5rem; */
+  margin-bottom: 1.25rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .fullsetGrid {
   /* display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); */
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 1.5rem; */
+  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 260px);
   gap: 1.5rem;
+  justify-content: center; /* ← ключове */
 }
+
+
 
 .fullsetCard {
   /* display: flex;
@@ -118,17 +95,17 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-
+  
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-
+  
   width: 260px;
   height: 310px;
-
+  
   padding: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
@@ -142,6 +119,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
+
 /* 🔹 КРИТИЧНО ВАЖЛИВО ДЛЯ NEXT.JS IMAGE */
 .fullsetImageWrap {
   /* position: relative; 
@@ -151,7 +129,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2); */
-
+  
   position: relative;
   width: 220px;           /* Растягиваем на всю ширину карточки */
   aspect-ratio: 4 / 3;   /* Все картинки будут одинаковых пропорций! */
@@ -159,7 +137,7 @@
   overflow: hidden;
   margin-bottom: 10px;   /* Отступ снизу до текста */
   background: rgba(0, 0, 0, 0.2);
-
+  
   /* width: 220px;
   min-width: 220px;
   
@@ -221,6 +199,48 @@
 }
 
 .buyButton {
-width: 180px;
+  width: 180px;
 }
 
+
+@media (min-width: 768px) {
+  .container {
+      margin: 0 40px 40px 40px;
+    }
+  
+    .title {
+      font-size: 1.5rem; /* 24px */ 
+    }
+  
+    .grid {
+      gap: 5rem;
+    }
+
+  .fullsetGrid {
+    gap: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+      gap: 2.5rem;
+    }
+
+  .fullsetGrid {
+    gap: 2.5rem;
+  }
+}
+
+/* Для ПК (от 1024px) - 4 карточки в ряд */
+@media (min-width: 1440px) {
+  .container {
+      /* max-width: 1200px; */
+      margin: 0 100px 40px 100px; /* Ваши оригинальные большие отступы для ПК */
+    }
+  .grid {
+      gap: 4rem;
+    }
+  .fullsetGrid {
+    gap: 4rem;
+  }
+}

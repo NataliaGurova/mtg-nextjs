@@ -2,7 +2,8 @@ export const navLinks = [
   { href: "/singles", label: "MTG Singles" },
   { href: "/fullsets", label: "MTG Full Sets" },
   { href: "/tokens", label: "MTG Tokens" },
-  { href: "/sealed", label: "MTG Sealed" }
+  { href: "/sealed", label: "MTG Sealed" },
+  { href: "/accessories", label: "Accessories" },
 ];
 
 
